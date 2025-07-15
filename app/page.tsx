@@ -63,6 +63,26 @@ export default function AppoModernLanding() {
         "-=0.8",
       )
 
+    // Animate Why We Exist section paragraphs (not header)
+    gsap.utils.toArray('.why-animate').forEach((el: any, i: number) => {
+      gsap.fromTo(el, {
+        opacity: 0,
+        y: 40,
+        filter: 'blur(8px)'
+      }, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 1,
+        delay: 0.2 + i * 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+        },
+      })
+    })
+
     // Navbar scroll effect
     ScrollTrigger.create({
       trigger: "body",
@@ -195,97 +215,28 @@ export default function AppoModernLanding() {
               </div>
               <div className="hero-buttons flex flex-col sm:flex-row gap-6">
                 <ModernButton
-                  variant="primary"
-                  size="lg"
-                  icon={<Play className="h-5 w-5" />}
-                  className="magnetic-button"
-                >
-                  Watch Patient Story
-                </ModernButton>
+  variant="primary"
+  size="lg"
+  icon={<Play className="h-5 w-5" />}
+  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl"
+>
+  Watch Patient Story
+</ModernButton>
                 <ModernButton
-                  variant="outline"
-                  size="lg"
-                  icon={<ArrowRight className="h-5 w-5" />}
-                  className="magnetic-button"
-                >
-                  Learn More
-                </ModernButton>
+  variant="outline"
+  size="lg"
+  icon={<ArrowRight className="h-5 w-5" />}
+  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl learn-more-btn"
+>
+  Learn More
+</ModernButton>
               </div>
             </div>
 
             {/* Advanced Dashboard Mockup */}
-            <div className="hero-dashboard relative">
-              <div className="relative">
-                {/* Floating background elements */}
-                <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-400 rounded-full opacity-10 float-animation"></div>
-                <div
-                  className="absolute -bottom-10 -right-10 w-16 h-16 bg-blue-500 rounded-full opacity-15 float-animation"
-                  style={{ animationDelay: "2s" }}
-                ></div>
-
-                {/* Main dashboard */}
-                <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500">
-                  <div className="glass-morphism rounded-2xl p-6 space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-gray-900 text-lg">Smart Insole Dashboard</h3>
-                      <Badge className="bg-green-100 text-green-700 animate-pulse">Live</Badge>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 card-hover-effect">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                            <Activity className="h-5 w-5 text-white" />
-                          </div>
-                          <div>
-                            <span className="text-sm font-medium text-gray-700">Pressure</span>
-                            <p className="text-xl font-bold text-blue-600">Normal</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 card-hover-effect">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
-                            <Heart className="h-5 w-5 text-white" />
-                          </div>
-                          <div>
-                            <span className="text-sm font-medium text-gray-700">Heart Rate</span>
-                            <p className="text-xl font-bold text-green-600">72 BPM</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 card-hover-effect">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-                          <AlertTriangle className="h-5 w-5 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="text-sm font-medium text-gray-700">Temperature Alert</span>
-                          <p className="text-sm text-orange-600 mt-1">Slight elevation detected - monitoring</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Progress bar */}
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Daily Activity</span>
-                        <span className="text-gray-900 font-medium">78%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-blue-600 to-blue-400 h-2 rounded-full"
-                          style={{ width: "78%" }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="hero-dashboard relative flex items-center justify-center">
+  <img src="/demo1.png" alt="Smart Insole Demo" className="rounded-3xl shadow-2xl w-full max-w-md object-cover" />
+</div>
           </div>
         </div>
       </section>
@@ -306,16 +257,16 @@ export default function AppoModernLanding() {
 
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
-                <div className="space-y-6 text-lg leading-relaxed">
-                  <p className="text-gray-700">
+                <div className="space-y-6 text-lg leading-relaxed font-semibold why-exist-animate">
+                  <p className="text-gray-700 why-animate">
                     When that happens, it's not just a foot that's lost—it's mobility, dignity, and income.
                   </p>
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 why-animate">
                     At APPO LTD, we couldn't accept that. That's why we built a smart, affordable, non-invasive insole
                     that can detect ulcers before they develop—preventing up to{" "}
                     <span className="font-bold text-blue-600 text-2xl">90% of amputations</span>.
                   </p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-gray-900 why-animate">
                     We're not just building tech—we're protecting futures.
                   </p>
                 </div>
@@ -336,23 +287,12 @@ export default function AppoModernLanding() {
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="parallax-element">
-                  <AnimatedCard className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8">
-                    <div className="text-center space-y-6">
-                      <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto">
-                        <Shield className="h-10 w-10 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-4xl font-black mb-2">90%</h3>
-                        <p className="text-blue-100">Amputation Prevention Rate</p>
-                      </div>
-                      <div className="w-full bg-white/20 rounded-full h-2">
-                        <div className="bg-white h-2 rounded-full" style={{ width: "90%" }}></div>
-                      </div>
-                    </div>
-                  </AnimatedCard>
-                </div>
+              <div className="relative flex items-center justify-center">
+                <img
+                  src="/ChatGPT Image Jul 15, 2025, 08_00_14 PM.png"
+                  alt="Why We Exist - Prevention"
+                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
+                />
               </div>
             </div>
           </div>
@@ -375,120 +315,95 @@ export default function AppoModernLanding() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatedCard
-              delay={0.1}
-              className="bg-white/80 backdrop-blur-xl border-2 border-blue-100 p-8 group hover:border-blue-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-blue-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <DollarSign className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  Instant Savings
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Get immediate cost savings on every healthcare intervention, powered by AI to optimize your treatment
-                  plans and reduce unnecessary expenses.
+          <div className="space-y-16">
+            {/* Card 1: Smart Insoles, Made Just For You */}
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-blue-600 mb-2">Smart Insoles, Made Just For You</h3>
+                <p className="text-gray-800 leading-relaxed">
+                  Our experts make a special mold of your feet to create smart insoles that fit you perfectly. You get amazing comfort and support with every step you take.
                 </p>
               </div>
-            </AnimatedCard>
+              <div className="flex-1">
+                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
+                  <img src="/insole%20implint.png" alt="Smart Insoles" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+            {/* Card 2: Personal Care for You */}
+            <div className="flex flex-col md:flex-row-reverse items-center gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-blue-600 mb-2">Personal Care for You</h3>
+                <p className="text-gray-800 leading-relaxed">
+                  Everyone is different, so your care should be too. We give you our full attention to understand your health needs, and we always keep your information safe and private.
+                </p>
+              </div>
+              <div className="flex-1">
+                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
+                  {/* Placeholder for image */}
+                </div>
+              </div>
+            </div>
+            {/* Card 3: Early Health Alerts */}
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-blue-600 mb-2">Early Health Alerts</h3>
+                <p className="text-gray-800 leading-relaxed">
+                  The smart sensors in your insoles watch over your feet all day. They find early signs of problems, like diabetic foot ulcers, and send an alert right away. This lets you act fast and helps you worry less.
+                </p>
+              </div>
+              <div className="flex-1">
+                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
+                  {/* Placeholder for image */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <AnimatedCard
-              delay={0.2}
-              className="bg-white/80 backdrop-blur-xl border-2 border-purple-100 p-8 group hover:border-purple-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <BarChart3 className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-300">
-                  Real-Time Insights
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Make smarter decisions with live data and actionable insights, delivered in real-time to stay ahead of
-                  potential complications.
-                </p>
-              </div>
-            </AnimatedCard>
+      {/* Meet the Team Behind the Mission */}
+      <section className="section-animate py-32 bg-gradient-to-br from-purple-50 via-white to-blue-50" id="team">
+        <div className="container px-4">
+          <div className="text-center space-y-6 mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-gray-900 flex items-center justify-center gap-3">
+              👨‍🔬 <span>Meet the Team Behind the Mission</span>
+            </h2>
+          </div>
 
-            <AnimatedCard
-              delay={0.3}
-              className="bg-white/80 backdrop-blur-xl border-2 border-green-100 p-8 group hover:border-green-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-green-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Activity className="h-8 w-8 text-white" />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+            {[
+              { name: "Grace Uwase", role: "Co-Founder & COO", img: "/images/team/pp.jpg", twitter: "#", linkedin: "#" },
+              { name: "Prisca Mukamana", role: "Lead Engineer", img: "/images/team/prisca.png", twitter: "#", linkedin: "#" },
+              { name: "Rwakayiro David", role: "CTO", img: "/images/team/rwakayiro%20david.jpeg", twitter: "#", linkedin: "#" },
+              { name: "Alex Nshimiyimana", role: "Product Designer", img: "/images/team/alex.jpeg", twitter: "#", linkedin: "#" },
+              { name: "Kelly Iradukunda", role: "Data Scientist", img: "/images/team/kelly.jpg", twitter: "#", linkedin: "#" },
+            ].map((member, idx) => (
+              <div
+                key={member.name}
+                className="group rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                style={{ gridColumn: idx < 2 ? "span 1 / span 1" : undefined }}
+              >
+                <div className="relative w-full h-72">
+                  <img src={member.img} alt={member.name} className="object-cover w-full h-full" />
+                  {/* Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-black/0 p-4 flex flex-col">
+                    <div>
+                      <h3 className="text-white font-bold text-lg">{member.name}</h3>
+                      <p className="text-white text-sm opacity-80">{member.role}</p>
+                    </div>
+                    <div className="flex items-center gap-4 mt-2">
+                      <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors">
+                        <Twitter className="h-5 w-5" />
+                      </a>
+                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors">
+                        <Linkedin className="h-5 w-5" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300">
-                  Flexible Plans
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Choose plans that adapt to your healthcare needs, offering unparalleled scalability and
-                  cost-effectiveness for every patient.
-                </p>
               </div>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.4}
-              className="bg-white/80 backdrop-blur-xl border-2 border-red-100 p-8 group hover:border-red-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-red-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Shield className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-red-600 transition-colors duration-300">
-                  Secure Transactions
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Prioritize safety with cutting-edge encryption and robust security features for every health data
-                  interaction and transaction.
-                </p>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.5}
-              className="bg-white/80 backdrop-blur-xl border-2 border-orange-100 p-8 group hover:border-orange-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-orange-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Smartphone className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors duration-300">
-                  Adaptive Features
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Leverage AI-driven features that evolve with your healthcare needs, ensuring efficiency and innovation
-                  at every step.
-                </p>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.6}
-              className="bg-white/80 backdrop-blur-xl border-2 border-cyan-100 p-8 group hover:border-cyan-300 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 to-cyan-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-cyan-600 transition-colors duration-300">
-                  Dedicated Support
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Access expert assistance 24/7 to ensure you're never alone on your healthcare journey with
-                  comprehensive support services.
-                </p>
-              </div>
-            </AnimatedCard>
+            ))}
           </div>
         </div>
       </section>

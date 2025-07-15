@@ -63,18 +63,18 @@ export function FAQAccordion() {
         {currentFAQs.map((faq, index) => (
           <AnimatedCard
             key={currentPage * itemsPerPage + index}
-            className="p-6 cursor-pointer hover:shadow-lg transition-all duration-300"
+            className="p-0 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300 rounded-lg"
             delay={index * 0.1}
           >
             <button
-              className="w-full text-left"
+              className="w-full text-left flex"
               onClick={() =>
                 setOpenIndex(
                   openIndex === currentPage * itemsPerPage + index ? null : currentPage * itemsPerPage + index,
                 )
               }
             >
-              <div className="flex items-center justify-between">
+              <div className="flex-1 p-6 flex items-center justify-between">
                 <h3 className="font-semibold text-gray-900 pr-4">{faq.question}</h3>
                 <ChevronDown
                   className={cn(
@@ -84,8 +84,11 @@ export function FAQAccordion() {
                 />
               </div>
               {openIndex === currentPage * itemsPerPage + index && (
-                <div className="mt-4 text-gray-600 leading-relaxed">{faq.answer}</div>
-              )}
+                  <div className="px-6 pb-6 text-gray-600 leading-relaxed animate-[fade-in_0.3s_ease-out]">{faq.answer}</div>
+                )}
+            <span
+                className={`block w-1 transition-all duration-300 ${openIndex === currentPage * itemsPerPage + index ? 'bg-blue-600' : 'bg-transparent'}`}
+              ></span>
             </button>
           </AnimatedCard>
         ))}

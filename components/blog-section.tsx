@@ -100,13 +100,20 @@ export function BlogSection() {
       </AnimatedCard>
 
       {/* Regular Posts Grid */}
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {regularPosts.map((post, index) => (
           <AnimatedCard
             key={post.title}
-            className="group cursor-pointer hover:shadow-xl transition-all duration-300"
-            delay={index * 0.1}
+            className="group cursor-pointer bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden"
+            delay={index * 0.05}
           >
+            <div className="relative group overflow-hidden">
+              <div className="h-48 w-full bg-gradient-to-br from-gray-200 to-gray-100 flex items-center justify-center">
+                {/* Placeholder could be replaced with real thumbnail */}
+                <span className="text-gray-500">Cover Image</span>
+              </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+            </div>
             <div className="p-6 space-y-4">
               <div className="flex items-center space-x-2">
                 <Badge variant="outline" className="text-xs">
