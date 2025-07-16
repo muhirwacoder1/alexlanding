@@ -1,0 +1,136 @@
+.faqContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  background: white;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faqHeader {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  background: linear-gradient(to right, #ffffff, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.faqItem.active .faqHeader {
+  background: linear-gradient(to right, #eff6ff, #f8fafc);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.question {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.faqItem.active .question {
+  color: #2563eb;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.faqItem.active .icon {
+  background: #2563eb;
+  transform: rotate(45deg);
+}
+
+.icon svg {
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.faqItem.active .icon svg {
+  color: white;
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  border-top: 0;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.faqItem.active .answer {
+  max-height: 1000px;
+  border-color: #e2e8f0;
+}
+
+.answerContent {
+  padding: 1.5rem;
+  color: #475569;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.answerContent p {
+  margin-bottom: 1rem;
+}
+
+.answerContent p:last-child {
+  margin-bottom: 0;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagBasic {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+.tagTechnical {
+  background: rgba(168, 85, 247, 0.1);
+  color: #7c3aed;
+}
+
+.tagCost {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.categoryTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  margin-top: 3rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e2e8f0;
+}

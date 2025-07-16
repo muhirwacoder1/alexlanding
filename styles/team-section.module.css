@@ -1,0 +1,158 @@
+.teamSection {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #faf5ff 100%);
+}
+
+.teamCard {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: all 0.5s ease;
+}
+
+.teamCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+.teamCard:hover .overlay {
+  opacity: 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateZ(0);
+  transition: transform 0.7s ease;
+}
+
+.teamCard:hover .image {
+  transform: scale(1.1);
+}
+
+.content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.5rem;
+  z-index: 20;
+  transform: translateY(1.5rem);
+  transition: transform 0.5s ease;
+}
+
+.teamCard:hover .content {
+  transform: translateY(0);
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  transform: translateX(-1.5rem);
+  transition: transform 0.5s ease;
+  transition-delay: 100ms;
+}
+
+.teamCard:hover .name {
+  transform: translateX(0);
+}
+
+.divider {
+  height: 1px;
+  width: 0;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.5s ease;
+  transition-delay: 200ms;
+}
+
+.teamCard:hover .divider {
+  width: 100%;
+}
+
+.role {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateX(-1.5rem);
+  transition: transform 0.5s ease;
+  transition-delay: 200ms;
+}
+
+.teamCard:hover .role {
+  transform: translateX(0);
+}
+
+.bio {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateX(-1.5rem);
+  transition: transform 0.5s ease;
+  transition-delay: 300ms;
+}
+
+.teamCard:hover .bio {
+  transform: translateX(0);
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateX(-1.5rem);
+  transition: transform 0.5s ease;
+  transition-delay: 400ms;
+}
+
+.teamCard:hover .socialLinks {
+  transform: translateX(0);
+}
+
+.socialLink {
+  color: white;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  color: #60a5fa;
+  transform: scale(1.1);
+}
+
+.animateGradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, #2563eb, #9333ea, #2563eb);
+  background-size: 300%;
+  animation: gradient 8s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

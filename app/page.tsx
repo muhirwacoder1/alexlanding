@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ModernButton } from "@/components/modern-button"
 import { AnimatedCard } from "@/components/animated-card"
 import { FloatingElements } from "@/components/floating-elements"
@@ -34,8 +34,13 @@ import {
   X,
 } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
 import styles from '@/styles/tech-section.module.css'
+
+import techStyles from '@/styles/tech-section.module.css';
+import teamStyles from '@/styles/team-section.module.css';
+import partnerStyles from '@/styles/partners.module.css';
+import Image from 'next/image';
+import FAQSection from '@/components/faq-section'
 
 export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -132,6 +137,37 @@ export default function AppoModernLanding() {
           },
         },
       )
+    })
+
+    // Team section animations
+    gsap.utils.toArray('.team-card-animate').forEach((card: any, i: number) => {
+      const image = card.querySelector('img')
+      const content = card.querySelector('.team-content')
+      const socialLinks = card.querySelectorAll('a')
+      
+      gsap.set(card, { opacity: 0, y: 50 })
+      
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 85%',
+        onEnter: () => {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            delay: i * 0.2
+          })
+          
+          gsap.from(image, {
+            scale: 1.2,
+            rotation: 5,
+            duration: 1.5,
+            ease: 'power3.out',
+            delay: i * 0.2
+          })
+        }
+      })
     })
 
     // Technology section animations with enhanced text effects
@@ -262,6 +298,51 @@ export default function AppoModernLanding() {
           duration: 0.3,
           ease: 'power2.out'
         })
+      })
+    })
+
+    // Partner logos animation
+    gsap.utils.toArray('.partner-logo-animate').forEach((logo: any, i: number) => {
+      const image = logo.querySelector('.partner-image')
+      
+      gsap.set(logo, { 
+        opacity: 0,
+        x: -100,
+        rotationY: -30
+      })
+
+      ScrollTrigger.create({
+        trigger: logo,
+        start: 'top 85%',
+        onEnter: () => {
+          // Initial entrance animation
+          gsap.to(logo, {
+            opacity: 1,
+            x: 0,
+            rotationY: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: i * 0.3
+          })
+
+          // Continuous floating animation
+          gsap.to(logo, {
+            y: '-10',
+            duration: 1.5,
+            ease: 'power1.inOut',
+            yoyo: true,
+            repeat: -1
+          })
+
+          // Image shine effect
+          gsap.to(image, {
+            filter: 'brightness(1.1)',
+            duration: 1,
+            ease: 'power2.inOut',
+            yoyo: true,
+            repeat: -1
+          })
+        }
       })
     })
   }, [])
@@ -496,51 +577,7 @@ export default function AppoModernLanding() {
         </div>
       </section>
 
-      {/* Meet the Team Behind the Mission */}
-      <section className="section-animate py-32 bg-gradient-to-br from-purple-50 via-white to-blue-50" id="team">
-        <div className="container px-4">
-          <div className="text-center space-y-6 mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 flex items-center justify-center gap-3">
-              👨‍🔬 <span>Meet the Team Behind the Mission</span>
-            </h2>
-          </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            {[
-              { name: "Grace Uwase", role: "Co-Founder & COO", img: "/images/team/pp.jpg", twitter: "#", linkedin: "#" },
-              { name: "Prisca Mukamana", role: "Lead Engineer", img: "/images/team/prisca.png", twitter: "#", linkedin: "#" },
-              { name: "Rwakayiro David", role: "CTO", img: "/images/team/rwakayiro%20david.jpeg", twitter: "#", linkedin: "#" },
-              { name: "Alex Nshimiyimana", role: "Product Designer", img: "/images/team/alex.jpeg", twitter: "#", linkedin: "#" },
-              { name: "Kelly Iradukunda", role: "Data Scientist", img: "/images/team/kelly.jpg", twitter: "#", linkedin: "#" },
-            ].map((member, idx) => (
-              <div
-                key={member.name}
-                className="group rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-                style={{ gridColumn: idx < 2 ? "span 1 / span 1" : undefined }}
-              >
-                <div className="relative w-full h-72">
-                  <img src={member.img} alt={member.name} className="object-cover w-full h-full" />
-                  {/* Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-black/0 p-4 flex flex-col">
-                    <div>
-                      <h3 className="text-white font-bold text-lg">{member.name}</h3>
-                      <p className="text-white text-sm opacity-80">{member.role}</p>
-                    </div>
-                    <div className="flex items-center gap-4 mt-2">
-                      <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors">
-                        <Twitter className="h-5 w-5" />
-                      </a>
-                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors">
-                        <Linkedin className="h-5 w-5" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Why Choose Us Section - Enhanced */}
       <section className="section-animate py-32 bg-white">
@@ -645,85 +682,118 @@ export default function AppoModernLanding() {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="section-animate py-32 bg-white">
+      <section id="team" className={teamStyles.teamSection}>
         <div className="container px-4">
           <div className="text-center space-y-6 mb-20">
-            <Badge className="bg-gradient-to-r from-green-100 to-green-200 text-green-700 px-6 py-3 rounded-full text-lg">
-              👨‍🔬 Meet the Team Behind the Mission
+            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg animate-pulse">
+              👨‍🔬 Meet Our Visionaries
             </Badge>
             <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
-              Passionate <span className="text-gradient">Innovators</span> Saving Lives
+              Passionate <span className={teamStyles.animateGradient}>Innovators</span> Saving Lives
             </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our diverse team of experts is united by one mission: preventing amputations and transforming lives.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <AnimatedCard delay={0.1} className="text-center group">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <span className="text-white font-bold text-2xl">NG</span>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+            {[
+              { 
+                name: "Grace Uwase", 
+                role: "Co-Founder & COO", 
+                img: "/images/team/pp.jpg", 
+                twitter: "#", 
+                linkedin: "#",
+                gradient: "from-blue-400 to-blue-600",
+                bio: "Driving our mission with passion and purpose"
+              },
+              { 
+                name: "Prisca Mukamana", 
+                role: "Lead Engineer", 
+                img: "/images/team/prisca.png", 
+                twitter: "#", 
+                linkedin: "#",
+                gradient: "from-purple-400 to-purple-600",
+                bio: "Innovating the future of preventive healthcare"
+              },
+              { 
+                name: "Rwakayiro David", 
+                role: "CTO", 
+                img: "/images/team/rwakayiro david.jpeg", 
+                twitter: "#", 
+                linkedin: "#",
+                gradient: "from-green-400 to-green-600",
+                bio: "Architecting smart solutions that save lives"
+              },
+              { 
+                name: "Alex Nshimiyimana", 
+                role: "Product Designer", 
+                img: "/images/team/alex.jpeg", 
+                twitter: "#", 
+                linkedin: "#",
+                gradient: "from-pink-400 to-pink-600",
+                bio: "Creating intuitive experiences for better care"
+              },
+              { 
+                name: "Kelly Iradukunda", 
+                role: "Data Scientist", 
+                img: "/images/team/kelly.jpg", 
+                twitter: "#", 
+                linkedin: "#",
+                gradient: "from-yellow-400 to-yellow-600",
+                bio: "Transforming data into life-saving insights"
+              },
+            ].map((member, idx) => (
+              <div
+                key={member.name}
+                className={`${teamStyles.teamCard} team-card-animate`}
+              >
+                <div className={teamStyles.imageContainer}>
+                  <div className={teamStyles.overlay}></div>
+                  <img 
+                    src={member.img} 
+                    alt={member.name} 
+                    className={teamStyles.image}
+                  />
+                  <div className={teamStyles.content}>
+                    <div className="space-y-3">
+                      <h3 className={teamStyles.name}>
+                        {member.name}
+                      </h3>
+                      <div className={teamStyles.divider}></div>
+                      <p className={teamStyles.role}>
+                        {member.role}
+                      </p>
+                      <p className={teamStyles.bio}>
+                        {member.bio}
+                      </p>
+                      <div className={teamStyles.socialLinks}>
+                        <a 
+                          href={member.linkedin} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className={teamStyles.socialLink}
+                          title={`Connect with ${member.name} on LinkedIn`}
+                          aria-label={`Connect with ${member.name} on LinkedIn`}
+                        >
+                          <Linkedin className="h-5 w-5" />
+                        </a>
+                        <a 
+                          href={member.twitter} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className={teamStyles.socialLink}
+                          title={`Follow ${member.name} on Twitter`}
+                          aria-label={`Follow ${member.name} on Twitter`}
+                        >
+                          <Twitter className="h-5 w-5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Nyirarukundo Grace</h3>
-              <p className="text-blue-600 font-medium mb-4">CEO</p>
-              <p className="text-sm text-gray-600 mb-6">Leading the vision with a passion for impact.</p>
-              <div className="flex justify-center space-x-3">
-                <ModernButton variant="ghost" size="sm">
-                  <Linkedin className="h-4 w-4" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm">
-                  <Twitter className="h-4 w-4" />
-                </ModernButton>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard delay={0.2} className="text-center group">
-              <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <span className="text-white font-bold text-2xl">NP</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Nikuze Prisca</h3>
-              <p className="text-green-600 font-medium mb-4">COO</p>
-              <p className="text-sm text-gray-600 mb-6">Operations expert driving scale and efficiency.</p>
-              <div className="flex justify-center space-x-3">
-                <ModernButton variant="ghost" size="sm">
-                  <Linkedin className="h-4 w-4" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm">
-                  <Twitter className="h-4 w-4" />
-                </ModernButton>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard delay={0.3} className="text-center group">
-              <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <span className="text-white font-bold text-2xl">RD</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Rwakayiro David</h3>
-              <p className="text-purple-600 font-medium mb-4">CTO</p>
-              <p className="text-sm text-gray-600 mb-6">Engineering smart, reliable insole hardware.</p>
-              <div className="flex justify-center space-x-3">
-                <ModernButton variant="ghost" size="sm">
-                  <Linkedin className="h-4 w-4" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm">
-                  <Twitter className="h-4 w-4" />
-                </ModernButton>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard delay={0.4} className="text-center group">
-              <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <span className="text-white font-bold text-2xl">MA</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Muhirwa Alex</h3>
-              <p className="text-orange-600 font-medium mb-4">Software Developer</p>
-              <p className="text-sm text-gray-600 mb-6">Architecting real-time monitoring and web dashboard.</p>
-              <div className="flex justify-center space-x-3">
-                <ModernButton variant="ghost" size="sm">
-                  <Linkedin className="h-4 w-4" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm">
-                  <Twitter className="h-4 w-4" />
-                </ModernButton>
-              </div>
-            </AnimatedCard>
+            ))}
           </div>
         </div>
       </section>
@@ -739,11 +809,38 @@ export default function AppoModernLanding() {
               Backed by <span className="text-gradient">Leading Institutions</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We collaborate with Rwanda's top healthcare and innovation partners to deliver world-class solutions.
+              Proudly supported by Rwanda's premier educational institutions.
             </p>
           </div>
 
-          <TrustedPartners />
+          <div className={partnerStyles.logoContainer}>
+            {/* University of Rwanda Logo */}
+            <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
+              <div className={partnerStyles.imageWrapper}>
+                <Image 
+                  src="/university-of-rwanda-logo.png" 
+                  alt="University of Rwanda Logo" 
+                  width={250}
+                  height={100}
+                  className="object-contain partner-image"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* ALX Logo */}
+            <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
+              <div className={partnerStyles.imageWrapper}>
+                <Image 
+                  src="/alx logo.webp" 
+                  alt="ALX Logo" 
+                  width={250}
+                  height={100}
+                  className="object-contain partner-image"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -792,7 +889,7 @@ export default function AppoModernLanding() {
             <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
               Healthcare <span className="text-gradient">Innovation</span> Blog
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Stay updated with the latest insights on diabetic care, healthcare technology, and our mission to save
               lives.
             </p>
@@ -809,15 +906,27 @@ export default function AppoModernLanding() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-animate py-32 bg-white">
-        <div className="container px-4">
+      <section className="section-animate py-32 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-white">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
+        </div>
+        
+        <div className="container px-4 relative">
           <div className="text-center space-y-6 mb-20">
+            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg">
+              ❓ Got Questions?
+            </Badge>
             <h2 className="text-4xl md:text-6xl font-black text-gray-900">
               Frequently Asked <span className="text-gradient">Questions</span>
             </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Find answers to common questions about APPO's smart insole technology, costs, and healthcare impact.
+            </p>
           </div>
 
-          <FAQAccordion />
+          <FAQSection />
         </div>
       </section>
 

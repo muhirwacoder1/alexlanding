@@ -1,144 +1,149 @@
 "use client"
 
-import { AnimatedCard } from "@/components/animated-card"
-import { ModernButton } from "@/components/modern-button"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, ArrowRight, User } from "lucide-react"
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import styles from '@/styles/blog-section.module.css'
 
 const blogPosts = [
   {
-    title: "The Hidden Crisis: Diabetic Foot Ulcers in Rwanda",
-    excerpt:
-      "Understanding the scope of diabetic complications in East Africa and why prevention is crucial for saving lives and reducing healthcare costs.",
-    category: "Healthcare",
-    readTime: "5 min read",
-    date: "Dec 15, 2024",
-    author: "Dr. Grace Nyirarukundo",
-    featured: true,
-    gradient: "from-blue-600 to-blue-700",
+    id: 1,
+    title: 'Revolutionary Smart Insoles: The Future of Diabetic Care',
+    excerpt: 'Discover how our AI-powered insoles are transforming preventive healthcare for diabetic patients in Rwanda.',
+    category: 'Technology',
+    image: '/images/healthcare-services.png',
+    author: {
+      name: 'Dr. Grace Uwase',
+      image: '/images/team/pp.jpg',
+      role: 'Co-Founder & COO'
+    },
+    date: 'July 15, 2025',
+    featured: true
   },
   {
-    title: "How Smart Insoles Are Revolutionizing Diabetic Care",
-    excerpt:
-      "A deep dive into the technology behind our smart insole sensors and how they detect problems before they become serious.",
-    category: "Technology",
-    readTime: "7 min read",
-    date: "Dec 10, 2024",
-    author: "David Rwakayiro",
-    gradient: "from-purple-600 to-purple-700",
+    id: 2,
+    title: 'Preventing Amputations: Early Detection is Key',
+    excerpt: 'Learn about the critical importance of early detection in preventing diabetic foot complications.',
+    category: 'Healthcare',
+    image: '/images/services-grid.png',
+    author: {
+      name: 'Kelly Iradukunda',
+      image: '/images/team/kelly.jpg',
+      role: 'Data Scientist'
+    },
+    date: 'July 14, 2025'
   },
   {
-    title: "Patient Success Story: From Amputation Risk to Active Life",
-    excerpt:
-      "Meet John, a 45-year-old teacher who avoided amputation thanks to early detection and intervention with APPO technology.",
-    category: "Success Stories",
-    readTime: "4 min read",
-    date: "Dec 5, 2024",
-    author: "Prisca Nikuze",
-    gradient: "from-green-600 to-green-700",
-  },
-  {
-    title: "Building Healthcare Tech in Rwanda: Challenges & Opportunities",
-    excerpt:
-      "The journey of creating locally-relevant healthcare solutions and the unique challenges of the East African market.",
-    category: "Innovation",
-    readTime: "6 min read",
-    date: "Nov 28, 2024",
-    author: "Alex Muhirwa",
-    gradient: "from-orange-600 to-orange-700",
-  },
+    id: 3,
+    title: 'The Impact of AI in Modern Healthcare',
+    excerpt: 'Exploring how artificial intelligence is revolutionizing healthcare delivery in Africa.',
+    category: 'Innovation',
+    image: '/images/dashboard.png',
+    author: {
+      name: 'Rwakayiro David',
+      image: '/images/team/rwakayiro david.jpeg',
+      role: 'CTO'
+    },
+    date: 'July 13, 2025'
+  }
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { y: 50, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  }
+}
+
 export function BlogSection() {
-  const featuredPost = blogPosts[0]
-  const regularPosts = blogPosts.slice(1)
+  const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   return (
-    <div className="space-y-12">
-      {/* Featured Post */}
-      <AnimatedCard
-        className={`bg-gradient-to-br ${featuredPost.gradient} text-white p-8 lg:p-12 relative overflow-hidden`}
-      >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
-
-        <div className="relative z-10">
-          <div className="flex items-center space-x-4 mb-6">
-            <Badge className="bg-white/20 text-white hover:bg-white/30">⭐ Featured</Badge>
-            <Badge className="bg-white/20 text-white hover:bg-white/30">{featuredPost.category}</Badge>
+    <motion.div 
+      className={styles.blogGrid}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+    >
+      {blogPosts.map((post) => (
+        <motion.article
+          key={post.id}
+          className={styles.blogCard}
+          variants={cardVariants}
+          onHoverStart={() => setHoveredId(post.id)}
+          onHoverEnd={() => setHoveredId(null)}
+        >
+          {post.featured && (
+            <span className={styles.featuredBadge}>
+              ✨ Featured
+            </span>
+          )}
+          <div className={styles.imageContainer}>
+            <div className={styles.imageOverlay} />
+            <img 
+              src={post.image} 
+              alt={post.title}
+              className={styles.image}
+            />
           </div>
-
-          <h3 className="text-3xl lg:text-4xl font-black mb-4 leading-tight">{featuredPost.title}</h3>
-
-          <p className="text-blue-100 text-lg mb-8 leading-relaxed">{featuredPost.excerpt}</p>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6 text-blue-100">
-              <div className="flex items-center space-x-2">
-                <User className="h-4 w-4" />
-                <span className="text-sm">{featuredPost.author}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="h-4 w-4" />
-                <span className="text-sm">{featuredPost.date}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4" />
-                <span className="text-sm">{featuredPost.readTime}</span>
-              </div>
-            </div>
-
-            <ModernButton
-              variant="secondary"
-              className="bg-white text-blue-600 hover:bg-gray-100"
-              icon={<ArrowRight className="h-4 w-4" />}
-            >
-              Read More
-            </ModernButton>
-          </div>
-        </div>
-      </AnimatedCard>
-
-      {/* Regular Posts Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {regularPosts.map((post, index) => (
-          <AnimatedCard
-            key={post.title}
-            className="group cursor-pointer bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden"
-            delay={index * 0.05}
-          >
-            <div className="relative group overflow-hidden">
-              <div className="h-48 w-full bg-gradient-to-br from-gray-200 to-gray-100 flex items-center justify-center">
-                {/* Placeholder could be replaced with real thumbnail */}
-                <span className="text-gray-500">Cover Image</span>
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-            </div>
-            <div className="p-6 space-y-4">
-              <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="text-xs">
-                  {post.category}
-                </Badge>
-              </div>
-
-              <h4 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
-                {post.title}
-              </h4>
-
-              <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
-
-              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                <div className="flex items-center space-x-4 text-sm text-gray-500">
-                  <span>{post.author}</span>
-                  <span>•</span>
-                  <span>{post.date}</span>
+          <div className={styles.content}>
+            <span className={styles.category}>
+              {post.category}
+            </span>
+            <h3 className={styles.title}>
+              {post.title}
+            </h3>
+            <p className={styles.excerpt}>
+              {post.excerpt}
+            </p>
+            <div className={styles.footer}>
+              <div className={styles.author}>
+                <div className={styles.authorImage}>
+                  <img 
+                    src={post.author.image}
+                    alt={post.author.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <span className="text-sm text-gray-500">{post.readTime}</span>
+                <div className={styles.authorInfo}>
+                  <span className={styles.authorName}>
+                    {post.author.name}
+                  </span>
+                  <span className={styles.date}>
+                    {post.date}
+                  </span>
+                </div>
               </div>
+              <motion.div 
+                className={styles.readMore}
+                animate={{
+                  x: hoveredId === post.id ? 5 : 0
+                }}
+              >
+                Read More 
+                <ArrowRight className="h-4 w-4" />
+              </motion.div>
             </div>
-          </AnimatedCard>
-        ))}
-      </div>
-    </div>
-  )
+          </div>
+        </motion.article>
+      ))}
+    </motion.div>
+  );
 }
