@@ -35,6 +35,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import styles from '@/styles/tech-section.module.css'
 
 export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -131,6 +132,137 @@ export default function AppoModernLanding() {
           },
         },
       )
+    })
+
+    // Technology section animations with enhanced text effects
+    gsap.utils.toArray('.tech-card-animate').forEach((card: any, i: number) => {
+      const title = card.querySelector('.tech-title-animate')
+      const text = card.querySelector('.tech-text-animate')
+      const image = card.querySelector('.tech-image-animate')
+      const highlights = card.querySelectorAll('.text-highlight')
+      const bolds = card.querySelectorAll('.text-bold')
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play none none reverse',
+        }
+      })
+
+      // Card entrance animation
+      tl.fromTo(card, {
+        opacity: 0,
+        y: 60,
+        scale: 0.95
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power3.out'
+      })
+      
+      // Title animation with character splitting
+      .fromTo(title.children, {
+        opacity: 0,
+        y: 20,
+        rotateX: -90
+      }, {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 0.8,
+        stagger: 0.03,
+        ease: 'back.out(1.7)'
+      }, '-=0.4')
+
+      // Text animation with highlight emphasis
+      .fromTo(text, {
+        opacity: 0,
+        y: 30,
+        filter: 'blur(2px)'
+      }, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '-=0.4')
+
+      // Highlight words animation
+      .fromTo(highlights, {
+        backgroundColor: 'rgba(59, 130, 246, 0)',
+        color: 'inherit'
+      }, {
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        color: '#2563eb',
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'power2.inOut'
+      }, '-=0.4')
+
+      // Bold words emphasis
+      .fromTo(bolds, {
+        scale: 1,
+        fontWeight: 400
+      }, {
+        scale: 1.05,
+        fontWeight: 700,
+        duration: 0.3,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, '-=0.3')
+
+      // Image animation
+      .fromTo(image, {
+        opacity: 0,
+        scale: 0.8,
+        rotationY: 15
+      }, {
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        duration: 1,
+        ease: 'power3.out'
+      }, '-=0.7')
+    })
+
+    // Enhanced hover animations for tech cards
+    gsap.utils.toArray('.tech-card-animate').forEach((card: any) => {
+      const image = card.querySelector('.tech-image-animate img')
+      const title = card.querySelector('.tech-title-animate')
+      
+      card.addEventListener('mouseenter', () => {
+        gsap.to(image, {
+          scale: 1.1,
+          rotation: 2,
+          duration: 0.4,
+          ease: 'power2.out'
+        })
+        gsap.to(title, {
+          color: '#2563eb',
+          x: 10,
+          duration: 0.3,
+          ease: 'power2.out'
+        })
+      })
+      
+      card.addEventListener('mouseleave', () => {
+        gsap.to(image, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.4,
+          ease: 'power2.out'
+        })
+        gsap.to(title, {
+          color: '#2563eb',
+          x: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        })
+      })
     })
   }, [])
 
@@ -317,44 +449,46 @@ export default function AppoModernLanding() {
 
           <div className="space-y-16">
             {/* Card 1: Smart Insoles, Made Just For You */}
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-blue-600 mb-2">Smart Insoles, Made Just For You</h3>
-                <p className="text-gray-800 leading-relaxed">
-                  Our experts make a special mold of your feet to create smart insoles that fit you perfectly. You get amazing comfort and support with every step you take.
+            <div className="flex flex-col md:flex-row items-stretch gap-8 tech-card-animate min-h-[600px]">
+              <div className="flex-1 space-y-4 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Smart Insoles, Made Just For You</h3>
+                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
+                  Our <span className="text-bold">experts</span> make a <span className="text-highlight">special mold of your feet</span> to create smart insoles that fit you perfectly. You get <span className="text-bold">amazing comfort</span> and <span className="text-highlight">support with every step</span> you take. Each insole is <span className="text-bold">custom-crafted</span> using <span className="text-highlight">advanced 3D scanning technology</span> to ensure optimal fit and maximum effectiveness in detecting early signs of foot complications.
                 </p>
               </div>
               <div className="flex-1">
-                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
-                  <img src="/insole%20implint.png" alt="Smart Insoles" className="w-full h-full object-cover" />
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
+                  <img src="/insole%20implint.png" alt="Smart Insoles" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>
+            
             {/* Card 2: Personal Care for You */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-6">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-blue-600 mb-2">Personal Care for You</h3>
-                <p className="text-gray-800 leading-relaxed">
-                  Everyone is different, so your care should be too. We give you our full attention to understand your health needs, and we always keep your information safe and private.
+            <div className="flex flex-col md:flex-row-reverse items-stretch gap-8 tech-card-animate min-h-[600px]">
+              <div className="flex-1 space-y-4 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Personal Care for You</h3>
+                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
+                  Everyone is different, so your care should be too. We give you our <span className="text-highlight">full attention</span> to understand your <span className="text-bold">health needs</span>, and we always keep your information <span className="text-bold">safe and private</span>. Our <span className="text-highlight">personalized approach</span> ensures that each patient receives <span className="text-bold">tailored monitoring</span> and care recommendations based on their <span className="text-highlight">unique health profile</span> and lifestyle.
                 </p>
               </div>
               <div className="flex-1">
-                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
-                  {/* Placeholder for image */}
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
+                  <img src="/personalized%20care.png" alt="Personalized Care" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>
+            
             {/* Card 3: Early Health Alerts */}
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-blue-600 mb-2">Early Health Alerts</h3>
-                <p className="text-gray-800 leading-relaxed">
-                  The smart sensors in your insoles watch over your feet all day. They find early signs of problems, like diabetic foot ulcers, and send an alert right away. This lets you act fast and helps you worry less.
+            <div className="flex flex-col md:flex-row items-stretch gap-8 tech-card-animate min-h-[600px]">
+              <div className="flex-1 space-y-4 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Early Health Alerts</h3>
+                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
+                  The <span className="text-highlight">smart sensors</span> in your insoles <span className="text-bold">watch over your feet</span> all day. They find <span className="text-highlight">early signs of problems</span>, like diabetic foot ulcers, and send an <span className="text-bold">alert right away</span>. This lets you <span className="text-highlight">act fast</span> and helps you worry less. Our <span className="text-bold">advanced AI algorithms</span> continuously analyze <span className="text-highlight">pressure patterns and temperature changes</span> to provide real-time health insights.
                 </p>
               </div>
               <div className="flex-1">
-                <div className="bg-gray-100 rounded-xl w-full h-40 md:h-48 flex items-center justify-center">
-                  {/* Placeholder for image */}
+                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
+                  <img src="/early%20health%20alert.png" alt="Early Health Alerts" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>

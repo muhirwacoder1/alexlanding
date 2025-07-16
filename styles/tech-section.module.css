@@ -1,0 +1,13 @@
+.text-highlight {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.text-bold {
+  display: inline-block;
+  font-weight: 600;
+  color: #2563eb;
+  transition: all 0.3s ease;
+}
