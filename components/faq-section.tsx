@@ -9,15 +9,53 @@ const faqData = {
     title: "Basic Information",
     questions: [
       {
-        question: "What is APPO's smart insole technology?",
-        answer: "APPO's smart insole is a custom-made medical device that fits inside your shoes to detect early signs of diabetic foot complications. Using advanced sensors and AI, it continuously monitors foot pressure points and temperature changes to prevent ulcers before they form.",
+        question: "What is NEEM's smart insole technology?",
+        answer: "NEEM's smart insole is a custom-made medical device that fits inside your shoes to detect early signs of diabetic foot complications. Using advanced sensors and AI, it continuously monitors foot pressure points and temperature changes to prevent ulcers before they form.",
         tags: ["basic"]
       },
       {
-        question: "How effective is the APPO solution?",
+        question: "How effective is the NEEM solution?",
         answer: "Our smart insoles have demonstrated a 90% success rate in preventing diabetic foot ulcers. This high efficacy is achieved through real-time monitoring, early detection, and immediate alerts when potential issues are detected.",
         tags: ["basic"]
-      }
+      },
+      {
+        question: "Is it painful to wear or use?",
+        answer:
+          "Not at all! It's designed for comfort, flexibility, and daily use. The insole is lightweight and fits in most shoes.",
+        tags: ["basic"]  
+      },
+      {
+        question: "How does the smart insole work?",
+        answer:
+          "It uses built-in sensors to monitor foot pressure, temperature, and heart rate. Data is sent to the cloud and alerts you before a problem starts.",
+        tags: ["basic"] ,
+      },
+      {
+        question: "How much does it cost?",
+        answer:
+          "$150 per pair, with flexible payment plans. Monthly monitoring subscription is $15. We also offer insurance coverage options.",
+          tags: ["basic"] 
+      },
+      {question: "Can I use it without a doctor?",
+      answer:
+        "Yes, but it's even more effective when shared with your healthcare provider. We provide easy sharing tools for medical professionals.",
+        tags: ["basic"] 
+    },
+  
+    {
+      question: "How long does the battery last?",
+      answer:
+        "The smart insole battery lasts up to 7 days with normal use. It charges wirelessly and takes only 2 hours for a full charge.",
+        tags: ["basic"] 
+    },
+  
+    {
+      question: "Is my health data secure?",
+      answer:
+        "Absolutely. We use bank-level encryption and comply with international healthcare data protection standards. Your data is never shared without permission.",
+        tags: ["basic"] 
+    },
+      
     ]
   },
   technical: {
@@ -30,7 +68,7 @@ const faqData = {
       },
       {
         question: "Is the device water-resistant?",
-        answer: "Yes, the APPO smart insole is designed to be water-resistant for daily use. While it can handle normal foot perspiration and light exposure to water, we recommend removing them before activities involving direct water contact.",
+        answer: "Yes, the NEEM smart insole is designed to be water-resistant for daily use. While it can handle normal foot perspiration and light exposure to water, we recommend removing them before activities involving direct water contact.",
         tags: ["technical"]
       }
     ]
@@ -39,12 +77,12 @@ const faqData = {
     title: "Costs & Coverage",
     questions: [
       {
-        question: "Is APPO covered by insurance?",
-        answer: "Yes, APPO works with several insurance providers in Rwanda. We also offer flexible payment plans to ensure our solution is accessible to those who need it most. Contact our team for specific details about coverage options.",
+        question: "Is NEEM covered by insurance?",
+        answer: "Insurance coverage in Rwanda is coming soon. In the meantime, we offer flexible payment plans to ensure our solution is accessible to those who need it most. Please contact our team for specific details on your payment and coverage options.",
         tags: ["cost"]
       },
       {
-        question: "What's included in the APPO package?",
+        question: "What's included in the NEEM package?",
         answer: "The APPO package includes custom-fitted smart insoles, access to our mobile monitoring app, regular check-ups, and continuous support from our healthcare team. We also provide replacement insoles as needed.",
         tags: ["cost"]
       }

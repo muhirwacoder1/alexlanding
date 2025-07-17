@@ -9,13 +9,13 @@ const blogPosts = [
   {
     id: 1,
     title: 'Revolutionary Smart Insoles: The Future of Diabetic Care',
-    excerpt: 'Discover how our AI-powered insoles are transforming preventive healthcare for diabetic patients in Rwanda.',
+    excerpt: 'Discover how our Smart insoles are transforming preventive healthcare for diabetic patients in Rwanda.',
     category: 'Technology',
-    image: '/images/healthcare-services.png',
+    image: 'https://wearables.in/cdn/shop/products/nurvv-runn-smart-insoles-2.jpg?crop=center&height=500&v=1664358280&width=600',
     author: {
-      name: 'Dr. Grace Uwase',
+      name: 'Grace ',
       image: '/images/team/pp.jpg',
-      role: 'Co-Founder & COO'
+      role: 'CEO'
     },
     date: 'July 15, 2025',
     featured: true
@@ -25,11 +25,11 @@ const blogPosts = [
     title: 'Preventing Amputations: Early Detection is Key',
     excerpt: 'Learn about the critical importance of early detection in preventing diabetic foot complications.',
     category: 'Healthcare',
-    image: '/images/services-grid.png',
+    image: 'https://www.coastalvascular.com/wp-content/uploads/2023/07/AmputationPreventionProgram.jpg',
     author: {
-      name: 'Kelly Iradukunda',
+      name: 'Kelly Irakoze',
       image: '/images/team/kelly.jpg',
-      role: 'Data Scientist'
+      role: 'Data Analyst'
     },
     date: 'July 14, 2025'
   },
@@ -38,7 +38,7 @@ const blogPosts = [
     title: 'The Impact of AI in Modern Healthcare',
     excerpt: 'Exploring how artificial intelligence is revolutionizing healthcare delivery in Africa.',
     category: 'Innovation',
-    image: '/images/dashboard.png',
+    image: 'https://gloriumtech.com/wp-content/uploads/2022/06/Top-5-Use-Cases-for-AI-in-Healthcare.png',
     author: {
       name: 'Rwakayiro David',
       image: '/images/team/rwakayiro david.jpeg',

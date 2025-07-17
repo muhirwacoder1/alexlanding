@@ -7,8 +7,7 @@ import { FloatingElements } from "@/components/floating-elements"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { FAQAccordion } from "@/components/faq-accordion"
-import { TrustedPartners } from "@/components/trusted-partners"
+
 import { BlogSection } from "@/components/blog-section"
 import { CheckCircle } from "lucide-react"
 import {
@@ -499,7 +498,7 @@ export default function AppoModernLanding() {
 
               <div className="relative flex items-center justify-center">
                 <img
-                  src="/ChatGPT Image Jul 15, 2025, 08_00_14 PM.png"
+                  src="/ChatGPT Image Jul 15, 2025, 08_00_14 PM.jpg"
                   alt="Why We Exist - Prevention"
                   className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
                 />
@@ -551,7 +550,7 @@ export default function AppoModernLanding() {
               </div>
               <div className="flex-1">
                 <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/personalized%20care.png" alt="Personalized Care" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+                  <img src="/personalized%20care.jpg" alt="Personalized Care" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>
@@ -566,7 +565,7 @@ export default function AppoModernLanding() {
               </div>
               <div className="flex-1">
                 <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/early%20health%20alert.png" alt="Early Health Alerts" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+                  <img src="/early%20health%20alert.jpg" alt="Early Health Alerts" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>
