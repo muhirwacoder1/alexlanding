@@ -360,7 +360,7 @@ export default function AppoModernLanding() {
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center shadow-lg pulse-glow">
                 <Heart className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gradient">APPO</span>
+              <span className="text-xl font-bold text-gradient">Neem</span>
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -475,7 +475,7 @@ export default function AppoModernLanding() {
                     When that happens, it's not just a foot that's lost—it's mobility, dignity, and income.
                   </p>
                   <p className="text-gray-700 why-animate">
-                    At APPO LTD, we couldn't accept that. That's why we built a smart, affordable, non-invasive insole
+                    At Neem , we couldn't accept that. That's why we built a smart, affordable, non-invasive insole
                     that can detect ulcers before they develop—preventing up to{" "}
                     <span className="font-bold text-blue-600 text-2xl">90% of amputations</span>.
                   </p>
@@ -489,10 +489,7 @@ export default function AppoModernLanding() {
                     <div className="text-3xl font-black text-blue-600">90%</div>
                     <div className="text-sm text-gray-600">Prevention Rate</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-green-600">1000+</div>
-                    <div className="text-sm text-gray-600">Lives Saved</div>
-                  </div>
+                  
                   <div className="text-center">
                     <div className="text-3xl font-black text-purple-600">24/7</div>
                     <div className="text-sm text-gray-600">Monitoring</div>
@@ -534,7 +531,7 @@ export default function AppoModernLanding() {
               <div className="flex-1 space-y-4 flex flex-col justify-center">
                 <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Smart Insoles, Made Just For You</h3>
                 <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
-                  Our <span className="text-bold">experts</span> make a <span className="text-highlight">special mold of your feet</span> to create smart insoles that fit you perfectly. You get <span className="text-bold">amazing comfort</span> and <span className="text-highlight">support with every step</span> you take. Each insole is <span className="text-bold">custom-crafted</span> using <span className="text-highlight">advanced 3D scanning technology</span> to ensure optimal fit and maximum effectiveness in detecting early signs of foot complications.
+                  Our <span className="text-bold">experts</span> make a <span className="text-highlight">special mold of your feet</span> to create smart insoles that fit you perfectly. You get <span className="text-bold">amazing comfort</span> and <span className="text-highlight">support with every step</span> you take. Each insole is <span className="text-bold">custom-crafted</span> using <span className="text-highlight">advanced casting and 3Dprinting</span> to ensure optimal fit and maximum effectiveness in detecting early signs of foot complications.
                 </p>
               </div>
               <div className="flex-1">
@@ -564,7 +561,7 @@ export default function AppoModernLanding() {
               <div className="flex-1 space-y-4 flex flex-col justify-center">
                 <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Early Health Alerts</h3>
                 <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
-                  The <span className="text-highlight">smart sensors</span> in your insoles <span className="text-bold">watch over your feet</span> all day. They find <span className="text-highlight">early signs of problems</span>, like diabetic foot ulcers, and send an <span className="text-bold">alert right away</span>. This lets you <span className="text-highlight">act fast</span> and helps you worry less. Our <span className="text-bold">advanced AI algorithms</span> continuously analyze <span className="text-highlight">pressure patterns and temperature changes</span> to provide real-time health insights.
+                  The <span className="text-highlight">smart sensors</span> in your insoles <span className="text-bold">watch over your feet</span> all day. They find <span className="text-highlight">early signs of problems</span>, like diabetic foot ulcers, and send an <span className="text-bold">alert right away</span>. This lets you <span className="text-highlight">act fast</span> and helps you worry less. Our <span className="text-bold">advanced Data processing</span> continuously analyzing <span className="text-highlight">pressure patterns and temperature changes</span> to provide real-time health insights.
                 </p>
               </div>
               <div className="flex-1">
@@ -584,7 +581,7 @@ export default function AppoModernLanding() {
         <div className="container px-4">
           <div className="text-center space-y-6 mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-gray-900">
-              Why Choose <span className="text-gradient">APPO</span>
+              Why Choose <span className="text-gradient">NEEM</span>
             </h2>
           </div>
 
@@ -699,20 +696,20 @@ export default function AppoModernLanding() {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
             {[
               { 
-                name: "Grace Uwase", 
-                role: "Co-Founder & COO", 
+                name: "Grace Nyirarukundo", 
+                role: "CEO", 
                 img: "/images/team/pp.jpg", 
                 twitter: "#", 
-                linkedin: "#",
+                linkedin: "linkedin.com/in/grace-nyirarukundo-19841925a",
                 gradient: "from-blue-400 to-blue-600",
                 bio: "Driving our mission with passion and purpose"
               },
               { 
-                name: "Prisca Mukamana", 
-                role: "Lead Engineer", 
+                name: "Prisca Nikuze", 
+                role: "COO", 
                 img: "/images/team/prisca.png", 
                 twitter: "#", 
-                linkedin: "#",
+                linkedin: "",
                 gradient: "from-purple-400 to-purple-600",
                 bio: "Innovating the future of preventive healthcare"
               },
@@ -721,25 +718,25 @@ export default function AppoModernLanding() {
                 role: "CTO", 
                 img: "/images/team/rwakayiro david.jpeg", 
                 twitter: "#", 
-                linkedin: "#",
+                linkedin: "linkedin.com/in/jean-david-rwakayiro-61718a344",
                 gradient: "from-green-400 to-green-600",
                 bio: "Architecting smart solutions that save lives"
               },
               { 
-                name: "Alex Nshimiyimana", 
+                name: "Alex MUHIRWA", 
                 role: "Product Designer", 
                 img: "/images/team/alex.jpeg", 
                 twitter: "#", 
-                linkedin: "#",
+                linkedin: "linkedin.com/in/muhirwa-alex-64aa2b268",
                 gradient: "from-pink-400 to-pink-600",
                 bio: "Creating intuitive experiences for better care"
               },
               { 
-                name: "Kelly Iradukunda", 
-                role: "Data Scientist", 
+                name: "Kelly Irakoze", 
+                role: "Data Analyst", 
                 img: "/images/team/kelly.jpg", 
                 twitter: "#", 
-                linkedin: "#",
+                linkedin: "linkedin.com/in/irakoze-ntawigenga-kelly-bb194a287",
                 gradient: "from-yellow-400 to-yellow-600",
                 bio: "Transforming data into life-saving insights"
               },
@@ -809,7 +806,7 @@ export default function AppoModernLanding() {
               Backed by <span className="text-gradient">Leading Institutions</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Proudly supported by Rwanda's premier educational institutions.
+              Proudly supported by Rwanda's best institutions.
             </p>
           </div>
 
@@ -922,7 +919,7 @@ export default function AppoModernLanding() {
               Frequently Asked <span className="text-gradient">Questions</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find answers to common questions about APPO's smart insole technology, costs, and healthcare impact.
+              Find answers to common questions about NEEM's smart insole technology, costs, and healthcare impact.
             </p>
           </div>
 
@@ -946,7 +943,7 @@ export default function AppoModernLanding() {
               💼 Join Our <span className="text-blue-200">Mission</span>
             </h2>
             <p className="text-xl md:text-2xl opacity-90 max-w-4xl mx-auto leading-relaxed">
-              Are you a healthcare provider, hospital, investor, or supporter? Join our mission to stop preventable
+              Are you a healthcare provider, hospital, investor, or Institutions ? Join our mission to stop preventable
               amputations across Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -958,7 +955,7 @@ export default function AppoModernLanding() {
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-blue-600"
               >
-                📩 Volunteer or Collaborate
+                📩 Ask question
               </ModernButton>
               <ModernButton
                 variant="outline"
@@ -1001,7 +998,7 @@ export default function AppoModernLanding() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg">Email</h3>
-                    <p className="text-gray-600">📧 info@appoltd.com</p>
+                    <p className="text-gray-600">📧 appoltd8@gmail.com.com</p>
                   </div>
                 </AnimatedCard>
 
@@ -1011,25 +1008,12 @@ export default function AppoModernLanding() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg">Phone</h3>
-                    <p className="text-gray-600">📞 +250 XXX XXX XXX</p>
+                    <p className="text-gray-600">📞 +250 784131200</p>
                   </div>
                 </AnimatedCard>
               </div>
 
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900">📰 In the News</h3>
-                <div className="flex flex-wrap gap-3">
-                  <Badge variant="outline" className="px-4 py-2 text-sm">
-                    ACEIoT Innovation Grant Winners
-                  </Badge>
-                  <Badge variant="outline" className="px-4 py-2 text-sm">
-                    University of Rwanda HealthTech Showcase
-                  </Badge>
-                  <Badge variant="outline" className="px-4 py-2 text-sm">
-                    CHUK Hospital Pilot Project
-                  </Badge>
-                </div>
-              </div>
+              
             </div>
 
             <AnimatedCard delay={0.4} className="p-8">
@@ -1089,7 +1073,7 @@ export default function AppoModernLanding() {
                 <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center shadow-lg">
                   <Heart className="h-5 w-5 text-white" />
                 </div>
-                <span className="text-2xl font-bold">APPO LTD</span>
+                <span className="text-2xl font-bold">NEEM</span>
               </div>
               <p className="text-gray-400 leading-relaxed">
                 Saving limbs. Restoring lives. Protecting futures through smart healthcare technology.
@@ -1115,14 +1099,10 @@ export default function AppoModernLanding() {
               <h3 className="font-bold text-lg">Resources</h3>
               <div className="space-y-3">
                 <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
-                  📖 Blog Articles
+                  Blog 
                 </Link>
-                <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
-                  📰 News Coverage
-                </Link>
-                <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
-                  📄 Research Papers
-                </Link>
+              
+              
               </div>
             </div>
 
