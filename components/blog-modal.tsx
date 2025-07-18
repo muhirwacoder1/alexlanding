@@ -10,7 +10,8 @@ import styles from '@/styles/blog-modal.module.css'
 const blogContentMap: Record<number, any> = {
   1: dynamic(() => import('./contents blog/smart insole revolution')),
   2: dynamic(() => import('./contents blog/Preventing Amputations')),
-  3: dynamic(() => import('./contents blog/AI in health'))
+  3: dynamic(() => import('./contents blog/AI in health')),
+  4: dynamic(() => import('./contents blog/prisca-blog'))
 }
 
 interface BlogModalProps {

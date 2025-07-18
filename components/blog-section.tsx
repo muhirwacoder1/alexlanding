@@ -46,6 +46,19 @@ const blogPosts = [
       role: 'CTO'
     },
     date: 'July 13, 2025'
+  },
+  {
+    id: 4,
+    title: 'Bridging Healthcare Gaps: Technology Transforming Rural Healthcare in Rwanda',
+    excerpt: 'Exploring how digital health solutions are revolutionizing healthcare delivery in rural Rwanda and creating opportunities for early intervention.',
+    category: 'Healthcare Innovation',
+    image: 'https://www.newtimes.co.rw/thenewtimes/uploads/images/2023/01/11/thumbs/1200x700/9746.jpg',
+    author: {
+      name: 'Prisca',
+      image: '/images/team/prisca.png',
+      role: 'Healthcare Analyst'
+    },
+    date: 'July 16, 2025'
   }
 ]
 
@@ -72,33 +85,40 @@ const cardVariants = {
   }
 }
 
-export function BlogSection() {
+interface BlogSectionProps {
+  showAll?: boolean
+}
+
+export function BlogSection({ showAll = false }: BlogSectionProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  
+
   const handleReadMore = (postId: number) => {
     setSelectedBlogId(postId)
     setIsModalOpen(true)
   }
-  
+
   const handleCloseModal = () => {
     setIsModalOpen(false)
   }
-  
+
   // Find the selected blog data
   const selectedBlog = blogPosts.find(post => post.id === selectedBlogId)
 
+  // Show only first 3 posts by default, all posts when showAll is true
+  const postsToShow = showAll ? blogPosts : blogPosts.slice(0, 3)
+
   return (
     <>
-      <motion.div 
+      <motion.div
         className={styles.blogGrid}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {blogPosts.map((post) => (
+        {postsToShow.map((post) => (
           <motion.article
             key={post.id}
             className={styles.blogCard}
@@ -113,8 +133,8 @@ export function BlogSection() {
             )}
             <div className={styles.imageContainer}>
               <div className={styles.imageOverlay} />
-              <img 
-                src={post.image} 
+              <img
+                src={post.image}
                 alt={post.title}
                 className={styles.image}
               />
@@ -132,7 +152,7 @@ export function BlogSection() {
               <div className={styles.footer}>
                 <div className={styles.author}>
                   <div className={styles.authorImage}>
-                    <img 
+                    <img
                       src={post.author.image}
                       alt={post.author.name}
                       className="w-full h-full object-cover"
@@ -147,7 +167,7 @@ export function BlogSection() {
                     </span>
                   </div>
                 </div>
-                <motion.button 
+                <motion.button
                   className={styles.readMore}
                   animate={{
                     x: hoveredId === post.id ? 5 : 0
@@ -156,7 +176,7 @@ export function BlogSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Read More 
+                  Read More
                   <ArrowRight className="h-4 w-4" />
                 </motion.button>
               </div>
@@ -164,9 +184,9 @@ export function BlogSection() {
           </motion.article>
         ))}
       </motion.div>
-      
+
       {/* Blog Modal */}
-      <BlogModal 
+      <BlogModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         blogId={selectedBlogId}

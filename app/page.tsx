@@ -31,6 +31,7 @@ import {
   Youtube,
   Menu,
   X,
+  MessageCircle,
 } from "lucide-react"
 import Link from "next/link"
 import styles from '@/styles/tech-section.module.css'
@@ -46,6 +47,7 @@ import AboutNEEM from "@/components/about/about";
 export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [showAllArticles, setShowAllArticles] = useState(false)
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
 
@@ -1056,13 +1058,34 @@ export default function AppoModernLanding() {
             </p>
           </div>
 
-          <BlogSection />
+          <BlogSection showAll={showAllArticles} />
 
-          <div className="text-center mt-12">
-            <ModernButton variant="outline" size="lg" icon={<ArrowRight className="h-5 w-5 text-white" />} className="bg-blue-600 text-white hover:bg-blue-700">
-              View All Articles
-            </ModernButton>
-          </div>
+          {!showAllArticles && (
+            <div className="text-center mt-6">
+              <ModernButton 
+                variant="outline" 
+                size="lg" 
+                icon={<ArrowRight className="h-5 w-5 text-white" />} 
+                className="bg-blue-600 text-white hover:bg-blue-700"
+                onClick={() => setShowAllArticles(true)}
+              >
+                View All Articles
+              </ModernButton>
+            </div>
+          )}
+
+          {showAllArticles && (
+            <div className="text-center mt-6">
+              <ModernButton 
+                variant="outline" 
+                size="lg" 
+                className="bg-gray-600 text-white hover:bg-gray-700"
+                onClick={() => setShowAllArticles(false)}
+              >
+                Show Less
+              </ModernButton>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1133,97 +1156,172 @@ export default function AppoModernLanding() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="section-animate py-32 bg-white">
+      {/* Modern Contact Section */}
+      <section id="contact" className="section-animate py-32 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container px-4">
           <div className="text-center space-y-6 mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900">
-              📬 Contact <span className="text-gradient">Us</span>
+            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg">
+              📬 Get In Touch
+            </Badge>
+            <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+              Contact <span className="text-gradient">Us</span>
             </h2>
-            <p className="text-xl text-gray-600">We'd love to hear from you.</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Ready to transform diabetic care? Let's discuss how we can work together to save lives.
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
-            <div className="space-y-12">
-              <div className="space-y-8">
-                <AnimatedCard delay={0.1} className="flex items-center space-x-6 p-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <MapPin className="h-8 w-8 text-white" />
+          <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            
+            {/* Contact Form */}
+            <div className="space-y-8">
+              <AnimatedCard delay={0.1} className="contact-form-glass p-8 rounded-3xl">
+                <div className="space-y-6">
+                  <div className="text-center space-y-3">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                      <Mail className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900">Send us a Message</h3>
+                    <p className="text-gray-600">We'll get back to you within 24 hours</p>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Location</h3>
-                    <p className="text-gray-600">📍 Kigali, Rwanda</p>
-                  </div>
-                </AnimatedCard>
 
-                <AnimatedCard delay={0.2} className="flex items-center space-x-6 p-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <Mail className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Email</h3>
-                    <p className="text-gray-600">📧 appoltd8@gmail.com.com</p>
-                  </div>
-                </AnimatedCard>
+                  <form className="space-y-6">
+                    {/* Name Field */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 flex items-center">
+                        <Users className="h-4 w-4 mr-2 text-blue-600" />
+                        Full Name *
+                      </label>
+                      <Input 
+                        placeholder="Enter your full name" 
+                        className="contact-input rounded-2xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 h-12"
+                        required
+                      />
+                    </div>
 
-                <AnimatedCard delay={0.3} className="flex items-center space-x-6 p-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <Phone className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Phone</h3>
-                    <p className="text-gray-600">📞 +250 784131200</p>
-                  </div>
-                </AnimatedCard>
-              </div>
+                    {/* Email Field */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 flex items-center">
+                        <Mail className="h-4 w-4 mr-2 text-green-600" />
+                        Email Address *
+                      </label>
+                      <Input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="contact-input rounded-2xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 h-12"
+                        required
+                      />
+                    </div>
 
-              
+                    {/* Message Field */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 flex items-center">
+                        <MessageCircle className="h-4 w-4 mr-2 text-purple-600" />
+                        Message *
+                      </label>
+                      <Textarea
+                        placeholder="Tell us about your inquiry, partnership opportunity, or how we can help..."
+                        rows={6}
+                        className="contact-input rounded-2xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-300 resize-none"
+                        required
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="pt-4">
+                      <ModernButton 
+                        variant="primary" 
+                        size="lg" 
+                        className="w-full h-14 text-lg font-semibold rounded-2xl group relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                        <Mail className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                        <span className="relative z-10">Send Message</span>
+                        <ArrowRight className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                      </ModernButton>
+                    </div>
+
+                    <div className="text-center text-sm text-gray-500 pt-2">
+                      We respect your privacy and will never share your information.
+                    </div>
+                  </form>
+                </div>
+              </AnimatedCard>
             </div>
 
-            <AnimatedCard delay={0.4} className="p-8">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Send a Message</h3>
-                  <p className="text-gray-600">Get in touch with our team for partnerships, support, or inquiries.</p>
-                </div>
+            {/* Map and Contact Info */}
+            <div className="space-y-8">
+              
+              {/* Contact Information Cards */}
+              <div className="grid gap-4">
+                <AnimatedCard delay={0.2} className="contact-info-glass p-6 rounded-2xl flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Location</h4>
+                    <p className="text-gray-600">Norrsken House Kigali, Rwanda</p>
+                  </div>
+                </AnimatedCard>
 
-                <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">First Name</label>
-                      <Input placeholder="Your first name" className="rounded-xl border-2 focus:border-blue-500" />
+                <AnimatedCard delay={0.3} className="contact-info-glass p-6 rounded-2xl flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                    <Mail className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Email</h4>
+                    <a href="mailto:appoltd8@gmail.com" className="text-gray-600 hover:text-blue-600 transition-colors">
+                      appoltd8@gmail.com
+                    </a>
+                  </div>
+                </AnimatedCard>
+              </div>
+
+              {/* Embedded Map */}
+              <AnimatedCard delay={0.4} className="map-container rounded-3xl overflow-hidden shadow-2xl">
+                <div className="relative">
+                  <div className="absolute top-4 left-4 z-10">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                        <span className="text-sm font-semibold text-gray-800">Norrsken House Kigali</span>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">Last Name</label>
-                      <Input placeholder="Your last name" className="rounded-xl border-2 focus:border-blue-500" />
-                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Email</label>
-                    <Input
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="rounded-xl border-2 focus:border-blue-500"
-                    />
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5050469965067!2d30.059993200000008!3d-1.9511718999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca5a86d814c61%3A0x7d3b83e12b1c11a9!2sNorrsken%20House%20Kigali!5e0!3m2!1sen!2srw!4v1752854416001!5m2!1sen!2srw" 
+                    width="100%" 
+                    height="400" 
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-3xl"
+                  />
+                </div>
+              </AnimatedCard>
+
+              {/* Call to Action */}
+              <AnimatedCard delay={0.5} className="contact-cta-glass p-8 rounded-3xl text-center">
+                <div className="space-y-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                    <Heart className="h-8 w-8 text-white animate-pulse" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Subject</label>
-                    <Input placeholder="What's this about?" className="rounded-xl border-2 focus:border-blue-500" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Message</label>
-                    <Textarea
-                      placeholder="Tell us more about your inquiry..."
-                      rows={4}
-                      className="rounded-xl border-2 focus:border-blue-500"
-                    />
-                  </div>
-                  <ModernButton variant="primary" size="lg" className="w-full">
-                    Send Message
+                  <h4 className="text-xl font-bold text-gray-900">Ready to Save Lives?</h4>
+                  <p className="text-gray-600">
+                    Join us in revolutionizing diabetic care and preventing amputations across Africa.
+                  </p>
+                  <ModernButton 
+                    variant="outline" 
+                    size="lg" 
+                    className="group hover:scale-105 transition-all duration-300"
+                  >
+                    <Users className="h-5 w-5 mr-2 group-hover:animate-pulse" />
+                    Partner With Us
                   </ModernButton>
                 </div>
-              </div>
-            </AnimatedCard>
+              </AnimatedCard>
+            </div>
           </div>
         </div>
       </section>

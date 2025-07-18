@@ -333,6 +333,146 @@
   }
 }
 
+/* Contact Section Styles */
+.contact-form-glass {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.7)
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 25px 50px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(59, 130, 246, 0.1), 
+    transparent
+  );
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-form-glass:hover::before {
+  left: 100%;
+}
+
+.contact-form-glass:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.8)
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 35px 70px rgba(59, 130, 246, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.contact-info-glass {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.6)
+  );
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-info-glass:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.7)
+  );
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12);
+}
+
+.contact-cta-glass {
+  background: linear-gradient(135deg, 
+    rgba(147, 51, 234, 0.1),
+    rgba(59, 130, 246, 0.1)
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(147, 51, 234, 0.2);
+  box-shadow: 
+    0 25px 50px rgba(147, 51, 234, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-cta-glass:hover {
+  background: linear-gradient(135deg, 
+    rgba(147, 51, 234, 0.15),
+    rgba(59, 130, 246, 0.15)
+  );
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 35px 70px rgba(147, 51, 234, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.contact-input {
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-input:focus {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.7)
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 70px rgba(59, 130, 246, 0.15);
+}
+
+/* Contact Form Animations */
+@keyframes contactFloat {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-5px);
+  }
+}
+
+.contact-float {
+  animation: contactFloat 4s ease-in-out infinite;
+}
+
+.contact-float:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.contact-float:nth-child(3) {
+  animation-delay: 2s;
+}
+
 .hero-bg {
   background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(29, 78, 216, 0.1) 0%, transparent 50%),
