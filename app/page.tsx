@@ -365,34 +365,37 @@ export default function AppoModernLanding() {
         <nav className="nav-circle px-8 py-4 shadow-2xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center shadow-lg pulse-glow">
-                <Heart className="h-5 w-5 text-white" />
+              <div className="nav-logo-container relative cursor-pointer">
+                <img 
+                  src="/logo neem.png" 
+                  alt="NEEM Logo" 
+                  className="h-12 w-auto object-contain"
+                />
               </div>
-              <span className="text-xl font-bold text-gradient">Neem</span>
             </div>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-2">
               <Link
                 href="#story"
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105"
+                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
               >
                 Story
               </Link>
               <Link
                 href="#technology"
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105"
+                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
               >
                 Services
               </Link>
               <Link
                 href="#team"
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105"
+                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
               >
                 Team
               </Link>
               <Link
                 href="#contact"
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105"
+                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
               >
                 Contact
               </Link>
@@ -405,7 +408,7 @@ export default function AppoModernLanding() {
                 </ModernButton>
               </div>
               <button
-                className="md:hidden p-3 rounded-full hover:bg-gray-100 transition-all duration-300 relative group"
+                className="md:hidden p-3 rounded-full liquid-glass-icon transition-all duration-300 relative group"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -434,7 +437,7 @@ export default function AppoModernLanding() {
         {/* Mobile Menu Backdrop */}
         {isMenuOpen && (
           <div 
-            className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300"
+            className="md:hidden fixed inset-0 bg-black/20 z-40 transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
@@ -456,14 +459,14 @@ export default function AppoModernLanding() {
                     isMenuOpen ? 'animate-in' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
-                  style={{ animationDelay: '0.1s' }}
+
                 >
                   <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
                     <Heart className="h-6 w-6 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base group-hover:text-blue-700 transition-colors">Our Story</span>
-                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-blue-500 transition-colors">Learn about our mission</p>
+                    <span className="font-semibold text-base text-gray-800 group-hover:text-blue-700 transition-colors">Our Story</span>
+                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-blue-600 transition-colors">Learn about our mission</p>
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-blue-600" />
                 </Link>
@@ -474,14 +477,14 @@ export default function AppoModernLanding() {
                     isMenuOpen ? 'animate-in' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
-                  style={{ animationDelay: '1.5s' }}
+
                 >
                   <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
                     <Smartphone className="h-6 w-6 text-green-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base group-hover:text-green-700 transition-colors">Services</span>
-                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-green-500 transition-colors">Smart insole technology</p>
+                    <span className="font-semibold text-base text-gray-800 group-hover:text-green-700 transition-colors">Services</span>
+                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-green-600 transition-colors">Smart insole technology</p>
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-green-600" />
                 </Link>
@@ -492,14 +495,14 @@ export default function AppoModernLanding() {
                     isMenuOpen ? 'animate-in' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
-                  style={{ animationDelay: '3s' }}
+
                 >
                   <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
                     <Users className="h-6 w-6 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base group-hover:text-purple-700 transition-colors">Team</span>
-                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-purple-500 transition-colors">Meet our experts</p>
+                    <span className="font-semibold text-base text-gray-800 group-hover:text-purple-700 transition-colors">Team</span>
+                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-purple-600 transition-colors">Meet our experts</p>
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
                 </Link>
@@ -510,14 +513,13 @@ export default function AppoModernLanding() {
                     isMenuOpen ? 'animate-in' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
-                  style={{ animationDelay: '4.5s' }}
                 >
                   <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
                     <Mail className="h-6 w-6 text-orange-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base group-hover:text-orange-700 transition-colors">Contact</span>
-                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-orange-500 transition-colors">Get in touch with us</p>
+                    <span className="font-semibold text-base text-gray-800 group-hover:text-orange-700 transition-colors">Contact</span>
+                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-orange-600 transition-colors">Get in touch with us</p>
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-orange-600" />
                 </Link>
@@ -1226,69 +1228,125 @@ export default function AppoModernLanding() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container px-4">
-          <div className="grid md:grid-cols-4 gap-12">
-            <div className="space-y-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center shadow-lg">
-                  <Heart className="h-5 w-5 text-white" />
+      {/* Simplified Footer */}
+      <footer className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
+        {/* Main Footer Content */}
+        <div className="relative z-10 py-12">
+          <div className="container px-4">
+            {/* Main Section */}
+            <div className="grid md:grid-cols-3 gap-8 mb-8">
+              
+              {/* Brand Section */}
+              <div className="space-y-6">
+                <div className="footer-glass-card p-6 rounded-2xl">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <img 
+                      src="/logo neem.png" 
+                      alt="NEEM Logo" 
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    Saving Limbs. <span className="text-blue-600">Restoring Lives.</span>
+                  </h3>
+                  
+                  {/* Mission Stats */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="text-center p-3 rounded-xl bg-blue-100 border border-blue-200">
+                      <div className="text-xl font-bold text-blue-600">90%</div>
+                      <div className="text-xs text-gray-600">Prevention</div>
+                    </div>
+                    <div className="text-center p-3 rounded-xl bg-blue-100 border border-blue-200">
+                      <div className="text-xl font-bold text-blue-600">24/7</div>
+                      <div className="text-xs text-gray-600">Monitoring</div>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-2xl font-bold">NEEM</span>
               </div>
-              <p className="text-gray-400 leading-relaxed">
-                Saving limbs. Restoring lives. Protecting futures through smart healthcare technology.
-              </p>
+
+              {/* Quick Links */}
+              <div className="space-y-6">
+                <div className="footer-glass-card p-6 rounded-2xl">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Quick Links</h3>
+                  <div className="space-y-2">
+                    <Link 
+                      href="#story" 
+                      className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
+                    >
+                      Our Story
+                    </Link>
+                    <Link 
+                      href="#technology" 
+                      className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
+                    >
+                      Services
+                    </Link>
+                    <Link 
+                      href="#team" 
+                      className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
+                    >
+                      Team
+                    </Link>
+                    <Link 
+                      href="#contact" 
+                      className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact */}
+              <div className="space-y-6">
+                <div className="footer-glass-card p-6 rounded-2xl">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Get In Touch</h3>
+                  
+                  <div className="space-y-3">
+                    <a 
+                      href="mailto:appoltd8@gmail.com"
+                      className="footer-contact-simple flex items-center p-3 rounded-xl transition-all duration-300 group hover:bg-blue-50"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-red-500 flex items-center justify-center mr-3">
+                        <img src="/gmail.png" alt="Gmail" className="w-4 h-4" />
+                      </div>
+                      <div className="text-sm text-gray-600 group-hover:text-gray-800">
+                        appoltd8@gmail.com
+                      </div>
+                    </a>
+                    
+                    <a 
+                      href="https://www.linkedin.com/company/appo-health/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-contact-simple flex items-center p-3 rounded-xl transition-all duration-300 group hover:bg-blue-50"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center mr-3">
+                        <img src="/linkedin.png" alt="LinkedIn" className="w-4 h-4" />
+                      </div>
+                      <div className="text-sm text-gray-600 group-hover:text-gray-800">
+                        LinkedIn
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="font-bold text-lg">Company</h3>
-              <div className="space-y-3">
-                <Link href="#story" className="block text-gray-400 hover:text-white transition-colors">
-                  Our Story
-                </Link>
-                <Link href="#technology" className="block text-gray-400 hover:text-white transition-colors">
-                  Technology
-                </Link>
-                <Link href="#team" className="block text-gray-400 hover:text-white transition-colors">
-                  Team
-                </Link>
+            {/* Bottom Section */}
+            <div className="footer-glass-card p-4 rounded-2xl">
+              <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+                <div className="text-gray-600 text-sm">
+                  &copy; {new Date().getFullYear()} <span className="font-semibold text-gray-800">APPO LTD</span>. All rights reserved.
+                </div>
+                
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <span>Made with</span>
+                  <Heart className="h-3 w-3 text-red-500" />
+                  <span>in Rwanda</span>
+                </div>
               </div>
             </div>
-
-            <div className="space-y-6">
-              <h3 className="font-bold text-lg">Resources</h3>
-              <div className="space-y-3">
-                <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
-                  Blog 
-                </Link>
-              
-              
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="font-bold text-lg">Connect</h3>
-              <div className="flex space-x-4">
-                <ModernButton variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Facebook className="h-5 w-5" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Twitter className="h-5 w-5" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Linkedin className="h-5 w-5" />
-                </ModernButton>
-                <ModernButton variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Youtube className="h-5 w-5" />
-                </ModernButton>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} APPO LTD. All rights reserved. Saving lives through innovation.</p>
           </div>
         </div>
       </footer>
