@@ -1,67 +1,107 @@
-import { useState } from 'react';
+const PreventingAmputations = () => {
+  return (
+    <div className="w-full max-w-4xl mx-auto px-4 space-y-12">
+      <div className="space-y-6">
+        <h2 className="text-3xl md:text-4xl font-bold mb-5 text-gray-900">
+          Preventing Amputations: Early Detection is Key
+        </h2>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          Diabetes affects millions globally, and one of its most costly complications is the development of foot
+          ulcers—often leading to amputation. Early detection is crucial in preventing these life-altering outcomes.
+          Let's explore why early detection matters and how it's transforming diabetic care.
+        </p>
+      </div>
 
-interface SmartInsolesProps {
-  title?: string;
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">The Critical Window of Opportunity</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          When it comes to diabetic foot complications, timing is everything. Research shows that early intervention
+          can prevent up to 85% of amputations. The challenge lies in detecting problems before they become visible
+          to the naked eye or cause pain—often too late for preventive measures.
+        </p>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          This is where smart monitoring technology becomes invaluable. By detecting subtle changes in temperature,
+          pressure points, and circulation before ulcers form, we can intervene during the critical window when
+          prevention is still possible.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">Warning Signs That Matter</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">The most important early indicators include:</p>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>Temperature differences between corresponding points on each foot (often a sign of inflammation)</li>
+          <li>Sustained high pressure points that may lead to calluses and eventual breakdown</li>
+          <li>Reduced blood flow to specific areas of the foot</li>
+          <li>Subtle changes in gait or weight distribution</li>
+          <li>Micro-injuries that may go unnoticed due to neuropathy</li>
+        </ul>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          Traditional monitoring methods often miss these subtle changes until visible damage occurs. Advanced
+          sensing technology can detect these warning signs weeks before clinical symptoms appear.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">The Impact of Early Detection</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">Clinical studies demonstrate remarkable outcomes with early detection:</p>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>A randomized controlled trial showed a <strong>71% reduction in ulcer recurrence</strong> with temperature monitoring</li>
+          <li>Continuous pressure monitoring reduced new ulcer formation by <strong>86%</strong> in high-risk patients</li>
+          <li>Early intervention programs have reduced amputation rates by <strong>47-72%</strong> in various healthcare systems</li>
+        </ul>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          These statistics represent not just numbers, but preserved mobility, independence, and quality of life for
+          countless individuals.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">Technology Enabling Prevention</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          Several technological innovations are making early detection more accessible and effective:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li><strong>Smart insoles</strong> with embedded sensors that continuously monitor foot health</li>
+          <li><strong>AI algorithms</strong> that can predict ulcer formation based on subtle pattern changes</li>
+          <li><strong>Telemedicine platforms</strong> that connect patients with specialists for rapid assessment</li>
+          <li><strong>Mobile applications</strong> that empower patients to participate in their own monitoring</li>
+        </ul>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          These technologies are particularly valuable in regions with limited access to specialized healthcare,
+          democratizing access to preventive care.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">The Path Forward</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          To truly transform outcomes for diabetic patients, several key elements must come together:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>Wider adoption of preventive monitoring technologies</li>
+          <li>Integration of early detection into standard diabetes care protocols</li>
+          <li>Education for both patients and healthcare providers about warning signs</li>
+          <li>Insurance coverage for preventive technologies and interventions</li>
+          <li>Continued research to refine detection methods and intervention strategies</li>
+        </ul>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          With these elements in place, we can envision a future where diabetic amputations become increasingly rare,
+          replaced by early intervention and preserved limb function.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">Conclusion</h3>
+        <p className="text-base leading-relaxed text-gray-700 mb-4">
+          Early detection is not just a medical strategy—it's a paradigm shift in how we approach diabetic foot care.
+          By identifying problems at their earliest stages, we can prevent the cascade of complications that lead to
+          amputation. With continued innovation and implementation of smart monitoring technologies, we stand at the
+          threshold of a new era in diabetic care—one where prevention truly becomes the standard.
+        </p>
+      </div>
+    </div>
+  )
 }
 
-const SmartInsoles: React.FC<SmartInsolesProps> = ({ title }) => {
-  const [showContent, setShowContent] = useState(false);
-
-  const toggleContent = () => setShowContent(!showContent);
-
-  return (
-    <section>
-      <h2>{title || 'Revolutionary Smart Insoles: The Future of Diabetic Care'}</h2>
-      <button onClick={toggleContent}>Read more</button>
-      <AnimatePresence>
-        {showContent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="content">
-              <p>
-                Diabetes add animation  affects millions globally, and one of its most costly complications is the development of foot ulcers—often leading to amputation. Smart insoles are emerging as a game‑changing preventive healthcare technology. Let’s explore how these innovative devices work, why they matter, and what lies ahead.
-              </p>
-              <ul>
-                <li>Pressure and temperature sensors</li>
-                <li>Real-time monitoring and alerts</li>
-                <li>Wireless transmission to companion app or clinician dashboard</li>
-                <li>AI-powered prevention</li>
-              </ul>
-              <p>
-                The evidence is clear: smart insoles can help prevent diabetic foot ulcers and reduce amputations.
-              </p>
-              <p>
-                Multiple clinical trials support their impact:
-
-                <ul>
-                  <li>A randomized study showed a 71% reduction in ulcer recurrence over 18 months when patients used a pressure-sensing insole paired with alert feedback systems.</li>
-                  <li>Another trial found up to an 86% decrease in recurrence for patients with high adherence to alerts and proper use.</li>
-                </ul>
-              </p>
-              <p>
-                These results highlight the promise of combining real-time sensing and patient engagement to improve outcomes.
-              </p>
-              <p>
-                There are many smart insole solutions available, including Orpyx Sensory Insoles, Bonbouton’s graphene-based insole, and FootSense (Mexico).
-              </p>
-              <p>
-                The benefits of smart insoles extend beyond prevention, including improved self-management, cost savings, and environmental impact.
-              </p>
-              <p>
-                Future trends include AI-driven personalized care, smart offloading materials, and better remote health integration.
-              </p>
-              <p>
-                As the field evolves, broader adoption and technological innovation promise to make diabetic foot care smarter, more accessible, and truly transformative.
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-};
-
-export default SmartInsoles;
+export default PreventingAmputations

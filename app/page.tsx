@@ -382,7 +382,7 @@ export default function AppoModernLanding() {
                 href="#technology"
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105"
               >
-                Technology
+                Services
               </Link>
               <Link
                 href="#team"
@@ -878,7 +878,7 @@ export default function AppoModernLanding() {
                 ))}
               </div>
               <blockquote className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-relaxed">
-                "I've already lost one leg. APPO's insole is helping me protect the other. Every diabetic patient should
+                "I've already lost one leg. NEEM's insole is helping me protect the other. Every diabetic patient should
                 have one."
               </blockquote>
               <div className="flex items-center justify-center space-x-6">

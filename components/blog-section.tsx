@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import styles from '@/styles/blog-section.module.css'
+import { BlogModal } from './blog-modal'
 
 const blogPosts = [
   {
@@ -73,77 +74,104 @@ const cardVariants = {
 
 export function BlogSection() {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
+  const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  
+  const handleReadMore = (postId: number) => {
+    setSelectedBlogId(postId)
+    setIsModalOpen(true)
+  }
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+  
+  // Find the selected blog data
+  const selectedBlog = blogPosts.find(post => post.id === selectedBlogId)
 
   return (
-    <motion.div 
-      className={styles.blogGrid}
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-    >
-      {blogPosts.map((post) => (
-        <motion.article
-          key={post.id}
-          className={styles.blogCard}
-          variants={cardVariants}
-          onHoverStart={() => setHoveredId(post.id)}
-          onHoverEnd={() => setHoveredId(null)}
-        >
-          {post.featured && (
-            <span className={styles.featuredBadge}>
-              ✨ Featured
-            </span>
-          )}
-          <div className={styles.imageContainer}>
-            <div className={styles.imageOverlay} />
-            <img 
-              src={post.image} 
-              alt={post.title}
-              className={styles.image}
-            />
-          </div>
-          <div className={styles.content}>
-            <span className={styles.category}>
-              {post.category}
-            </span>
-            <h3 className={styles.title}>
-              {post.title}
-            </h3>
-            <p className={styles.excerpt}>
-              {post.excerpt}
-            </p>
-            <div className={styles.footer}>
-              <div className={styles.author}>
-                <div className={styles.authorImage}>
-                  <img 
-                    src={post.author.image}
-                    alt={post.author.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className={styles.authorInfo}>
-                  <span className={styles.authorName}>
-                    {post.author.name}
-                  </span>
-                  <span className={styles.date}>
-                    {post.date}
-                  </span>
-                </div>
-              </div>
-              <motion.div 
-                className={styles.readMore}
-                animate={{
-                  x: hoveredId === post.id ? 5 : 0
-                }}
-              >
-                Read More 
-                <ArrowRight className="h-4 w-4" />
-              </motion.div>
+    <>
+      <motion.div 
+        className={styles.blogGrid}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        {blogPosts.map((post) => (
+          <motion.article
+            key={post.id}
+            className={styles.blogCard}
+            variants={cardVariants}
+            onHoverStart={() => setHoveredId(post.id)}
+            onHoverEnd={() => setHoveredId(null)}
+          >
+            {post.featured && (
+              <span className={styles.featuredBadge}>
+                ✨ Featured
+              </span>
+            )}
+            <div className={styles.imageContainer}>
+              <div className={styles.imageOverlay} />
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className={styles.image}
+              />
             </div>
-          </div>
-        </motion.article>
-      ))}
-    </motion.div>
+            <div className={styles.content}>
+              <span className={styles.category}>
+                {post.category}
+              </span>
+              <h3 className={styles.title}>
+                {post.title}
+              </h3>
+              <p className={styles.excerpt}>
+                {post.excerpt}
+              </p>
+              <div className={styles.footer}>
+                <div className={styles.author}>
+                  <div className={styles.authorImage}>
+                    <img 
+                      src={post.author.image}
+                      alt={post.author.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className={styles.authorInfo}>
+                    <span className={styles.authorName}>
+                      {post.author.name}
+                    </span>
+                    <span className={styles.date}>
+                      {post.date}
+                    </span>
+                  </div>
+                </div>
+                <motion.button 
+                  className={styles.readMore}
+                  animate={{
+                    x: hoveredId === post.id ? 5 : 0
+                  }}
+                  onClick={() => handleReadMore(post.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Read More 
+                  <ArrowRight className="h-4 w-4" />
+                </motion.button>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </motion.div>
+      
+      {/* Blog Modal */}
+      <BlogModal 
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        blogId={selectedBlogId}
+        blogData={selectedBlog}
+      />
+    </>
   );
 }
