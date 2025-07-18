@@ -41,8 +41,11 @@ import partnerStyles from '@/styles/partners.module.css';
 import Image from 'next/image';
 import FAQSection from '@/components/faq-section'
 
+import AboutNEEM from "@/components/about/about";
+
 export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
 
@@ -55,6 +58,27 @@ export default function AppoModernLanding() {
     if (!gsap || !ScrollTrigger) return
 
     gsap.registerPlugin(ScrollTrigger)
+
+    // Team name scroll-triggered shadow/glow animation
+    const teamNameEls = document.querySelectorAll(`.${teamStyles.teamCard} .${teamStyles.name}`);
+    teamNameEls.forEach((el: Element) => {
+      gsap.fromTo(
+        el,
+        { textShadow: 'none', boxShadow: 'none' },
+        {
+          textShadow: '0 0 24px rgba(22, 102, 231, 0.5), 0 0 48px rgba(59,130,246,0.25)',
+          boxShadow: '0 0 24px 0 rgba(59,130,246,0.25)',
+          duration: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            end: 'top 40%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
 
     // Hero animations
     const tl = gsap.timeline()
@@ -303,45 +327,30 @@ export default function AppoModernLanding() {
     // Partner logos animation
     gsap.utils.toArray('.partner-logo-animate').forEach((logo: any, i: number) => {
       const image = logo.querySelector('.partner-image')
-      
-      gsap.set(logo, { 
+
+      // Initial entrance animation
+      gsap.fromTo(logo, {
         opacity: 0,
         x: -100,
-        rotationY: -30
+        rotationY: -30,
+        scale: 0.8
+      }, {
+        opacity: 1,
+        x: 0,
+        rotationY: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+        delay: i * 0.3
       })
 
-      ScrollTrigger.create({
-        trigger: logo,
-        start: 'top 85%',
-        onEnter: () => {
-          // Initial entrance animation
-          gsap.to(logo, {
-            opacity: 1,
-            x: 0,
-            rotationY: 0,
-            duration: 1.2,
-            ease: 'power3.out',
-            delay: i * 0.3
-          })
-
-          // Continuous floating animation
-          gsap.to(logo, {
-            y: '-10',
-            duration: 1.5,
-            ease: 'power1.inOut',
-            yoyo: true,
-            repeat: -1
-          })
-
-          // Image shine effect
-          gsap.to(image, {
-            filter: 'brightness(1.1)',
-            duration: 1,
-            ease: 'power2.inOut',
-            yoyo: true,
-            repeat: -1
-          })
-        }
+      // Continuous floating animation
+      gsap.to(logo, {
+        y: '-10',
+        duration: 1.5,
+        ease: 'power1.inOut',
+        yoyo: true,
+        repeat: -1
       })
     })
   }, [])
@@ -427,6 +436,7 @@ export default function AppoModernLanding() {
               </div>
               <div className="hero-buttons flex flex-col sm:flex-row gap-6">
                 <ModernButton
+    onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
   variant="primary"
   size="lg"
   icon={<Play className="h-5 w-5" />}
@@ -439,6 +449,7 @@ export default function AppoModernLanding() {
   size="lg"
   icon={<ArrowRight className="h-5 w-5" />}
   className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl learn-more-btn"
+  onClick={() => setShowAbout(true)}
 >
   Learn More
 </ModernButton>
@@ -453,7 +464,18 @@ export default function AppoModernLanding() {
         </div>
       </section>
 
-      {/* Our Story Section */}
+      {showAbout && (
+  <div className="flex justify-center items-center w-full bg-white/80 z-50 fixed top-0 left-0 min-h-screen overflow-auto p-8" style={{backdropFilter: 'blur(8px)'}}>
+    <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
+      <button className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 text-2xl font-bold" onClick={() => setShowAbout(false)} aria-label="Close About">
+        &times;
+      </button>
+      <AboutNEEM />
+    </div>
+  </div>
+)}
+
+{/* Our Story Section */}
       <section id="story" className="section-animate py-32 section-bg">
         <div className="container px-4">
           <div className="max-w-6xl mx-auto">
@@ -535,7 +557,7 @@ export default function AppoModernLanding() {
               </div>
               <div className="flex-1">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/insole%20implint.png" alt="Smart Insoles" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+                  <img src="/insole%20implint.jpg" alt="Smart Insoles" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                 </div>
               </div>
             </div>
@@ -654,8 +676,8 @@ export default function AppoModernLanding() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-red-600 transition-colors duration-300">
                   Prevents Amputation, Saves Lives
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  Scientifically designed to stop ulcers before they start. Real results. Real people. Real impact.
+                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
+                Scientifically designed to stop ulcers before they start. Real results. Real people. Real impact.
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center text-sm text-gray-500">
@@ -812,16 +834,17 @@ export default function AppoModernLanding() {
           <div className={partnerStyles.logoContainer}>
             {/* University of Rwanda Logo */}
             <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
-              <div className={partnerStyles.imageWrapper}>
-                <Image 
-                  src="/university-of-rwanda-logo.png" 
-                  alt="University of Rwanda Logo" 
-                  width={250}
-                  height={100}
-                  className="object-contain partner-image"
-                  priority
-                />
-              </div>
+               <Image
+    src="/university-of-rwanda-logo.png"
+    alt="University of Rwanda Logo"
+    width={300} // or larger, depending on your needs
+    height={200} // adjust for aspect ratio
+    className="w-auto h-[300px] md:h-[400px] lg:h-[500px] object-contain"
+    priority
+  />
+</div> 
+              <div className="flex justify-center items-center w-full py-8 bg-white">
+ 
             </div>
 
             {/* ALX Logo */}
@@ -867,7 +890,13 @@ export default function AppoModernLanding() {
                   <p className="text-gray-600">Video Available</p>
                 </div>
               </div>
-              <ModernButton variant="primary" size="lg" icon={<Play className="h-5 w-5" />} className="mt-8">
+              <ModernButton 
+                variant="primary" 
+                size="lg" 
+                icon={<Play className="h-5 w-5" />} 
+                className="mt-8"
+                onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
+              >
                 Watch Testimonial
               </ModernButton>
             </AnimatedCard>
@@ -894,7 +923,7 @@ export default function AppoModernLanding() {
           <BlogSection />
 
           <div className="text-center mt-12">
-            <ModernButton variant="outline" size="lg" icon={<ArrowRight className="h-5 w-5" />}>
+            <ModernButton variant="outline" size="lg" icon={<ArrowRight className="h-5 w-5 text-white" />} className="bg-blue-600 text-white hover:bg-blue-700">
               View All Articles
             </ModernButton>
           </div>
