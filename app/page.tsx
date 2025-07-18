@@ -399,18 +399,152 @@ export default function AppoModernLanding() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <ModernButton variant="primary" size="sm">
-                Partner With Us
-              </ModernButton>
+              <div className="hidden md:block">
+                <ModernButton variant="primary" size="sm">
+                  Partner With Us
+                </ModernButton>
+              </div>
               <button
-                className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
+                className="md:hidden p-3 rounded-full hover:bg-gray-100 transition-all duration-300 relative group"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
               >
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                <div className="relative w-5 h-5">
+                  <span 
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
+                      isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
+                    }`}
+                  />
+                  <span 
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
+                      isMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  />
+                  <span 
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
+                      isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
+                    }`}
+                  />
+                </div>
               </button>
             </div>
           </div>
         </nav>
+
+        {/* Mobile Menu Backdrop */}
+        {isMenuOpen && (
+          <div 
+            className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile Navigation Menu */}
+        <div 
+          className={`md:hidden absolute top-full left-0 right-0 mt-4 transition-all duration-500 ease-in-out transform z-50 ${
+            isMenuOpen 
+              ? 'opacity-100 translate-y-0 pointer-events-auto scale-100' 
+              : 'opacity-0 -translate-y-4 pointer-events-none scale-95'
+          }`}
+        >
+          <div className="liquid-glass-menu rounded-2xl overflow-hidden">
+            <div className="px-6 py-6">
+              <div className="space-y-3">
+                <Link
+                  href="#story"
+                  className={`mobile-menu-item liquid-glass liquid-glass-blue liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-blue-600 rounded-2xl transition-all duration-300 group ${
+                    isMenuOpen ? 'animate-in' : ''
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{ animationDelay: '0.1s' }}
+                >
+                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
+                    <Heart className="h-6 w-6 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className="flex-1 relative z-10">
+                    <span className="font-semibold text-base group-hover:text-blue-700 transition-colors">Our Story</span>
+                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-blue-500 transition-colors">Learn about our mission</p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-blue-600" />
+                </Link>
+                
+                <Link
+                  href="#technology"
+                  className={`mobile-menu-item liquid-glass liquid-glass-green liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-green-600 rounded-2xl transition-all duration-300 group ${
+                    isMenuOpen ? 'animate-in' : ''
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{ animationDelay: '1.5s' }}
+                >
+                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
+                    <Smartphone className="h-6 w-6 text-green-600 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className="flex-1 relative z-10">
+                    <span className="font-semibold text-base group-hover:text-green-700 transition-colors">Services</span>
+                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-green-500 transition-colors">Smart insole technology</p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-green-600" />
+                </Link>
+                
+                <Link
+                  href="#team"
+                  className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-purple-600 rounded-2xl transition-all duration-300 group ${
+                    isMenuOpen ? 'animate-in' : ''
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{ animationDelay: '3s' }}
+                >
+                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
+                    <Users className="h-6 w-6 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className="flex-1 relative z-10">
+                    <span className="font-semibold text-base group-hover:text-purple-700 transition-colors">Team</span>
+                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-purple-500 transition-colors">Meet our experts</p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
+                </Link>
+                
+                <Link
+                  href="#contact"
+                  className={`mobile-menu-item liquid-glass liquid-glass-orange liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-orange-600 rounded-2xl transition-all duration-300 group ${
+                    isMenuOpen ? 'animate-in' : ''
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{ animationDelay: '4.5s' }}
+                >
+                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
+                    <Mail className="h-6 w-6 text-orange-600 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className="flex-1 relative z-10">
+                    <span className="font-semibold text-base group-hover:text-orange-700 transition-colors">Contact</span>
+                    <p className="text-sm text-gray-500 mt-0.5 group-hover:text-orange-500 transition-colors">Get in touch with us</p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-orange-600" />
+                </Link>
+              </div>
+              
+              {/* Partner With Us Button in Mobile Menu */}
+              <div className={`mt-8 pt-6 border-t border-white/20 mobile-menu-item ${isMenuOpen ? 'animate-in' : ''}`}>
+                <div className="liquid-glass liquid-ripple rounded-2xl p-1">
+                  <ModernButton 
+                    variant="primary" 
+                    size="lg" 
+                    className="w-full justify-center group hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                    <Users className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                    <span className="font-semibold relative z-10">Partner With Us</span>
+                    <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-75 group-hover:animate-ping relative z-10"></div>
+                  </ModernButton>
+                </div>
+                <p className="text-center text-sm text-gray-400 mt-3 font-medium">
+                  Join us in saving lives through innovation ✨
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Hero Section with Advanced Animations */}
