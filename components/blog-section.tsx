@@ -55,7 +55,7 @@ const blogPosts = [
     image: 'https://www.newtimes.co.rw/thenewtimes/uploads/images/2023/01/11/thumbs/1200x700/9746.jpg',
     author: {
       name: 'Prisca',
-      image: '/images/team/prisca.png',
+      image: '/images/team/pp.jpg',
       role: 'Healthcare Analyst'
     },
     date: 'July 16, 2025'
@@ -108,23 +108,33 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
 
   // Show only first 3 posts by default, all posts when showAll is true
   const postsToShow = showAll ? blogPosts : blogPosts.slice(0, 3)
+  
+  console.log('BlogSection Debug:', {
+    showAll,
+    postsToShowLength: postsToShow.length,
+    totalPosts: blogPosts.length,
+    postsToShow: postsToShow.map(p => ({ id: p.id, title: p.title.substring(0, 30) + '...' }))
+  })
 
   return (
     <>
       <motion.div
-        className={styles.blogGrid}
+        className={`${styles.blogGrid} ${showAll ? styles.showAll : ''}`}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {postsToShow.map((post) => (
+        {postsToShow.map((post, index) => (
           <motion.article
-            key={post.id}
+            key={`${post.id}-${index}`}
             className={styles.blogCard}
             variants={cardVariants}
             onHoverStart={() => setHoveredId(post.id)}
             onHoverEnd={() => setHoveredId(null)}
+            style={{ 
+              gridColumn: showAll && postsToShow.length === 4 && index >= 2 ? 'span 1' : 'auto'
+            }}
           >
             {post.featured && (
               <span className={styles.featuredBadge}>

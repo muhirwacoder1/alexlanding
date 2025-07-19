@@ -47,7 +47,7 @@ import AboutNEEM from "@/components/about/about";
 export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
-  const [showAllArticles, setShowAllArticles] = useState(false)
+  const [showAllArticles, setShowAllArticles] = useState(true) // Temporarily set to true for debugging
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
 
@@ -169,9 +169,9 @@ export default function AppoModernLanding() {
       const image = card.querySelector('img')
       const content = card.querySelector('.team-content')
       const socialLinks = card.querySelectorAll('a')
-      
+
       gsap.set(card, { opacity: 0, y: 50 })
-      
+
       ScrollTrigger.create({
         trigger: card,
         start: 'top 85%',
@@ -183,7 +183,7 @@ export default function AppoModernLanding() {
             ease: 'power3.out',
             delay: i * 0.2
           })
-          
+
           gsap.from(image, {
             scale: 1.2,
             rotation: 5,
@@ -224,77 +224,77 @@ export default function AppoModernLanding() {
         duration: 0.8,
         ease: 'power3.out'
       })
-      
-      // Title animation with character splitting
-      .fromTo(title.children, {
-        opacity: 0,
-        y: 20,
-        rotateX: -90
-      }, {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        stagger: 0.03,
-        ease: 'back.out(1.7)'
-      }, '-=0.4')
 
-      // Text animation with highlight emphasis
-      .fromTo(text, {
-        opacity: 0,
-        y: 30,
-        filter: 'blur(2px)'
-      }, {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power2.out'
-      }, '-=0.4')
+        // Title animation with character splitting
+        .fromTo(title.children, {
+          opacity: 0,
+          y: 20,
+          rotateX: -90
+        }, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: 'back.out(1.7)'
+        }, '-=0.4')
 
-      // Highlight words animation
-      .fromTo(highlights, {
-        backgroundColor: 'rgba(59, 130, 246, 0)',
-        color: 'inherit'
-      }, {
-        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-        color: '#2563eb',
-        duration: 0.4,
-        stagger: 0.1,
-        ease: 'power2.inOut'
-      }, '-=0.4')
+        // Text animation with highlight emphasis
+        .fromTo(text, {
+          opacity: 0,
+          y: 30,
+          filter: 'blur(2px)'
+        }, {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          ease: 'power2.out'
+        }, '-=0.4')
 
-      // Bold words emphasis
-      .fromTo(bolds, {
-        scale: 1,
-        fontWeight: 400
-      }, {
-        scale: 1.05,
-        fontWeight: 700,
-        duration: 0.3,
-        stagger: 0.1,
-        ease: 'power2.out'
-      }, '-=0.3')
+        // Highlight words animation
+        .fromTo(highlights, {
+          backgroundColor: 'rgba(59, 130, 246, 0)',
+          color: 'inherit'
+        }, {
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          color: '#2563eb',
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.inOut'
+        }, '-=0.4')
 
-      // Image animation
-      .fromTo(image, {
-        opacity: 0,
-        scale: 0.8,
-        rotationY: 15
-      }, {
-        opacity: 1,
-        scale: 1,
-        rotationY: 0,
-        duration: 1,
-        ease: 'power3.out'
-      }, '-=0.7')
+        // Bold words emphasis
+        .fromTo(bolds, {
+          scale: 1,
+          fontWeight: 400
+        }, {
+          scale: 1.05,
+          fontWeight: 700,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, '-=0.3')
+
+        // Image animation
+        .fromTo(image, {
+          opacity: 0,
+          scale: 0.8,
+          rotationY: 15
+        }, {
+          opacity: 1,
+          scale: 1,
+          rotationY: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, '-=0.7')
     })
 
     // Enhanced hover animations for tech cards
     gsap.utils.toArray('.tech-card-animate').forEach((card: any) => {
       const image = card.querySelector('.tech-image-animate img')
       const title = card.querySelector('.tech-title-animate')
-      
+
       card.addEventListener('mouseenter', () => {
         gsap.to(image, {
           scale: 1.1,
@@ -309,7 +309,7 @@ export default function AppoModernLanding() {
           ease: 'power2.out'
         })
       })
-      
+
       card.addEventListener('mouseleave', () => {
         gsap.to(image, {
           scale: 1,
@@ -368,9 +368,9 @@ export default function AppoModernLanding() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="nav-logo-container relative cursor-pointer">
-                <img 
-                  src="/logo neem.png" 
-                  alt="NEEM Logo" 
+                <img
+                  src="/logo neem.png"
+                  alt="NEEM Logo"
                   className="h-12 w-auto object-contain"
                 />
               </div>
@@ -405,9 +405,15 @@ export default function AppoModernLanding() {
 
             <div className="flex items-center space-x-4">
               <div className="hidden md:block">
-                <ModernButton variant="primary" size="sm">
-                  Partner With Us
-                </ModernButton>
+                <a
+                  href="https://eu.makeforms.co/bb4hlb3/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ModernButton variant="primary" size="sm">
+                    Partner With Us
+                  </ModernButton>
+                </a>
               </div>
               <button
                 className="md:hidden p-3 rounded-full liquid-glass-icon transition-all duration-300 relative group"
@@ -415,20 +421,17 @@ export default function AppoModernLanding() {
                 aria-label="Toggle menu"
               >
                 <div className="relative w-5 h-5">
-                  <span 
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
-                      isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
-                    }`}
+                  <span
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
+                      }`}
                   />
-                  <span 
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
-                      isMenuOpen ? 'opacity-0' : 'opacity-100'
-                    }`}
+                  <span
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'
+                      }`}
                   />
-                  <span 
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${
-                      isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
-                    }`}
+                  <span
+                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
+                      }`}
                   />
                 </div>
               </button>
@@ -438,28 +441,26 @@ export default function AppoModernLanding() {
 
         {/* Mobile Menu Backdrop */}
         {isMenuOpen && (
-          <div 
+          <div
             className="md:hidden fixed inset-0 bg-black/20 z-40 transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
 
         {/* Mobile Navigation Menu */}
-        <div 
-          className={`md:hidden absolute top-full left-0 right-0 mt-4 transition-all duration-500 ease-in-out transform z-50 ${
-            isMenuOpen 
-              ? 'opacity-100 translate-y-0 pointer-events-auto scale-100' 
-              : 'opacity-0 -translate-y-4 pointer-events-none scale-95'
-          }`}
+        <div
+          className={`md:hidden absolute top-full left-0 right-0 mt-4 transition-all duration-500 ease-in-out transform z-50 ${isMenuOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto scale-100'
+            : 'opacity-0 -translate-y-4 pointer-events-none scale-95'
+            }`}
         >
           <div className="liquid-glass-menu rounded-2xl overflow-hidden">
             <div className="px-6 py-6">
               <div className="space-y-3">
                 <Link
                   href="#story"
-                  className={`mobile-menu-item liquid-glass liquid-glass-blue liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-blue-600 rounded-2xl transition-all duration-300 group ${
-                    isMenuOpen ? 'animate-in' : ''
-                  }`}
+                  className={`mobile-menu-item liquid-glass liquid-glass-blue liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-blue-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                    }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
@@ -472,12 +473,11 @@ export default function AppoModernLanding() {
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-blue-600" />
                 </Link>
-                
+
                 <Link
                   href="#technology"
-                  className={`mobile-menu-item liquid-glass liquid-glass-green liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-green-600 rounded-2xl transition-all duration-300 group ${
-                    isMenuOpen ? 'animate-in' : ''
-                  }`}
+                  className={`mobile-menu-item liquid-glass liquid-glass-green liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-green-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                    }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
@@ -490,12 +490,11 @@ export default function AppoModernLanding() {
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-green-600" />
                 </Link>
-                
+
                 <Link
                   href="#team"
-                  className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-purple-600 rounded-2xl transition-all duration-300 group ${
-                    isMenuOpen ? 'animate-in' : ''
-                  }`}
+                  className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-purple-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                    }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
@@ -508,12 +507,11 @@ export default function AppoModernLanding() {
                   </div>
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
                 </Link>
-                
+
                 <Link
                   href="#contact"
-                  className={`mobile-menu-item liquid-glass liquid-glass-orange liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-orange-600 rounded-2xl transition-all duration-300 group ${
-                    isMenuOpen ? 'animate-in' : ''
-                  }`}
+                  className={`mobile-menu-item liquid-glass liquid-glass-orange liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-orange-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                    }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
@@ -526,26 +524,33 @@ export default function AppoModernLanding() {
                   <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-orange-600" />
                 </Link>
               </div>
-              
+
               {/* Partner With Us Button in Mobile Menu */}
               <div className={`mt-8 pt-6 border-t border-white/20 mobile-menu-item ${isMenuOpen ? 'animate-in' : ''}`}>
                 <div className="liquid-glass liquid-ripple rounded-2xl p-1">
-                  <ModernButton 
-                    variant="primary" 
-                    size="lg" 
-                    className="w-full justify-center group hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                  <a
+                    href="https://eu.makeforms.co/bb4hlb3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                    <Users className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                    <span className="font-semibold relative z-10">Partner With Us</span>
-                    <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-75 group-hover:animate-ping relative z-10"></div>
-                  </ModernButton>
+                    <ModernButton
+                      variant="primary"
+                      size="lg"
+                      className="w-full justify-center group hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                      <Users className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                      <span className="font-semibold relative z-10">Partner With Us</span>
+                      <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-75 group-hover:animate-ping relative z-10"></div>
+                    </ModernButton>
+                  </a>
                 </div>
                 <p className="text-center text-sm text-gray-400 mt-3 font-medium">
                   Join us in saving lives through innovation ✨
                 </p>
               </div>
+
             </div>
           </div>
         </div>
@@ -574,46 +579,46 @@ export default function AppoModernLanding() {
               </div>
               <div className="hero-buttons flex flex-col sm:flex-row gap-6">
                 <ModernButton
-    onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
-  variant="primary"
-  size="lg"
-  icon={<Play className="h-5 w-5" />}
-  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl"
->
-  Watch Patient Story
-</ModernButton>
+                  onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
+                  variant="primary"
+                  size="lg"
+                  icon={<Play className="h-5 w-5" />}
+                  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl"
+                >
+                  Watch Patient Story
+                </ModernButton>
                 <ModernButton
-  variant="outline"
-  size="lg"
-  icon={<ArrowRight className="h-5 w-5" />}
-  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl learn-more-btn"
-  onClick={() => setShowAbout(true)}
->
-  Learn More
-</ModernButton>
+                  variant="outline"
+                  size="lg"
+                  icon={<ArrowRight className="h-5 w-5" />}
+                  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl learn-more-btn"
+                  onClick={() => setShowAbout(true)}
+                >
+                  Learn More
+                </ModernButton>
               </div>
             </div>
 
             {/* Advanced Dashboard Mockup */}
             <div className="hero-dashboard relative flex items-center justify-center">
-  <img src="/demo1.png" alt="Smart Insole Demo" className="rounded-3xl shadow-2xl w-full max-w-md object-cover" />
-</div>
+              <img src="/demo1.png" alt="Smart Insole Demo" className="rounded-3xl shadow-2xl w-full max-w-md object-cover" />
+            </div>
           </div>
         </div>
       </section>
 
       {showAbout && (
-  <div className="flex justify-center items-center w-full bg-white/80 z-50 fixed top-0 left-0 min-h-screen overflow-auto p-8" style={{backdropFilter: 'blur(8px)'}}>
-    <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
-      <button className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 text-2xl font-bold" onClick={() => setShowAbout(false)} aria-label="Close About">
-        &times;
-      </button>
-      <AboutNEEM />
-    </div>
-  </div>
-)}
+        <div className="flex justify-center items-center w-full bg-white/80 z-50 fixed top-0 left-0 min-h-screen overflow-auto p-8" style={{ backdropFilter: 'blur(8px)' }}>
+          <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
+            <button className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 text-2xl font-bold" onClick={() => setShowAbout(false)} aria-label="Close About">
+              &times;
+            </button>
+            <AboutNEEM />
+          </div>
+        </div>
+      )}
 
-{/* Our Story Section */}
+      {/* Our Story Section */}
       <section id="story" className="section-animate py-32 section-bg">
         <div className="container px-4">
           <div className="max-w-6xl mx-auto">
@@ -648,7 +653,7 @@ export default function AppoModernLanding() {
                     <div className="text-3xl font-black text-blue-600">90%</div>
                     <div className="text-sm text-gray-600">Prevention Rate</div>
                   </div>
-                  
+
                   <div className="text-center">
                     <div className="text-3xl font-black text-purple-600">24/7</div>
                     <div className="text-sm text-gray-600">Monitoring</div>
@@ -699,7 +704,7 @@ export default function AppoModernLanding() {
                 </div>
               </div>
             </div>
-            
+
             {/* Card 2: Personal Care for You */}
             <div className="flex flex-col md:flex-row-reverse items-stretch gap-8 tech-card-animate min-h-[600px]">
               <div className="flex-1 space-y-4 flex flex-col justify-center">
@@ -714,7 +719,7 @@ export default function AppoModernLanding() {
                 </div>
               </div>
             </div>
-            
+
             {/* Card 3: Early Health Alerts */}
             <div className="flex flex-col md:flex-row items-stretch gap-8 tech-card-animate min-h-[600px]">
               <div className="flex-1 space-y-4 flex flex-col justify-center">
@@ -815,7 +820,7 @@ export default function AppoModernLanding() {
                   Prevents Amputation, Saves Lives
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-6 text-justify">
-                Scientifically designed to stop ulcers before they start. Real results. Real people. Real impact.
+                  Scientifically designed to stop ulcers before they start. Real results. Real people. Real impact.
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center text-sm text-gray-500">
@@ -854,48 +859,43 @@ export default function AppoModernLanding() {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
             {[
-              { 
-                name: "Grace Nyirarukundo", 
-                role: "CEO", 
-                img: "/images/team/pp.jpg", 
-                twitter: "#", 
-                linkedin: "linkedin.com/in/grace-nyirarukundo-19841925a",
+              {
+                name: "Grace Nyirarukundo",
+                role: "CEO",
+                img: "/images/team/pp.jpg",
+                linkedin: "https://www.linkedin.com/in/grace-nyirarukundo-19841925a/",
                 gradient: "from-blue-400 to-blue-600",
                 bio: "Driving our mission with passion and purpose"
               },
-              { 
-                name: "Prisca Nikuze", 
-                role: "COO", 
-                img: "/images/team/prisca.png", 
-                twitter: "#", 
-                linkedin: "",
+              {
+                name: "Prisca Nikuze",
+                role: "COO",
+                img: "/images/team/prisca.png",
+                linkedin: "https://www.linkedin.com/in/nikuze-prisca-4342ba2a4/",
                 gradient: "from-purple-400 to-purple-600",
                 bio: "Innovating the future of preventive healthcare"
               },
-              { 
-                name: "Rwakayiro David", 
-                role: "CTO", 
-                img: "/images/team/rwakayiro david.jpeg", 
-                twitter: "#", 
-                linkedin: "linkedin.com/in/jean-david-rwakayiro-61718a344",
+              {
+                name: "Rwakayiro David",
+                role: "CTO",
+                img: "/images/team/rwakayiro david.jpeg",
+                linkedin: "https://www.linkedin.com/in/jean-david-rwakayiro-61718a344/",
                 gradient: "from-green-400 to-green-600",
                 bio: "Architecting smart solutions that save lives"
               },
-              { 
-                name: "Alex MUHIRWA", 
-                role: "Product Designer", 
-                img: "/images/team/alex.jpeg", 
-                twitter: "#", 
-                linkedin: "linkedin.com/in/muhirwa-alex-64aa2b268",
+              {
+                name: "Alex MUHIRWA",
+                role: "Product Designer",
+                img: "/images/team/alex.jpeg",
+                linkedin: "https://www.linkedin.com/in/muhirwa-alex-64aa2b268/",
                 gradient: "from-pink-400 to-pink-600",
                 bio: "Creating intuitive experiences for better care"
               },
-              { 
-                name: "Kelly Irakoze", 
-                role: "Data Analyst", 
-                img: "/images/team/kelly.jpg", 
-                twitter: "#", 
-                linkedin: "linkedin.com/in/irakoze-ntawigenga-kelly-bb194a287",
+              {
+                name: "Kelly Irakoze",
+                role: "Data Analyst",
+                img: "/images/team/kelly.jpg",
+                linkedin: "https://www.linkedin.com/in/irakoze-ntawigenga-kelly-bb194a287/",
                 gradient: "from-yellow-400 to-yellow-600",
                 bio: "Transforming data into life-saving insights"
               },
@@ -906,9 +906,9 @@ export default function AppoModernLanding() {
               >
                 <div className={teamStyles.imageContainer}>
                   <div className={teamStyles.overlay}></div>
-                  <img 
-                    src={member.img} 
-                    alt={member.name} 
+                  <img
+                    src={member.img}
+                    alt={member.name}
                     className={teamStyles.image}
                   />
                   <div className={teamStyles.content}>
@@ -924,25 +924,19 @@ export default function AppoModernLanding() {
                         {member.bio}
                       </p>
                       <div className={teamStyles.socialLinks}>
-                        <a 
-                          href={member.linkedin} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={teamStyles.socialLink}
                           title={`Connect with ${member.name} on LinkedIn`}
                           aria-label={`Connect with ${member.name} on LinkedIn`}
                         >
-                          <Linkedin className="h-5 w-5" />
-                        </a>
-                        <a 
-                          href={member.twitter} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className={teamStyles.socialLink}
-                          title={`Follow ${member.name} on Twitter`}
-                          aria-label={`Follow ${member.name} on Twitter`}
-                        >
-                          <Twitter className="h-5 w-5" />
+                          <img
+                            src="/linkedin.png"
+                            alt="LinkedIn"
+                            className="h-5 w-5 object-contain"
+                          />
                         </a>
                       </div>
                     </div>
@@ -972,25 +966,25 @@ export default function AppoModernLanding() {
           <div className={partnerStyles.logoContainer}>
             {/* University of Rwanda Logo */}
             <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
-               <Image
-    src="/university-of-rwanda-logo.png"
-    alt="University of Rwanda Logo"
-    width={300} // or larger, depending on your needs
-    height={200} // adjust for aspect ratio
-    className="w-auto h-[300px] md:h-[400px] lg:h-[500px] object-contain"
-    priority
-  />
-</div> 
-              <div className="flex justify-center items-center w-full py-8 bg-white">
- 
+              <Image
+                src="/university-of-rwanda-logo.png"
+                alt="University of Rwanda Logo"
+                width={300} // or larger, depending on your needs
+                height={200} // adjust for aspect ratio
+                className="w-auto h-[300px] md:h-[400px] lg:h-[500px] object-contain"
+                priority
+              />
+            </div>
+            <div className="flex justify-center items-center w-full py-8 bg-white">
+
             </div>
 
             {/* ALX Logo */}
             <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
               <div className={partnerStyles.imageWrapper}>
-                <Image 
-                  src="/alx logo.webp" 
-                  alt="ALX Logo" 
+                <Image
+                  src="/alx logo.webp"
+                  alt="ALX Logo"
                   width={250}
                   height={100}
                   className="object-contain partner-image"
@@ -1028,10 +1022,10 @@ export default function AppoModernLanding() {
                   <p className="text-gray-600">Video Available</p>
                 </div>
               </div>
-              <ModernButton 
-                variant="primary" 
-                size="lg" 
-                icon={<Play className="h-5 w-5" />} 
+              <ModernButton
+                variant="primary"
+                size="lg"
+                icon={<Play className="h-5 w-5" />}
                 className="mt-8"
                 onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
               >
@@ -1062,10 +1056,10 @@ export default function AppoModernLanding() {
 
           {!showAllArticles && (
             <div className="text-center mt-6">
-              <ModernButton 
-                variant="outline" 
-                size="lg" 
-                icon={<ArrowRight className="h-5 w-5 text-white" />} 
+              <ModernButton
+                variant="outline"
+                size="lg"
+                icon={<ArrowRight className="h-5 w-5 text-white" />}
                 className="bg-blue-600 text-white hover:bg-blue-700"
                 onClick={() => setShowAllArticles(true)}
               >
@@ -1076,9 +1070,9 @@ export default function AppoModernLanding() {
 
           {showAllArticles && (
             <div className="text-center mt-6">
-              <ModernButton 
-                variant="outline" 
-                size="lg" 
+              <ModernButton
+                variant="outline"
+                size="lg"
                 className="bg-gray-600 text-white hover:bg-gray-700"
                 onClick={() => setShowAllArticles(false)}
               >
@@ -1096,7 +1090,7 @@ export default function AppoModernLanding() {
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full opacity-20 blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
         </div>
-        
+
         <div className="container px-4 relative">
           <div className="text-center space-y-6 mb-20">
             <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg">
@@ -1134,23 +1128,41 @@ export default function AppoModernLanding() {
               amputations across Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <ModernButton variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                📌 Partner With Us
-              </ModernButton>
-              <ModernButton
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-blue-600"
+              <a
+                href="https://eu.makeforms.co/bb4hlb3/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                📩 Ask question
-              </ModernButton>
-              <ModernButton
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-blue-600"
+                <ModernButton variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+                  📌 Partner With Us
+                </ModernButton>
+              </a>
+              <a
+                href="https://eu.makeforms.co/tqvhwn7/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                📈 Investor Inquiry
-              </ModernButton>
+                <ModernButton
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-300"
+                >
+                  📩 Ask Question
+                </ModernButton>
+              </a>
+              <a
+                href="https://eu.makeforms.co/awyaduf/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ModernButton
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-300"
+                >
+                  📈 Investor Inquiry
+                </ModernButton>
+              </a>
             </div>
           </div>
         </div>
@@ -1172,7 +1184,7 @@ export default function AppoModernLanding() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-            
+
             {/* Contact Form */}
             <div className="space-y-8">
               <AnimatedCard delay={0.1} className="contact-form-glass p-8 rounded-3xl">
@@ -1192,8 +1204,8 @@ export default function AppoModernLanding() {
                         <Users className="h-4 w-4 mr-2 text-blue-600" />
                         Full Name *
                       </label>
-                      <Input 
-                        placeholder="Enter your full name" 
+                      <Input
+                        placeholder="Enter your full name"
                         className="contact-input rounded-2xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 h-12"
                         required
                       />
@@ -1229,9 +1241,9 @@ export default function AppoModernLanding() {
 
                     {/* Submit Button */}
                     <div className="pt-4">
-                      <ModernButton 
-                        variant="primary" 
-                        size="lg" 
+                      <ModernButton
+                        variant="primary"
+                        size="lg"
                         className="w-full h-14 text-lg font-semibold rounded-2xl group relative overflow-hidden"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
@@ -1251,7 +1263,7 @@ export default function AppoModernLanding() {
 
             {/* Map and Contact Info */}
             <div className="space-y-8">
-              
+
               {/* Contact Information Cards */}
               <div className="grid gap-4">
                 <AnimatedCard delay={0.2} className="contact-info-glass p-6 rounded-2xl flex items-center space-x-4">
@@ -1288,13 +1300,13 @@ export default function AppoModernLanding() {
                       </div>
                     </div>
                   </div>
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5050469965067!2d30.059993200000008!3d-1.9511718999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca5a86d814c61%3A0x7d3b83e12b1c11a9!2sNorrsken%20House%20Kigali!5e0!3m2!1sen!2srw!4v1752854416001!5m2!1sen!2srw" 
-                    width="100%" 
-                    height="400" 
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5050469965067!2d30.059993200000008!3d-1.9511718999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca5a86d814c61%3A0x7d3b83e12b1c11a9!2sNorrsken%20House%20Kigali!5e0!3m2!1sen!2srw!4v1752854416001!5m2!1sen!2srw"
+                    width="100%"
+                    height="400"
                     style={{ border: 0 }}
                     allowFullScreen={true}
-                    loading="lazy" 
+                    loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="rounded-3xl"
                   />
@@ -1311,9 +1323,9 @@ export default function AppoModernLanding() {
                   <p className="text-gray-600">
                     Join us in revolutionizing diabetic care and preventing amputations across Africa.
                   </p>
-                  <ModernButton 
-                    variant="outline" 
-                    size="lg" 
+                  <ModernButton
+                    variant="outline"
+                    size="lg"
                     className="group hover:scale-105 transition-all duration-300"
                   >
                     <Users className="h-5 w-5 mr-2 group-hover:animate-pulse" />
@@ -1333,21 +1345,21 @@ export default function AppoModernLanding() {
           <div className="container px-4">
             {/* Main Section */}
             <div className="grid md:grid-cols-3 gap-8 mb-8">
-              
+
               {/* Brand Section */}
               <div className="space-y-6">
                 <div className="footer-glass-card p-6 rounded-2xl">
                   <div className="flex items-center space-x-3 mb-4">
-                    <img 
-                      src="/logo neem.png" 
-                      alt="NEEM Logo" 
+                    <img
+                      src="/logo neem.png"
+                      alt="NEEM Logo"
                       className="h-12 w-auto object-contain"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">
                     Saving Limbs. <span className="text-blue-600">Restoring Lives.</span>
                   </h3>
-                  
+
                   {/* Mission Stats */}
                   <div className="grid grid-cols-2 gap-3">
                     <div className="text-center p-3 rounded-xl bg-blue-100 border border-blue-200">
@@ -1367,26 +1379,26 @@ export default function AppoModernLanding() {
                 <div className="footer-glass-card p-6 rounded-2xl">
                   <h3 className="text-lg font-bold text-gray-800 mb-4">Quick Links</h3>
                   <div className="space-y-2">
-                    <Link 
-                      href="#story" 
+                    <Link
+                      href="#story"
                       className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
                     >
                       Our Story
                     </Link>
-                    <Link 
-                      href="#technology" 
+                    <Link
+                      href="#technology"
                       className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
                     >
                       Services
                     </Link>
-                    <Link 
-                      href="#team" 
+                    <Link
+                      href="#team"
                       className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
                     >
                       Team
                     </Link>
-                    <Link 
-                      href="#contact" 
+                    <Link
+                      href="#contact"
                       className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
                     >
                       Contact
@@ -1399,9 +1411,9 @@ export default function AppoModernLanding() {
               <div className="space-y-6">
                 <div className="footer-glass-card p-6 rounded-2xl">
                   <h3 className="text-lg font-bold text-gray-800 mb-4">Get In Touch</h3>
-                  
+
                   <div className="space-y-3">
-                    <a 
+                    <a
                       href="mailto:appoltd8@gmail.com"
                       className="footer-contact-simple flex items-center p-3 rounded-xl transition-all duration-300 group hover:bg-blue-50"
                     >
@@ -1412,8 +1424,8 @@ export default function AppoModernLanding() {
                         appoltd8@gmail.com
                       </div>
                     </a>
-                    
-                    <a 
+
+                    <a
                       href="https://www.linkedin.com/company/appo-health/"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -1437,7 +1449,7 @@ export default function AppoModernLanding() {
                 <div className="text-gray-600 text-sm">
                   &copy; {new Date().getFullYear()} <span className="font-semibold text-gray-800">APPO LTD</span>. All rights reserved.
                 </div>
-                
+
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <span>Made with</span>
                   <Heart className="h-3 w-3 text-red-500" />
