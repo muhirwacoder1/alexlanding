@@ -55,8 +55,8 @@ const blogPosts = [
     image: 'https://www.newtimes.co.rw/thenewtimes/uploads/images/2023/01/11/thumbs/1200x700/9746.jpg',
     author: {
       name: 'Prisca',
-      image: '/images/team/pp.jpg',
-      role: 'Healthcare Analyst'
+      image: '/images/team/prisca.png',
+      role: 'COO'
     },
     date: 'July 16, 2025'
   }

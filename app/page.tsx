@@ -1313,26 +1313,7 @@ export default function AppoModernLanding() {
                 </div>
               </AnimatedCard>
 
-              {/* Call to Action */}
-              <AnimatedCard delay={0.5} className="contact-cta-glass p-8 rounded-3xl text-center">
-                <div className="space-y-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                    <Heart className="h-8 w-8 text-white animate-pulse" />
-                  </div>
-                  <h4 className="text-xl font-bold text-gray-900">Ready to Save Lives?</h4>
-                  <p className="text-gray-600">
-                    Join us in revolutionizing diabetic care and preventing amputations across Africa.
-                  </p>
-                  <ModernButton
-                    variant="outline"
-                    size="lg"
-                    className="group hover:scale-105 transition-all duration-300"
-                  >
-                    <Users className="h-5 w-5 mr-2 group-hover:animate-pulse" />
-                    Partner With Us
-                  </ModernButton>
-                </div>
-              </AnimatedCard>
+        
             </div>
           </div>
         </div>
