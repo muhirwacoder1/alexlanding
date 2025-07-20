@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Heart, MessageCircle, Share2 } from 'lucide-react'
+import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import styles from '@/styles/blog-modal.module.css'
 
@@ -75,13 +75,14 @@ export function BlogModal({ isOpen, onClose, blogId, blogData }: BlogModalProps)
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
         >
           {/* Modal */}
           <motion.div 
             className={styles.modalContainer}
-            initial={{ scale: 0.9, y: 20, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
           >
             {/* Progress bar */}
@@ -131,14 +132,24 @@ export function BlogModal({ isOpen, onClose, blogId, blogData }: BlogModalProps)
                 </motion.div>
               </div>
               
-              {/* Close button */}
-              <button 
-                onClick={onClose}
-                className={styles.closeButton}
-                aria-label="Close"
-              >
-                <X size={20} />
-              </button>
+              {/* Navigation buttons */}
+              <div className={styles.headerButtons}>
+                <button 
+                  onClick={onClose}
+                  className={styles.backButton}
+                  aria-label="Back to main"
+                >
+                  <ArrowLeft size={20} />
+                  <span>Back to Articles</span>
+                </button>
+                <button 
+                  onClick={onClose}
+                  className={styles.closeButton}
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             
             {/* Content */}

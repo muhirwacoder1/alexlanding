@@ -1,24 +1,31 @@
 .modalOverlay {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
 }
 
 .modalContainer {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  max-width: 1000px;
-  max-height: 90vh;
+  height: 100%;
   background-color: white;
-  border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.3s ease-out;
 }
 
 .modalHeader {
@@ -88,10 +95,40 @@
   opacity: 0.8;
 }
 
-.closeButton {
+.headerButtons {
   position: absolute;
   top: 1rem;
+  left: 1rem;
   right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.backButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.closeButton {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 9999px;
@@ -114,7 +151,9 @@
 .modalContent {
   padding: 2rem;
   overflow-y: auto;
-  max-height: calc(90vh - 300px);
+  flex: 1;
+  height: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .progressBar {
@@ -139,6 +178,8 @@
   justify-content: space-between;
   padding: 1.5rem 2rem;
   border-top: 1px solid #e5e7eb;
+  background-color: white;
+  z-index: 10;
 }
 
 .footerActions {
@@ -239,6 +280,15 @@
   }
 }
 
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .animateFadeIn {
   animation: fadeIn 0.5s ease forwards;
 }
@@ -247,17 +297,79 @@
   animation: slideUp 0.5s ease forwards;
 }
 
+/* Animation is handled by framer-motion in the component */
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .modalHeader {
-    height: 200px;
+    height: 250px;
   }
   
   .title {
     font-size: 1.5rem;
   }
   
+  .headerContent {
+    padding: 1.5rem;
+  }
+  
   .modalContent {
-    max-height: calc(90vh - 200px);
+    padding: 1.5rem;
+  }
+  
+  .backButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .modalFooter {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .footerActions {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalHeader {
+    height: 200px;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .headerContent {
+    padding: 1rem;
+  }
+  
+  .modalContent {
+    padding: 1rem;
+  }
+  
+  .backButton span {
+    display: none;
+  }
+  
+  .backButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .closeButton {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  
+  .headerButtons {
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
   }
 }

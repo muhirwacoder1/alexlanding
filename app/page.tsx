@@ -48,6 +48,9 @@ export default function AppoModernLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showAllArticles, setShowAllArticles] = useState(true) // Temporarily set to true for debugging
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [showTrafficNotification, setShowTrafficNotification] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
 
@@ -608,12 +611,25 @@ export default function AppoModernLanding() {
       </section>
 
       {showAbout && (
-        <div className="flex justify-center items-center w-full bg-white/80 z-50 fixed top-0 left-0 min-h-screen overflow-auto p-8" style={{ backdropFilter: 'blur(8px)' }}>
-          <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
-            <button className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 text-2xl font-bold" onClick={() => setShowAbout(false)} aria-label="Close About">
-              &times;
-            </button>
-            <AboutNEEM />
+        <div
+          className="fixed inset-0 bg-black/70 z-50 backdrop-blur-md"
+          onClick={(e) => {
+            // Close only if clicking the backdrop, not the content
+            if (e.target === e.currentTarget) {
+              setShowAbout(false);
+            }
+          }}
+        >
+          <div className="fixed inset-0 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
+                <div className="pointer-events-auto w-screen max-w-6xl">
+                  <div className="flex h-full flex-col bg-white shadow-xl overflow-hidden">
+                    <AboutNEEM onClose={() => setShowAbout(false)} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -759,7 +775,7 @@ export default function AppoModernLanding() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                   Made for Rwandans, by Rwandans
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
                   We understand the local healthcare challenges and build for real needs, ensuring cultural relevance
                   and accessibility.
                 </p>
@@ -789,7 +805,7 @@ export default function AppoModernLanding() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300">
                   Affordable & Accessible
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
                   Unlike international alternatives, our solution is low-cost and available in Rwanda with flexible
                   payment options.
                 </p>
@@ -1168,6 +1184,44 @@ export default function AppoModernLanding() {
         </div>
       </section>
 
+      {/* Traffic Notification */}
+      {showTrafficNotification && (
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-lg shadow-lg animate-bounce-once">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <AlertTriangle className="h-5 w-5 text-amber-500" />
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-amber-800">Form Submission Failed</h3>
+                <div className="mt-2 text-sm text-amber-700">
+                  <p>Your form was not submitted due to high traffic on this form. Please use the Ask Form on the Join Us section instead.</p>
+                </div>
+                <div className="mt-4">
+                  <div className="-mx-2 -my-1.5 flex">
+                    <a
+                      href="https://eu.makeforms.co/bb4hlb3/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-md bg-amber-100 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50"
+                    >
+                      Go to Join Us Form
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setShowTrafficNotification(false)}
+                      className="ml-3 rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modern Contact Section */}
       <section id="contact" className="section-animate py-32 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container px-4">
@@ -1241,16 +1295,42 @@ export default function AppoModernLanding() {
 
                     {/* Submit Button */}
                     <div className="pt-4">
-                      <ModernButton
-                        variant="primary"
-                        size="lg"
-                        className="w-full h-14 text-lg font-semibold rounded-2xl group relative overflow-hidden"
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setIsSubmitting(true);
+                          
+                          // Show notification after 3 seconds
+                          setTimeout(() => {
+                            setIsSubmitting(false);
+                            setShowTrafficNotification(true);
+                            
+                            // Hide notification after 5 seconds
+                            setTimeout(() => {
+                              setShowTrafficNotification(false);
+                            }, 5000);
+                          }, 3000);
+                        }}
+                        disabled={isSubmitting}
+                        className="w-full h-14 text-lg font-semibold rounded-2xl group relative overflow-hidden bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                        <Mail className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                        <span className="relative z-10">Send Message</span>
-                        <ArrowRight className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
-                      </ModernButton>
+                        <div className="flex items-center justify-center">
+                          {isSubmitting ? (
+                            <>
+                              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                              <span className="relative z-10">Submitting...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Mail className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                              <span className="relative z-10">Send Message</span>
+                              <ArrowRight className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                            </>
+                          )}
+                        </div>
+                      </button>
                     </div>
 
                     <div className="text-center text-sm text-gray-500 pt-2">
@@ -1313,7 +1393,7 @@ export default function AppoModernLanding() {
                 </div>
               </AnimatedCard>
 
-        
+
             </div>
           </div>
         </div>

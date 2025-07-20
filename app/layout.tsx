@@ -2,13 +2,19 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import "../styles/animations.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: " NEEM - Saving Limbs. Restoring Lives.",
+  title: "NEEM - Saving Limbs. Restoring Lives.",
   description: "Smart insole technology preventing diabetic amputations",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  icons: {
+    icon: '/logo neem.png',
+    apple: '/logo neem.png',
+    shortcut: '/logo neem.png'
+  }
 }
 
 export default function RootLayout({
