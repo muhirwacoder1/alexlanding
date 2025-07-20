@@ -97,22 +97,21 @@ export default function AppoModernLanding() {
         "-=0.8",
       )
 
-    // Animate Why We Exist section paragraphs (not header)
+    // Animate Why We Exist section paragraphs (simplified)
     gsap.utils.toArray('.why-animate').forEach((el: any, i: number) => {
       gsap.fromTo(el, {
         opacity: 0,
-        y: 40,
-        filter: 'blur(8px)'
+        y: 20
       }, {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
-        duration: 1,
-        delay: 0.2 + i * 0.2,
-        ease: 'power3.out',
+        duration: 0.6,
+        delay: i * 0.1,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
+          start: 'top 90%',
+          once: true
         },
       })
     })
@@ -147,53 +146,40 @@ export default function AppoModernLanding() {
       })
     })
 
-    // Section animations
+    // Section animations (simplified)
     gsap.utils.toArray(".section-animate").forEach((section: any, index) => {
       gsap.fromTo(
         section,
-        { y: 100, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            once: true
           },
         },
       )
     })
 
-    // Team section animations
+    // Team section animations (simplified)
     gsap.utils.toArray('.team-card-animate').forEach((card: any, i: number) => {
-      const image = card.querySelector('img')
-      const content = card.querySelector('.team-content')
-      const socialLinks = card.querySelectorAll('a')
-
-      gsap.set(card, { opacity: 0, y: 50 })
-
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 85%',
-        onEnter: () => {
-          gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            delay: i * 0.2
-          })
-
-          gsap.from(image, {
-            scale: 1.2,
-            rotation: 5,
-            duration: 1.5,
-            ease: 'power3.out',
-            delay: i * 0.2
-          })
+      gsap.fromTo(card, {
+        opacity: 0,
+        y: 30
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 90%',
+          once: true
         }
       })
     })
