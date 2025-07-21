@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 import styles from '@/styles/blog-section.module.css'
-import { BlogModal } from './blog-modal'
+import dynamic from 'next/dynamic'
+import { PerformanceOptimizer } from './performance-optimizer'
+
+// Lazy load the blog modal for better performance
+const BlogModal = dynamic(() => import('./blog-modal').then(mod => ({ default: mod.BlogModal })), {
+  ssr: false,
+  loading: () => null
+})
 
 const blogPosts = [
   {
@@ -67,20 +75,27 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.1,
+      delayChildren: 0.1
     }
   }
 }
 
 const cardVariants = {
-  hidden: { y: 50, opacity: 0 },
+  hidden: {
+    y: 30,
+    opacity: 0,
+    scale: 0.95
+  },
   visible: {
     y: 0,
     opacity: 1,
+    scale: 1,
     transition: {
       type: "spring",
-      stiffness: 100,
-      damping: 15
+      stiffness: 120,
+      damping: 20,
+      mass: 0.8
     }
   }
 }
@@ -93,6 +108,27 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // Intersection Observer for performance
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   const handleReadMore = (postId: number) => {
     setSelectedBlogId(postId)
@@ -108,7 +144,7 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
 
   // Show only first 3 posts by default, all posts when showAll is true
   const postsToShow = showAll ? blogPosts : blogPosts.slice(0, 3)
-  
+
   console.log('BlogSection Debug:', {
     showAll,
     postsToShowLength: postsToShow.length,
@@ -118,12 +154,13 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
 
   return (
     <>
+      <PerformanceOptimizer />
       <motion.div
+        ref={sectionRef}
         className={`${styles.blogGrid} ${showAll ? styles.showAll : ''}`}
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isVisible ? "visible" : "hidden"}
       >
         {postsToShow.map((post, index) => (
           <motion.article
@@ -132,7 +169,7 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
             variants={cardVariants}
             onHoverStart={() => setHoveredId(post.id)}
             onHoverEnd={() => setHoveredId(null)}
-            style={{ 
+            style={{
               gridColumn: showAll && postsToShow.length === 4 && index >= 2 ? 'span 1' : 'auto'
             }}
           >
@@ -143,10 +180,20 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
             )}
             <div className={styles.imageContainer}>
               <div className={styles.imageOverlay} />
-              <img
+              <Image
                 src={post.image}
                 alt={post.title}
                 className={styles.image}
+                width={600}
+                height={400}
+                priority={index < 2} // Prioritize first 2 images
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={(e) => {
+                  console.warn('Image failed to load:', post.image)
+                  e.currentTarget.style.display = 'none'
+                }}
               />
             </div>
             <div className={styles.content}>
@@ -162,10 +209,13 @@ export function BlogSection({ showAll = false }: BlogSectionProps) {
               <div className={styles.footer}>
                 <div className={styles.author}>
                   <div className={styles.authorImage}>
-                    <img
+                    <Image
                       src={post.author.image}
                       alt={post.author.name}
                       className="w-full h-full object-cover"
+                      width={48}
+                      height={48}
+                      loading="lazy"
                     />
                   </div>
                   <div className={styles.authorInfo}>

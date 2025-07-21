@@ -1,17 +1,45 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Heart, MessageCircle, Share2, ArrowLeft, Clock, User } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import styles from '@/styles/blog-modal.module.css'
 
-// Blog post content mapping
+// Blog post content mapping with better lazy loading
 const blogContentMap: Record<number, any> = {
-  1: dynamic(() => import('./contents blog/smart insole revolution')),
-  2: dynamic(() => import('./contents blog/Preventing Amputations')),
-  3: dynamic(() => import('./contents blog/AI in health')),
-  4: dynamic(() => import('./contents blog/prisca-blog'))
+  1: dynamic(() => import('./contents blog/smart insole revolution'), {
+    loading: () => <ContentSkeleton />,
+    ssr: false
+  }),
+  2: dynamic(() => import('./contents blog/Preventing Amputations'), {
+    loading: () => <ContentSkeleton />,
+    ssr: false
+  }),
+  3: dynamic(() => import('./contents blog/AI in health'), {
+    loading: () => <ContentSkeleton />,
+    ssr: false
+  }),
+  4: dynamic(() => import('./contents blog/prisca-blog'), {
+    loading: () => <ContentSkeleton />,
+    ssr: false
+  })
+}
+
+// Loading skeleton component
+function ContentSkeleton() {
+  return (
+    <div className={styles.contentSkeleton}>
+      <div className={styles.skeletonLine} style={{ width: '80%', height: '2rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '100%', height: '1rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '90%', height: '1rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '95%', height: '1rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '70%', height: '2rem', marginTop: '2rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '100%', height: '1rem' }} />
+      <div className={styles.skeletonLine} style={{ width: '85%', height: '1rem' }} />
+    </div>
+  )
 }
 
 interface BlogModalProps {
@@ -112,10 +140,18 @@ export function BlogModal({ isOpen, onClose, blogId, blogData }: BlogModalProps)
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <img 
+                <Image 
                   src={blogData.image} 
                   alt={blogData.title}
                   className={styles.headerImage}
+                  width={900}
+                  height={400}
+                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  onError={(e) => {
+                    console.warn('Modal image failed to load:', blogData.image)
+                  }}
                 />
                 <div className={styles.imageOverlay} />
               </motion.div>
@@ -135,9 +171,12 @@ export function BlogModal({ isOpen, onClose, blogId, blogData }: BlogModalProps)
                 <div className={styles.metaInfo}>
                   <div className={styles.authorSection}>
                     <div className={styles.authorAvatar}>
-                      <img 
+                      <Image 
                         src={blogData.author.image} 
                         alt={blogData.author.name}
+                        width={48}
+                        height={48}
+                        loading="lazy"
                       />
                     </div>
                     <div className={styles.authorDetails}>
@@ -161,16 +200,18 @@ export function BlogModal({ isOpen, onClose, blogId, blogData }: BlogModalProps)
               id="blog-modal-content"
               className={styles.modalContent}
             >
-              {BlogContent && (
-                <motion.div
-                  className={styles.blogContent}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                >
-                  <BlogContent />
-                </motion.div>
-              )}
+              <Suspense fallback={<ContentSkeleton />}>
+                {BlogContent && (
+                  <motion.div
+                    className={styles.blogContent}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                  >
+                    <BlogContent />
+                  </motion.div>
+                )}
+              </Suspense>
             </div>
             
             {/* Footer */}
