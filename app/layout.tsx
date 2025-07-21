@@ -28,6 +28,7 @@ export default function RootLayout({
       <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <meta name="google-site-verification" content="uHZaR51Gbr8p9GOvIP5ZqIwM9Pqnbn5MdqzKwrlm0Ko" />
       </head>
       <body className={inter.className}>
         {children}
