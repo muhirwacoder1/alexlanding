@@ -83,7 +83,7 @@ const faqData = {
       },
       {
         question: "What's included in the NEEM package?",
-        answer: "The APPO package includes custom-fitted smart insoles, access to our mobile monitoring app, regular check-ups, and continuous support from our healthcare team. We also provide replacement insoles as needed.",
+        answer: "The NEEM package includes custom-fitted smart insoles, access to our mobile monitoring app, regular check-ups, and continuous support from our healthcare team. We also provide replacement insoles as needed.",
         tags: ["cost"]
       }
     ]
