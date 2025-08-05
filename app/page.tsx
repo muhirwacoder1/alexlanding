@@ -1348,8 +1348,8 @@ export default function AppoModernLanding() {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900">Email</h4>
-                    <a href="mailto:appoltd8@gmail.com" className="text-gray-600 hover:text-blue-600 transition-colors">
-                      appoltd8@gmail.com
+                    <a href="mailto:neemgroup@outlook.com" className="text-gray-600 hover:text-blue-600 transition-colors">
+                      neemgroup@outlook.com
                     </a>
                   </div>
                 </AnimatedCard>
@@ -1461,14 +1461,14 @@ export default function AppoModernLanding() {
 
                   <div className="space-y-3">
                     <a
-                      href="mailto:appoltd8@gmail.com"
+                      href="mailto:neemgroup@outlook.com"
                       className="footer-contact-simple flex items-center p-3 rounded-xl transition-all duration-300 group hover:bg-blue-50"
                     >
                       <div className="w-8 h-8 rounded-lg bg-red-500 flex items-center justify-center mr-3">
                         <img src="/gmail.png" alt="Gmail" className="w-4 h-4" />
                       </div>
                       <div className="text-sm text-gray-600 group-hover:text-gray-800">
-                        appoltd8@gmail.com
+                        neemgroup@outlook.com
                       </div>
                     </a>
 
@@ -1494,7 +1494,7 @@ export default function AppoModernLanding() {
             <div className="footer-glass-card p-4 rounded-2xl">
               <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
                 <div className="text-gray-600 text-sm">
-                  &copy; {new Date().getFullYear()} <span className="font-semibold text-gray-800">APPO LTD</span>. All rights reserved.
+                  &copy; {new Date().getFullYear()} <span className="font-semibold text-gray-800">NEEM</span>. All rights reserved.
                 </div>
 
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
