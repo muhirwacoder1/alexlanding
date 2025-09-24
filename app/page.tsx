@@ -32,6 +32,7 @@ import {
   Menu,
   X,
   MessageCircle,
+  Plus,
 } from "lucide-react"
 import Link from "next/link"
 import styles from '@/styles/tech-section.module.css'
@@ -51,8 +52,124 @@ export default function AppoModernLanding() {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [showTrafficNotification, setShowTrafficNotification] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [navLinksWhite, setNavLinksWhite] = useState(true) // Track navbar link color
+
+  // Product state
+  const [selectedSize, setSelectedSize] = useState('M')
+  const [quantity, setQuantity] = useState(1)
+  const [showPopup, setShowPopup] = useState(false)
+  const [customerName, setCustomerName] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  
+  // FAQ state
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [showAllFAQs, setShowAllFAQs] = useState(false)
+  
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
+
+  // FAQ data - Using existing FAQs from the original component (12 total)
+  const faqData = [
+    // Basic Information (8 FAQs)
+    {
+      question: "What is NEEM's smart insole technology?",
+      answer: "NEEM's smart insole is a custom-made medical device that fits inside your shoes to detect early signs of diabetic foot complications. Using advanced sensors and AI, it continuously monitors foot pressure points and temperature changes to prevent ulcers before they form."
+    },
+    {
+      question: "How effective is the NEEM solution?",
+      answer: "Our smart insoles have demonstrated a 90% success rate in preventing diabetic foot ulcers. This high efficacy is achieved through real-time monitoring, early detection, and immediate alerts when potential issues are detected."
+    },
+    {
+      question: "Is it painful to wear or use?",
+      answer: "Not at all! It's designed for comfort, flexibility, and daily use. The insole is lightweight and fits in most shoes."
+    },
+    {
+      question: "How does the smart insole work?",
+      answer: "It uses built-in sensors to monitor foot pressure, temperature, and heart rate. Data is sent to the cloud and alerts you before a problem starts."
+    },
+    {
+      question: "How much does it cost?",
+      answer: "$150 per pair, with flexible payment plans. Monthly monitoring subscription is $15. We also offer insurance coverage options."
+    },
+    {
+      question: "Can I use it without a doctor?",
+      answer: "Yes, but it's even more effective when shared with your healthcare provider. We provide easy sharing tools for medical professionals."
+    },
+    {
+      question: "How long does the battery last?",
+      answer: "The smart insole battery lasts up to 7 days with normal use. It charges wirelessly and takes only 2 hours for a full charge."
+    },
+    {
+      question: "Is my health data secure?",
+      answer: "Absolutely. We use bank-level encryption and comply with international healthcare data protection standards. Your data is never shared without permission."
+    },
+    // Technical Details (2 FAQs)
+    {
+      question: "How do the smart sensors work?",
+      answer: "Our smart sensors use a combination of pressure mapping and temperature monitoring technology. They continuously collect data about your feet's condition, analyze patterns using AI algorithms, and send alerts through our mobile app when they detect concerning changes."
+    },
+    {
+      question: "Is the device water-resistant?",
+      answer: "Yes, the NEEM smart insole is designed to be water-resistant for daily use. While it can handle normal foot perspiration and light exposure to water, we recommend removing them before activities involving direct water contact."
+    },
+    // Costs & Coverage (2 FAQs)
+    {
+      question: "Is NEEM covered by insurance?",
+      answer: "Insurance coverage in Rwanda is coming soon. In the meantime, we offer flexible payment plans to ensure our solution is accessible to those who need it most. Please contact our team for specific details on your payment and coverage options."
+    },
+    {
+      question: "What's included in the NEEM package?",
+      answer: "The NEEM package includes custom-fitted smart insoles, access to our mobile monitoring app, regular check-ups, and continuous support from our healthcare team. We also provide replacement insoles as needed."
+    }
+  ]
+
+  // FAQ handlers
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
+
+  const handleShowAllFAQs = () => {
+    setShowAllFAQs(true)
+  }
+
+  // Handle purchase with MoMo payment
+  const handlePurchase = () => {
+    if (!customerName.trim() || !mobileNumber.trim()) {
+      alert('Please fill in all required fields')
+      return
+    }
+
+    // Calculate total amount
+    const totalAmount = 30000 * quantity
+
+    // Create MoMo dial string
+    const momoDialString = `*182*1*1*0784131200*${totalAmount}#`
+
+    // Close popup
+    setShowPopup(false)
+
+    // Show confirmation and dial
+    const confirmMessage = `Order confirmed!\n\nCustomer: ${customerName}\nPhone: ${mobileNumber}\nProduct: NEEM Smart Insole (Size ${selectedSize})\nQuantity: ${quantity}\nTotal: ${totalAmount.toLocaleString()} RWF\n\nYou will now be redirected to dial the MoMo payment code.`
+    alert(confirmMessage)
+
+    // Attempt to dial the MoMo code
+    try {
+      window.location.href = `tel:${momoDialString}`
+    } catch (error) {
+      // Fallback: copy to clipboard and show instructions
+      navigator.clipboard.writeText(momoDialString).then(() => {
+        alert(`MoMo code copied to clipboard: ${momoDialString}\n\nPlease dial this code on your phone to complete the payment.`)
+      }).catch(() => {
+        alert(`Please dial this MoMo code on your phone: ${momoDialString}`)
+      })
+    }
+
+    // Reset form
+    setCustomerName('')
+    setMobileNumber('')
+    setQuantity(1)
+    setSelectedSize('M')
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -146,19 +263,19 @@ export default function AppoModernLanding() {
       })
     })
 
-    // Section animations (simplified)
+    // Section animations (simplified) - Faster and play once
     gsap.utils.toArray(".section-animate").forEach((section: any, index) => {
       gsap.fromTo(
         section,
-        { y: 30, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.3,
           ease: "power2.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 85%",
+            start: "top 90%",
             once: true
           },
         },
@@ -344,6 +461,62 @@ export default function AppoModernLanding() {
         repeat: -1
       })
     })
+
+
+
+    // Technology Photo Cards Animation - Load all at once with scroll trigger
+    let techCardsAnimated = false; // Flag to ensure animation only runs once
+
+    gsap.utils.toArray('.tech-photo-card').forEach((card: any, i: number) => {
+      gsap.fromTo(card, {
+        opacity: 0,
+        y: 60,
+        scale: 0.9
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: i * 0.15, // Slightly longer stagger for better visual effect
+        scrollTrigger: {
+          trigger: '#technology',
+          start: 'top 80%',
+          once: true, // Only play once, don't repeat on scroll back
+          onEnter: () => {
+            if (!techCardsAnimated) {
+              techCardsAnimated = true;
+            }
+          }
+        }
+      })
+    })
+
+    // Navbar color change on scroll
+    const handleScroll = () => {
+      const heroSection = heroRef.current
+      const storySection = document.getElementById('story')
+
+      if (heroSection && storySection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
+        const scrollPosition = window.scrollY + 100 // Add offset for navbar height
+
+        // Change to black when scrolling past hero section
+        if (scrollPosition > heroBottom) {
+          setNavLinksWhite(false)
+        } else {
+          setNavLinksWhite(true)
+        }
+      }
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll)
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
@@ -368,25 +541,37 @@ export default function AppoModernLanding() {
             <div className="hidden md:flex items-center space-x-2">
               <Link
                 href="#story"
-                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
+                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                  ? 'text-white hover:text-blue-300'
+                  : 'text-gray-700 hover:text-blue-600'
+                  }`}
               >
                 Story
               </Link>
               <Link
                 href="#technology"
-                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
+                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                  ? 'text-white hover:text-blue-300'
+                  : 'text-gray-700 hover:text-blue-600'
+                  }`}
               >
                 Services
               </Link>
               <Link
                 href="#team"
-                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
+                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                  ? 'text-white hover:text-blue-300'
+                  : 'text-gray-700 hover:text-blue-600'
+                  }`}
               >
                 Team
               </Link>
               <Link
                 href="#contact"
-                className="nav-link-glass px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden"
+                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                  ? 'text-white hover:text-blue-300'
+                  : 'text-gray-700 hover:text-blue-600'
+                  }`}
               >
                 Contact
               </Link>
@@ -411,16 +596,16 @@ export default function AppoModernLanding() {
               >
                 <div className="relative w-5 h-5">
                   <span
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
-                      }`}
+                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                      } ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'}`}
                   />
                   <span
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'
-                      }`}
+                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                      } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
                   />
                   <span
-                    className={`absolute block h-0.5 w-5 bg-gray-700 transform transition-all duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
-                      }`}
+                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                      } ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'}`}
                   />
                 </div>
               </button>
@@ -545,55 +730,102 @@ export default function AppoModernLanding() {
         </div>
       </header>
 
-      {/* Hero Section with Advanced Animations */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center hero-bg overflow-hidden">
-        <div className="container px-4 py-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <Badge className="hero-title bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 hover:from-blue-200 hover:to-blue-300 transition-all duration-300 transform hover:scale-105 px-4 py-2 rounded-full">
-                  🚀 Saving Limbs. Restoring Lives.
-                </Badge>
-                <h1 className="hero-title text-5xl md:text-7xl font-black text-gray-900 leading-tight">
+      {/* Hero Section with Background Image and Enhanced Design */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image with Enhanced Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/team/foot.webp"
+            alt="Diabetic foot care - Professional medical background"
+            className="w-full h-full object-cover object-center transition-transform duration-700"
+          />
+          {/* Reduced overlay opacity to show background image */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/45"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent"></div>
+        </div>
+
+        {/* Animated particles overlay */}
+        <div className="absolute inset-0 z-5 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+          <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-blue-300 rounded-full animate-ping"></div>
+          <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse delay-1000"></div>
+        </div>
+
+        {/* Main Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 relative z-10">
+          <div className="flex items-center justify-center min-h-[80vh]">
+            {/* Centered Content */}
+            <div className="max-w-5xl mx-auto text-center space-y-8 lg:space-y-12">
+              <div className="space-y-6 lg:space-y-10">
+
+                {/* Main Heading */}
+                <h1 className="hero-title text-[42px] font-black text-white leading-[1.1] tracking-tight">
                   Protecting Diabetic Patients from{" "}
-                  <span className="text-gradient relative">
-                    Amputation
-                    <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
+                  <span className="relative inline-block">
+                    <span className="text-gradient-animated">
+                      Amputation
+                    </span>
+                    <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 rounded-full shadow-lg hero-glow"></div>
                   </span>
                 </h1>
-                <p className="hero-subtitle text-xl md:text-2xl text-gray-600 leading-relaxed font-light">
-                  Our smart insole detects foot ulcers before they begin—saving lives, preserving independence, and
+
+                {/* Subtitle */}
+                <p className="hero-subtitle text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed font-light max-w-4xl mx-auto">
+                  Our smart insole detects foot ulcers before they begin saving lives, preserving independence, and
                   restoring dignity.
                 </p>
+
+                {/* Key Stats */}
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-12 pt-6">
+                  <div className="text-center">
+                    <div className="text-3xl sm:text-4xl font-bold text-blue-400">90%</div>
+                    <div className="text-sm sm:text-base text-gray-300">Prevention Rate</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl sm:text-4xl font-bold text-cyan-400">24/7</div>
+                    <div className="text-sm sm:text-base text-gray-300">Monitoring</div>
+                  </div>
+
+                </div>
               </div>
-              <div className="hero-buttons flex flex-col sm:flex-row gap-6">
+
+              {/* Action Buttons */}
+              <div className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pt-4">
                 <ModernButton
                   onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
                   variant="primary"
                   size="lg"
                   icon={<Play className="h-5 w-5" />}
-                  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl"
+                  className="magnetic-button rounded-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl shadow-2xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 transform hover:scale-105 transition-all duration-300"
                 >
-                  Watch Patient Story
+                  Patient Story
                 </ModernButton>
                 <ModernButton
                   variant="outline"
                   size="lg"
                   icon={<ArrowRight className="h-5 w-5" />}
-                  className="magnetic-button rounded-full px-10 py-5 text-xl shadow-xl learn-more-btn"
+                  className="magnetic-button rounded-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl shadow-lg learn-more-btn bg-transparent backdrop-blur-sm border-2 border-blue-500/70 text-white hover:bg-blue-500/10 hover:border-blue-400 transform hover:scale-105 transition-all duration-300"
                   onClick={() => setShowAbout(true)}
                 >
                   Learn More
                 </ModernButton>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Advanced Dashboard Mockup */}
-            <div className="hero-dashboard relative flex items-center justify-center">
-              <img src="/demo1.png" alt="Smart Insole Demo" className="rounded-3xl shadow-2xl w-full max-w-md object-cover" />
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="flex flex-col items-center space-y-3 text-white animate-bounce">
+            <span className="text-sm font-medium tracking-wide">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/10">
+              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
             </div>
           </div>
         </div>
+        {/* Bottom rounded fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-white rounded-t-3xl z-5"></div>
       </section>
 
       {showAbout && (
@@ -620,56 +852,116 @@ export default function AppoModernLanding() {
         </div>
       )}
 
-      {/* Our Story Section */}
-      <section id="story" className="section-animate py-32 section-bg">
-        <div className="container px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-6 py-3 rounded-full text-lg">
-                📖 Our Story: Why We Exist
-              </Badge>
-              <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
-                We couldn't accept that <span className="text-gradient">1 in 6 diabetic patients</span> in Rwanda risks
-                losing a limb
-              </h2>
-            </div>
+      {/* Our Story Section - Sticky Cards Design */}
+      <section id="story" className="relative bg-white">
+        {/* Section Header */}
+        <div className="container px-4 py-16">
+          <div className="max-w-6xl mx-auto text-center space-y-6">
+            <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-6 py-3 rounded-full text-lg">
+              📖 Our Story: Why We Exist
+            </Badge>
+            <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+              We couldn't accept that <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">1 in 6 diabetic patients</span> in Rwanda risks losing a limb
+            </h2>
+          </div>
+        </div>
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <div className="space-y-6 text-lg leading-relaxed font-semibold why-exist-animate">
-                  <p className="text-gray-700 why-animate">
-                    When that happens, it's not just a foot that's lost—it's mobility, dignity, and income.
-                  </p>
-                  <p className="text-gray-700 why-animate">
-                    At Neem , we couldn't accept that. That's why we built a smart, affordable, non-invasive insole
-                    that can detect ulcers before they develop—preventing up to{" "}
-                    <span className="font-bold text-blue-600 text-2xl">90% of amputations</span>.
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900 why-animate">
-                    We're not just building tech—we're protecting futures.
-                  </p>
-                </div>
+        {/* Sticky Cards Container */}
+        <div className="relative">
+          <div className="container px-4">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-blue-600">90%</div>
-                    <div className="text-sm text-gray-600">Prevention Rate</div>
+              {/* Left Column - Stacked Cards Carousel */}
+              <div className="relative max-w-2xl">
+                {/* Cards Container */}
+                <div className="relative h-[600px] story-cards-container">
+
+                  {/* Card 3 - Bottom Layer (Our Mission + Stats) */}
+                  <div className="absolute inset-0 story-card-3" style={{ transform: 'translateY(40px)', zIndex: 1 }}>
+                    <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl h-full border border-gray-200">
+                      <div className="space-y-8">
+                        <h3 className="story-card-text">
+                          "We're not just building tech—we're protecting futures."
+                        </h3>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-6 pt-8">
+                          <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg border border-blue-200">
+                            <div className="text-3xl font-black text-blue-600 mb-2">90%</div>
+                            <div className="text-sm font-semibold text-gray-700">Prevention Rate</div>
+                          </div>
+                          <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg border border-blue-200">
+                            <div className="text-3xl font-black text-blue-600 mb-2">24/7</div>
+                            <div className="text-sm font-semibold text-gray-700">Monitoring</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="text-center">
-                    <div className="text-3xl font-black text-purple-600">24/7</div>
-                    <div className="text-sm text-gray-600">Monitoring</div>
+                  {/* Card 2 - Middle Layer (Our Solution) */}
+                  <div className="absolute inset-0 story-card-2" style={{ transform: 'translateY(20px)', zIndex: 2 }}>
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 lg:p-12 shadow-xl h-full border border-blue-200">
+                      <div className="flex items-center h-full">
+                        <h3 className="story-card-text">
+                          "At NEEM, we couldn't accept that. That's why we built a smart, affordable, non-invasive insole that can detect ulcers before they develop—preventing up to <span className="text-blue-600">90% of amputations</span>."
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 1 - Top Layer (The Problem) - Active */}
+                  <div className="absolute inset-0 story-card-1" style={{ transform: 'translateY(0px)', zIndex: 3 }}>
+                    <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-2xl h-full border border-gray-200">
+                      <div className="flex items-center h-full">
+                        <h3 className="story-card-text">
+                          "When that happens, it's not just a foot that's lost—it's mobility, dignity, and income."
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Progress Indicator */}
+                <div className="flex justify-center mt-8 space-x-4">
+                  <div className="relative w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="absolute top-0 left-0 h-full bg-blue-600 rounded-full story-progress-1"></div>
+                  </div>
+                  <div className="relative w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="absolute top-0 left-0 h-full bg-blue-600 rounded-full story-progress-2"></div>
+                  </div>
+                  <div className="relative w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="absolute top-0 left-0 h-full bg-blue-600 rounded-full story-progress-3"></div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              {/* Right Column - Sticky Image */}
+              <div className="relative lg:sticky lg:top-24">
+                <div className="relative group">
+                  {/* Glow effect */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-green-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+
+                  {/* Main image */}
+                  <div className="relative">
+                    <img
+                      src="/ChatGPT Image Jul 15, 2025, 08_00_14 PM.jpg"
+                      alt="NEEM - Preventing Diabetic Amputations"
+                      className="rounded-3xl shadow-2xl w-full object-cover h-[600px] lg:h-[700px] transform group-hover:scale-105 transition-all duration-500"
+                    />
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+
+                    {/* Floating badge */}
+                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-lg">
+                      <span className="text-sm font-semibold text-blue-600">Saving Lives Daily</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="relative flex items-center justify-center">
-                <img
-                  src="/ChatGPT Image Jul 15, 2025, 08_00_14 PM.jpg"
-                  alt="Why We Exist - Prevention"
-                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -691,261 +983,284 @@ export default function AppoModernLanding() {
             </p>
           </div>
 
-          <div className="space-y-16">
-            {/* Card 1: Smart Insoles, Made Just For You */}
-            <div className="flex flex-col md:flex-row items-stretch gap-8 tech-card-animate min-h-[600px]">
-              <div className="flex-1 space-y-4 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Smart Insoles, Made Just For You</h3>
-                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
-                  Our <span className="text-bold">experts</span> make a <span className="text-highlight">special mold of your feet</span> to create smart insoles that fit you perfectly. You get <span className="text-bold">amazing comfort</span> and <span className="text-highlight">support with every step</span> you take. Each insole is <span className="text-bold">custom-crafted</span> using <span className="text-highlight">advanced casting and 3Dprinting</span> to ensure optimal fit and maximum effectiveness in detecting early signs of foot complications.
-                </p>
-              </div>
-              <div className="flex-1">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/insole%20implint.jpg" alt="Smart Insoles" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+          {/* Photo Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {/* Card 1 - Smart Insoles */}
+            <div className="tech-photo-card group cursor-pointer">
+              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                {/* Background Image */}
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: 'url(/insole%20implint.jpg)' }}>
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
+                </div>
+
+                {/* Default State - Bottom Title */}
+                <div className="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                  <h3 className="tech-photo-card-title">
+                    Smart Insoles +
+                  </h3>
+                </div>
+
+                {/* Hover State - Info Panel */}
+                <div className="absolute bottom-4 left-0 right-0 mx-4 bg-white p-6 rounded-2xl shadow-xl transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out">
+                  <h3 className="tech-photo-card-hover-title">
+                    Smart Insoles, Made Just For You
+                  </h3>
+                  <p className="tech-photo-card-description">
+                    Our experts make a special mold of your feet to create smart insoles that fit you perfectly. Custom-crafted using advanced 3D printing for optimal comfort and effectiveness.
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Personal Care for You */}
-            <div className="flex flex-col md:flex-row-reverse items-stretch gap-8 tech-card-animate min-h-[600px]">
-              <div className="flex-1 space-y-4 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Personal Care for You</h3>
-                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
-                  Everyone is different, so your care should be too. We give you our <span className="text-highlight">full attention</span> to understand your <span className="text-bold">health needs</span>, and we always keep your information <span className="text-bold">safe and private</span>. Our <span className="text-highlight">personalized approach</span> ensures that each patient receives <span className="text-bold">tailored monitoring</span> and care recommendations based on their <span className="text-highlight">unique health profile</span> and lifestyle.
-                </p>
-              </div>
-              <div className="flex-1">
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/personalized%20care.jpg" alt="Personalized Care" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+            {/* Card 2 - Personal Care */}
+            <div className="tech-photo-card group cursor-pointer">
+              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                {/* Background Image */}
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: 'url(/personalized%20care.jpg)' }}>
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
+                </div>
+
+                {/* Default State - Bottom Title */}
+                <div className="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                  <h3 className="tech-photo-card-title">
+                    Personal Care +
+                  </h3>
+                </div>
+
+                {/* Hover State - Info Panel */}
+                <div className="absolute bottom-4 left-0 right-0 mx-4 bg-white p-6 rounded-2xl shadow-xl transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out">
+                  <h3 className="tech-photo-card-hover-title">
+                    Personal Care for You
+                  </h3>
+                  <p className="tech-photo-card-description">
+                    Everyone is different, so your care should be too. We give you our full attention to understand your health needs, ensuring personalized monitoring and care recommendations.
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Card 3: Early Health Alerts */}
-            <div className="flex flex-col md:flex-row items-stretch gap-8 tech-card-animate min-h-[600px]">
-              <div className="flex-1 space-y-4 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4 tech-title-animate">Early Health Alerts</h3>
-                <p className="text-gray-800 leading-relaxed text-lg text-justify tech-text-animate">
-                  The <span className="text-highlight">smart sensors</span> in your insoles <span className="text-bold">watch over your feet</span> all day. They find <span className="text-highlight">early signs of problems</span>, like diabetic foot ulcers, and send an <span className="text-bold">alert right away</span>. This lets you <span className="text-highlight">act fast</span> and helps you worry less. Our <span className="text-bold">advanced Data processing</span> continuously analyzing <span className="text-highlight">pressure patterns and temperature changes</span> to provide real-time health insights.
-                </p>
-              </div>
-              <div className="flex-1">
-                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl w-full h-full flex items-center justify-center shadow-lg overflow-hidden tech-image-animate group">
-                  <img src="/early%20health%20alert.jpg" alt="Early Health Alerts" className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+            {/* Card 3 - Early Health Alerts */}
+            <div className="tech-photo-card group cursor-pointer">
+              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                {/* Background Image */}
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: 'url(/early%20health%20alert.jpg)' }}>
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
+                </div>
+
+                {/* Default State - Bottom Title */}
+                <div className="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                  <h3 className="tech-photo-card-title">
+                    Health Alerts +
+                  </h3>
+                </div>
+
+                {/* Hover State - Info Panel */}
+                <div className="absolute bottom-4 left-0 right-0 mx-4 bg-white p-6 rounded-2xl shadow-xl transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-out">
+                  <h3 className="tech-photo-card-hover-title">
+                    Early Health Alerts
+                  </h3>
+                  <p className="tech-photo-card-description">
+                    Smart sensors in your insoles watch over your feet all day. They find early signs of problems and send alerts right away, helping you act fast and worry less.
+                  </p>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
 
 
-      {/* Why Choose Us Section - Enhanced */}
-      <section className="section-animate py-32 bg-white">
+      {/* Request Demo Section - Floating Card */}
+      <section className="section-animate py-16 bg-white">
         <div className="container px-4">
-          <div className="text-center space-y-6 mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900">
-              Why Choose <span className="text-gradient">NEEM</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <AnimatedCard delay={0.1} className="relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10 p-8 text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-10 w-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  Made for Rwandans, by Rwandans
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
-                  We understand the local healthcare challenges and build for real needs, ensuring cultural relevance
-                  and accessibility.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Local healthcare expertise
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Cultural understanding
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Community-focused approach
-                  </div>
-                </div>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard delay={0.2} className="relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10 p-8 text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <DollarSign className="h-10 w-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300">
-                  Affordable & Accessible
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
-                  Unlike international alternatives, our solution is low-cost and available in Rwanda with flexible
-                  payment options.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Flexible payment plans
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Insurance coverage options
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Local availability
-                  </div>
-                </div>
-              </div>
-            </AnimatedCard>
-
-            <AnimatedCard delay={0.3} className="relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-red-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10 p-8 text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Heart className="h-10 w-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-red-600 transition-colors duration-300">
-                  Prevents Amputation, Saves Lives
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6 text-justify">
-                  Scientifically designed to stop ulcers before they start. Real results. Real people. Real impact.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    90% prevention rate
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Clinically tested
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Proven results
-                  </div>
-                </div>
-              </div>
-            </AnimatedCard>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section id="team" className={teamStyles.teamSection}>
-        <div className="container px-4">
-          <div className="text-center space-y-6 mb-20">
-            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg animate-pulse">
-              👨‍🔬 Meet Our Visionaries
-            </Badge>
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
-              Passionate <span className={teamStyles.animateGradient}>Innovators</span> Saving Lives
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our diverse team of experts is united by one mission: preventing amputations and transforming lives.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Grace Nyirarukundo",
-                role: "CEO",
-                img: "/images/team/pp.jpg",
-                linkedin: "https://www.linkedin.com/in/grace-nyirarukundo-19841925a/",
-                gradient: "from-blue-400 to-blue-600",
-                bio: "Driving our mission with passion and purpose"
-              },
-              {
-                name: "Prisca Nikuze",
-                role: "COO",
-                img: "/images/team/prisca.png",
-                linkedin: "https://www.linkedin.com/in/nikuze-prisca-4342ba2a4/",
-                gradient: "from-purple-400 to-purple-600",
-                bio: "Innovating the future of preventive healthcare"
-              },
-              {
-                name: "Rwakayiro David",
-                role: "CTO",
-                img: "/images/team/rwakayiro david.jpeg",
-                linkedin: "https://www.linkedin.com/in/jean-david-rwakayiro-61718a344/",
-                gradient: "from-green-400 to-green-600",
-                bio: "Architecting smart solutions that save lives"
-              },
-              {
-                name: "Alex MUHIRWA",
-                role: "Product Designer",
-                img: "/images/team/alex.jpeg",
-                linkedin: "https://www.linkedin.com/in/muhirwa-alex-64aa2b268/",
-                gradient: "from-pink-400 to-pink-600",
-                bio: "Creating intuitive experiences for better care"
-              },
-              {
-                name: "Kelly Irakoze",
-                role: "Data Analyst",
-                img: "/images/team/kelly.jpg",
-                linkedin: "https://www.linkedin.com/in/irakoze-ntawigenga-kelly-bb194a287/",
-                gradient: "from-yellow-400 to-yellow-600",
-                bio: "Transforming data into life-saving insights"
-              },
-            ].map((member, idx) => (
-              <div
-                key={member.name}
-                className={`${teamStyles.teamCard} team-card-animate`}
-              >
-                <div className={teamStyles.imageContainer}>
-                  <div className={teamStyles.overlay}></div>
+          <div className="max-w-6xl mx-auto">
+            {/* Floating Demo Card */}
+            <div className="relative mx-4 md:mx-8 lg:mx-10">
+              <div className="demo-card-floating rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 group">
+                {/* Background Image */}
+                <div className="relative h-[350px] md:h-[400px] lg:h-[450px]">
                   <img
-                    src={member.img}
-                    alt={member.name}
-                    className={teamStyles.image}
+                    src="/requist demo.webp"
+                    alt="Request Demo - NEEM Smart Insole Technology"
+                    className="w-full h-full object-cover"
                   />
-                  <div className={teamStyles.content}>
-                    <div className="space-y-3">
-                      <h3 className={teamStyles.name}>
-                        {member.name}
-                      </h3>
-                      <div className={teamStyles.divider}></div>
-                      <p className={teamStyles.role}>
-                        {member.role}
-                      </p>
-                      <p className={teamStyles.bio}>
-                        {member.bio}
-                      </p>
-                      <div className={teamStyles.socialLinks}>
-                        <a
-                          href={member.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={teamStyles.socialLink}
-                          title={`Connect with ${member.name} on LinkedIn`}
-                          aria-label={`Connect with ${member.name} on LinkedIn`}
-                        >
-                          <img
-                            src="/linkedin.png"
-                            alt="LinkedIn"
-                            className="h-5 w-5 object-contain"
-                          />
-                        </a>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20"></div>
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-8 md:px-16">
+                    <h2 className="demo-card-title text-white mb-6 leading-tight">
+                      A unified ecosystem for<br />
+                      customer action
+                    </h2>
+                    <p className="demo-card-subtitle text-white/90 mb-8 max-w-3xl leading-relaxed">
+                      NEEM is a healthcare platform that doubles as both your single source of
+                      truth and an everyday patient-centric control centre for your medical,
+                      monitoring and prevention teams.
+                    </p>
+                    <a
+                      href="https://eu.makeforms.co/bb4hlb3/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="demo-button group/btn"
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Request a demo
+                        <ArrowRight className="ml-3 h-5 w-5 transform group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Section */}
+      <section id="product" className="section-animate py-32 bg-gray-50">
+        <div className="container px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="product-card-container bg-white rounded-3xl shadow-2xl overflow-hidden">
+              <div className="grid lg:grid-cols-2 gap-0">
+
+                {/* Product Image Section */}
+                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-8 lg:p-12 flex items-center justify-center">
+                  {/* Size Badge */}
+                  <div className="absolute top-6 left-6 z-10">
+                    <div className="size-badge">
+                      <span className="size-badge-text">Universal</span>
+                    </div>
+                  </div>
+
+                  {/* Main Product Image */}
+                  <div className="relative w-full max-w-md mx-auto">
+                    <img
+                      src="/4.webp"
+                      alt="NEEM Smart Insole"
+                      className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500"
+                    />
+
+                    {/* Rotation Indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                      <div className="rotation-indicator">
+                        <div className="rotation-dot"></div>
+                        <span className="rotation-text">Rotate</span>
                       </div>
                     </div>
                   </div>
+
+                  {/* Product Thumbnails */}
+                  <div className="absolute bottom-6 left-6 flex space-x-3">
+                    <div className="thumbnail-container active">
+                      <img src="/4.webp" alt="View 1" className="thumbnail-image" />
+                    </div>
+                    <div className="thumbnail-container">
+                      <img src="/4.webp" alt="View 2" className="thumbnail-image opacity-60" />
+                    </div>
+                    <div className="thumbnail-container">
+                      <img src="/4.webp" alt="View 3" className="thumbnail-image opacity-60" />
+                    </div>
+                  </div>
                 </div>
+
+                {/* Product Details Section */}
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="space-y-6">
+
+                    {/* Product Category */}
+                    <div className="product-category">
+                      PREMIUM INSOLES
+                    </div>
+
+                    {/* Product Title */}
+                    <h2 className="product-title">
+                      NEEM Silicone Insole
+                    </h2>
+
+                    {/* Reviews */}
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                          />
+                        ))}
+                      </div>
+                      <span className="product-rating">4.5/5</span>
+                      <span className="product-reviews">12 Reviews</span>
+                    </div>
+
+                    {/* Product Description */}
+                    <p className="product-description">
+                      Our silicon insole is specially designed for diabetic patients to reduce the risk of foot complications,
+                      while also providing lasting comfort and relief for anyone experiencing foot pain.
+                    </p>
+
+                    {/* Size Options */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="size-label">Available Sizes</span>
+
+                      </div>
+                      <div className="flex space-x-3">
+                        {['S', 'M', 'L', 'XL'].map((size) => (
+                          <div
+                            key={size}
+                            className={`size-option ${selectedSize === size ? 'active' : ''}`}
+                            onClick={() => setSelectedSize(size)}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {size}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <div className="product-price">
+                      {(30000 * quantity).toLocaleString()} RWF
+                    </div>
+
+                    {/* Quantity and Buy Button */}
+                    <div className="flex items-center space-x-4">
+                      <div className="quantity-selector">
+                        <button
+                          className="quantity-btn"
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        >
+                          -
+                        </button>
+                        <span className="quantity-value">{quantity}</span>
+                        <button
+                          className="quantity-btn"
+                          onClick={() => setQuantity(quantity + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        className="buy-button group"
+                        onClick={() => setShowPopup(true)}
+                      >
+                        <span className="relative z-10">Buy Now</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -965,33 +1280,38 @@ export default function AppoModernLanding() {
             </p>
           </div>
 
-          <div className={partnerStyles.logoContainer}>
-            {/* University of Rwanda Logo */}
-            <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
-              <Image
-                src="/university-of-rwanda-logo.png"
-                alt="University of Rwanda Logo"
-                width={300} // or larger, depending on your needs
-                height={200} // adjust for aspect ratio
-                className="w-auto h-[300px] md:h-[400px] lg:h-[500px] object-contain"
-                priority
-              />
-            </div>
-            <div className="flex justify-center items-center w-full py-8 bg-white">
-
-            </div>
-
-            {/* ALX Logo */}
-            <div className={`${partnerStyles.partnerLogo} partner-logo-animate`}>
-              <div className={partnerStyles.imageWrapper}>
-                <Image
-                  src="/alx logo.webp"
-                  alt="ALX Logo"
-                  width={250}
-                  height={100}
-                  className="object-contain partner-image"
-                />
+          {/* Partners Grid */}
+          <div className="partners-grid-container">
+            <div className="partners-grid">
+              {/* University of Rwanda */}
+              <div className="partner-card partner-logo-animate">
+                <div className="partner-card-inner">
+                  <Image
+                    src="/university-of-rwanda-logo.png"
+                    alt="University of Rwanda"
+                    width={120}
+                    height={80}
+                    className="partner-logo-img"
+                  />
+                </div>
+                <div className="partner-grid-overlay"></div>
               </div>
+
+              {/* ALX */}
+              <div className="partner-card partner-logo-animate">
+                <div className="partner-card-inner">
+                  <Image
+                    src="/alx logo.webp"
+                    alt="ALX"
+                    width={120}
+                    height={80}
+                    className="partner-logo-img"
+                  />
+                </div>
+                <div className="partner-grid-overlay"></div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -1086,27 +1406,42 @@ export default function AppoModernLanding() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-animate py-32 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-white">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
-        </div>
-
-        <div className="container px-4 relative">
-          <div className="text-center space-y-6 mb-20">
-            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-6 py-3 rounded-full text-lg">
-              ❓ Got Questions?
-            </Badge>
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900">
-              Frequently Asked <span className="text-gradient">Questions</span>
+      <section className="section-animate py-32 bg-gray-50">
+        <div className="container px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* FAQ Title */}
+            <h2 className="faq-main-title">
+              Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find answers to common questions about NEEM's smart insole technology, costs, and healthcare impact.
-            </p>
-          </div>
 
-          <FAQSection />
+            {/* FAQ Items */}
+            <div className="faq-items-container">
+              {(showAllFAQs ? faqData : faqData.slice(0, 4)).map((faq, index) => (
+                <div key={index} className={`faq-item-minimal ${openFAQ === index ? 'active' : ''}`}>
+                  <div className="faq-question-row" onClick={() => toggleFAQ(index)}>
+                    <span className="faq-question-text">{faq.question}</span>
+                    <button className="faq-toggle-btn">
+                      <Plus className="w-5 h-5" />
+                    </button>
+                  </div>
+                  {openFAQ === index && (
+                    <div className="faq-answer-content">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Read More Button */}
+            {!showAllFAQs && (
+              <div className="faq-read-more-container">
+                <button className="faq-read-more-btn" onClick={handleShowAllFAQs}>
+                  Read more FAQs
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -1286,12 +1621,12 @@ export default function AppoModernLanding() {
                         onClick={(e) => {
                           e.preventDefault();
                           setIsSubmitting(true);
-                          
+
                           // Show notification after 3 seconds
                           setTimeout(() => {
                             setIsSubmitting(false);
                             setShowTrafficNotification(true);
-                            
+
                             // Hide notification after 5 seconds
                             setTimeout(() => {
                               setShowTrafficNotification(false);
@@ -1507,6 +1842,106 @@ export default function AppoModernLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Purchase Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-8 relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {/* Popup Header */}
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Order Summary</h3>
+              <p className="text-gray-600">Complete your purchase</p>
+            </div>
+
+            {/* Order Details */}
+            <div className="space-y-4 mb-6">
+              <div className="bg-gray-50 rounded-2xl p-4">
+                <div className="flex items-center space-x-4">
+                  <img src="/4.webp" alt="NEEM Smart Insole" className="w-16 h-16 object-contain rounded-lg" />
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-gray-900">NEEM Smart Insole</h4>
+                    <p className="text-sm text-gray-600">Size: {selectedSize} • Qty: {quantity}</p>
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-gray-200">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-gray-900">Total:</span>
+                    <span className="text-xl font-bold text-gray-900">{(30000 * quantity).toLocaleString()} RWF</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Customer Information Form */}
+            <div className="space-y-4 mb-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  placeholder="Enter your full name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Mobile Number (MoMo) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  value={mobileNumber}
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                  placeholder="078XXXXXXX"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Payment Info */}
+            <div className="bg-blue-50 rounded-2xl p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-blue-900">MoMo Payment</p>
+                  <p className="text-xs text-blue-700">You'll be redirected to dial the payment code</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowPopup(false)}
+                className="flex-1 py-3 px-4 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handlePurchase}
+                disabled={!customerName.trim() || !mobileNumber.trim()}
+                className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              >
+                Pay with MoMo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

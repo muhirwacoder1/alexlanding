@@ -1,7 +1,10 @@
 @keyframes bounce-once {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -9,4 +12,1556 @@
 
 .animate-bounce-once {
   animation: bounce-once 1s ease-in-out;
+}
+
+/* Hero Section Enhancements */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hero-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.hero-shimmer {
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Text gradient animation */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(45deg,
+      #3b82f6,
+      #06b6d4,
+      #10b981,
+      #3b82f6);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Responsive text scaling */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+}
+
+/* Enhanced button hover effects */
+.magnetic-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.magnetic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s;
+}
+
+.magnetic-button:hover::before {
+  left: 100%;
+}
+
+/* Stacked Cards Carousel Animation */
+@keyframes cardCycle {
+
+  0%,
+  33.33% {
+    transform: translateY(0px);
+    z-index: 3;
+    opacity: 1;
+  }
+
+  33.34%,
+  66.66% {
+    transform: translateY(20px);
+    z-index: 2;
+    opacity: 0.8;
+  }
+
+  66.67%,
+  100% {
+    transform: translateY(40px);
+    z-index: 1;
+    opacity: 0.6;
+  }
+}
+
+/* Story Cards Base Styles */
+.story-card-1,
+.story-card-2,
+.story-card-3 {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card Animations with proper delays - 8 seconds per card */
+.story-card-1 {
+  animation: cardCycle 24s infinite;
+  animation-delay: 0s;
+}
+
+.story-card-2 {
+  animation: cardCycle 24s infinite;
+  animation-delay: 8s;
+}
+
+.story-card-3 {
+  animation: cardCycle 24s infinite;
+  animation-delay: 16s;
+}
+
+/* Card hover effects */
+.story-card-1:hover,
+.story-card-2:hover,
+.story-card-3:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress Bar Filling Animation */
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+
+  33.33% {
+    width: 100%;
+  }
+
+  33.34%,
+  100% {
+    width: 0%;
+  }
+}
+
+/* Progress Bar Animations - 8 seconds per card */
+.story-progress-1 {
+  animation: progressFill 24s infinite;
+  animation-delay: 0s;
+}
+
+.story-progress-2 {
+  animation: progressFill 24s infinite;
+  animation-delay: 8s;
+}
+
+.story-progress-3 {
+  animation: progressFill 24s infinite;
+  animation-delay: 16s;
+}
+
+/* Story Card Typography */
+.story-card-text {
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #121211;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .story-card-text {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-card-text {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+}
+
+/* Responsive behavior */
+@media (max-width: 1024px) {
+
+  .story-card-1,
+  .story-card-2,
+  .story-card-3 {
+    position: relative !important;
+    transform: none !important;
+    margin-bottom: 2rem;
+    z-index: auto !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .story-cards-container {
+    animation: none;
+  }
+
+  .story-cards-container>div {
+    position: relative !important;
+    height: auto !important;
+  }
+}
+
+/* Technology Photo Cards Styles */
+.tech-photo-card {
+  transition: all 0.3s ease;
+}
+
+/* Default State Typography - Bottom Title for Tech Cards */
+.tech-photo-card-title {
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover State Typography - Info Panel Title for Tech Cards */
+.tech-photo-card-hover-title {
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+/* Description Text for Tech Cards */
+.tech-photo-card-description {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* Tech Card Hover Effects */
+.tech-photo-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Tech Info Panel Animation - Floating Effect with Margins */
+.tech-photo-card .absolute.bottom-4 {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 8px;
+  /* Add floating margins */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced floating effect on hover */
+.tech-photo-card:hover .absolute.bottom-4 {
+  margin: 0 12px;
+  /* Increase margins on hover for more floating effect */
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  /* Slight lift effect */
+}
+
+/* Initial state for tech cards - hidden for animation */
+.tech-photo-card {
+  opacity: 0;
+  transform: translateY(60px) scale(0.9);
+}
+
+/* Responsive Typography for Tech Cards */
+@media (max-width: 1024px) {
+  .tech-photo-card-title {
+    font-size: 40px;
+  }
+
+  .tech-photo-card-hover-title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-photo-card-title {
+    font-size: 32px;
+  }
+
+  .tech-photo-card-hover-title {
+    font-size: 20px;
+  }
+
+  .tech-photo-card-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-photo-card-title {
+    font-size: 28px;
+  }
+
+  .tech-photo-card-hover-title {
+    font-size: 18px;
+  }
+
+  .tech-photo-card-description {
+    font-size: 12px;
+  }
+}
+
+/* Technol
+ogy Section Scroll-Triggered Animation Enhancements */
+.tech-photo-card {
+  will-change: transform, opacity;
+}
+
+/* Improved hover info panel floating effect */
+.tech-photo-card .absolute.bottom-4.left-0.right-0 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-photo-card:hover .absolute.bottom-4.left-0.right-0 {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive floating margins */
+@media (max-width: 768px) {
+  .tech-photo-card .absolute.bottom-4 {
+    margin: 0 6px;
+  }
+
+  .tech-photo-card:hover .absolute.bottom-4 {
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-photo-card .absolute.bottom-4 {
+    margin: 0 4px;
+  }
+
+  .tech-photo-card:hover .absolute.bottom-4 {
+    margin: 0 6px;
+  }
+}
+
+/* Animation state management */
+.tech-photo-card.animated {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Ensure smooth transitions for all states */
+.tech-photo-card * {
+  transition-property: transform, opacity, box-shadow, margin;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* R
+equest Demo Card Styles */
+.demo-card-floating {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.demo-card-floating:hover {
+  box-shadow:
+    0 35px 70px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Demo Card Typography - Aeonik Medium */
+.demo-card-title {
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.demo-card-subtitle {
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* Demo Button Styles */
+.demo-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: white;
+  font-family: "Aeonik Medium", "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s;
+}
+
+.demo-button:hover::before {
+  left: 100%;
+}
+
+.demo-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Animation */
+@keyframes float-demo {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.demo-card-floating {
+  animation: float-demo 6s ease-in-out infinite;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .demo-card-title {
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+  }
+
+  .demo-card-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-button {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .demo-card-floating {
+    margin: 0 0.5rem;
+  }
+
+  .demo-card-title {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .demo-card-subtitle {
+    font-size: clamp(0.85rem, 4vw, 1rem);
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Enhanced Hover Effects */
+.demo-card-floating:hover .demo-card-title {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.demo-card-floating:hover .demo-card-subtitle {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphism Enhancement */
+.demo-card-floating {
+  position: relative;
+}
+
+.demo-card-floating::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.demo-card-floating:hover::before {
+  opacity: 1;
+}
+
+/* Product
+ Card Styles */
+.product-card-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.product-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Size Badge */
+.size-badge {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.size-badge-text {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  letter-spacing: 0.025em;
+}
+
+/* Rotation Indicator */
+.rotation-indicator {
+  display: flex;
+  align-items: center;
+  space-x: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.rotation-dot {
+  width: 8px;
+  height: 8px;
+  background: #3B82F6;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.rotation-text {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Product Thumbnails */
+.thumbnail-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.thumbnail-container.active {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.thumbnail-container:hover {
+  border-color: #3B82F6;
+  transform: scale(1.05);
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* Product Details */
+.product-category {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6B7280;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.product-title {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.product-rating {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.product-reviews {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #6B7280;
+}
+
+.product-description {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+/* Size Options */
+.size-label {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.size-guide {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3B82F6;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.size-option {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size-option.active {
+  border-color: #111827;
+  background: #111827;
+  color: white;
+}
+
+.size-option:hover:not(.active) {
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+
+/* Price */
+.product-price {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.025em;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.quantity-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background: #F3F4F6;
+  color: #111827;
+}
+
+.quantity-value {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  border-left: 1px solid #E5E7EB;
+  border-right: 1px solid #E5E7EB;
+}
+
+/* Buy Button */
+.buy-button {
+  flex: 1;
+  height: 56px;
+  background: #111827;
+  border: none;
+  border-radius: 16px;
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(17, 24, 39, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .product-title {
+    font-size: 2rem;
+  }
+
+  .product-price {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card-container {
+    margin: 0 1rem;
+  }
+
+  .product-title {
+    font-size: 1.75rem;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+  }
+
+  .size-option {
+    width: 40px;
+    height: 40px;
+    font-size: 0.75rem;
+  }
+
+  .buy-button {
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .quantity-btn,
+  .quantity-value {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .thumbnail-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .size-badge {
+    padding: 6px 12px;
+  }
+
+  .size-badge-text {
+    font-size: 0.75rem;
+  }
+
+  .rotation-indicator {
+    padding: 6px 12px;
+  }
+
+  .rotation-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation Enhancements */
+@keyframes product-float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.product-card-container {
+  animation: product-float 6s ease-in-out infinite;
+}
+
+/* Hover Effects */
+.product-card-container:hover .thumbnail-image {
+  opacity: 1;
+}
+
+.product-card-container:hover .size-option:not(.active) {
+  border-color: #D1D5DB;
+}
+
+.buy-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s;
+}
+
+.buy-button:hover::before {
+  left: 100%;
+}
+
+/*
+ Enhanced Size Option Interactivity */
+.size-option {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.size-option:active {
+  transform: scale(0.95);
+}
+
+.size-option:hover:not(.active) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Enhanced Quantity Selector */
+.quantity-btn {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantity-btn:active {
+  transform: scale(0.95);
+}
+
+.quantity-btn:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+/* Purchase Popup Styles */
+.popup-overlay {
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content {
+  animation: slideUp 0.3s ease-out;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Form Input Enhancements */
+input[type="text"],
+input[type="tel"] {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Button Hover Effects */
+.popup-content button:hover {
+  transform: translateY(-1px);
+}
+
+.popup-content button:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsive Popup */
+@media (max-width: 640px) {
+  .popup-content {
+    margin: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* Loading State for Buy Button */
+.buy-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buy-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Enhanced popup backdrop */
+.fixed.inset-0.bg-black.bg-opacity-50 {
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Enhanced popup container */
+.fixed.inset-0.bg-black.bg-opacity-50>div {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Part
+ners Grid Styles */
+.partners-grid-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  align-items: center;
+  justify-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .partners-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.partner-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 250px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.partner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(0, 0, 0, 0.02) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.partner-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 2;
+}
+
+.partner-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-contain: contain;
+  filter: grayscale(0.3);
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover .partner-logo-img {
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
+
+.partner-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+}
+
+.partner-placeholder-text {
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Grid Overlay Animation */
+.partner-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.partner-card:hover .partner-grid-overlay {
+  opacity: 1;
+}
+
+/* Hover Effects */
+.partner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Light Animation */
+.partner-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent,
+      transparent);
+  transform: rotate(45deg) translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.partner-card:hover::after {
+  transform: rotate(45deg) translateX(100%);
+}
+
+/* Staggered Animation for Grid Items */
+.partner-logo-animate:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.partner-logo-animate:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.partner-logo-animate:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.partner-logo-animate:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+/* Floating Animation */
+@keyframes partnerFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.partner-card {
+  animation: partnerFloat 6s ease-in-out infinite;
+}
+
+.partner-card:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.partner-card:nth-child(3) {
+  animation-delay: -4s;
+}
+
+.partner-card:nth-child(4) {
+  animation-delay: -1s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .partner-card {
+    max-width: 180px;
+  }
+
+  .partner-card-inner {
+    padding: 1.5rem;
+  }
+
+  .partners-grid-container {
+    padding: 0 1rem;
+  }
+}
+
+/* FAQ 
+Section - Minimal Design with Rounded Corners */
+.faq-main-title {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 3rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .faq-main-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.faq-items-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item-minimal {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.faq-item-minimal:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item-minimal:hover {
+  background-color: #fafafa;
+  border-color: #d1d5db;
+}
+
+.faq-question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .faq-question-row {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.faq-question-text {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #374151;
+  line-height: 1.5;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+@media (max-width: 640px) {
+  .faq-question-text {
+    font-size: 1rem;
+  }
+}
+
+.faq-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.faq-toggle-btn:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.faq-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.faq-read-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.faq-read-more-btn {
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #1f2937;
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(31, 41, 55, 0.15);
+}
+
+.faq-read-more-btn:hover {
+  background: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.2);
+}
+
+.faq-read-more-btn:active {
+  transform: translateY(0);
+}
+
+/* FAQ Answer Styles (for when expanded) */
+.faq-answer-content {
+  padding: 0 2rem 1.5rem 2rem;
+  font-family: "Aeonik Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
+  border-top: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+
+@media (max-width: 640px) {
+  .faq-answer-content {
+    padding: 0 1.5rem 1.25rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Active state for expanded FAQ */
+.faq-item-minimal.active {
+  background: white;
+  border-color: #d1d5db;
+}
+
+.faq-item-minimal.active .faq-toggle-btn {
+  transform: rotate(45deg);
+  background-color: #1f2937;
+  color: white;
+}
+
+.faq-item-minimal.active .faq-question-text {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* Enh
+anced Mobile Responsiveness for Our Story Section */
+@media (max-width: 1024px) {
+  .story-cards-container {
+    height: auto !important;
+    min-height: 500px;
+  }
+
+  .story-card-1,
+  .story-card-2,
+  .story-card-3 {
+    position: relative !important;
+    transform: none !important;
+    z-index: auto !important;
+    opacity: 1 !important;
+    animation: none !important;
+    margin-bottom: 2rem;
+  }
+
+  .story-card-1:last-child,
+  .story-card-2:last-child,
+  .story-card-3:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-cards-container {
+    min-height: 400px;
+  }
+
+  .story-card-text {
+    font-size: 22px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-cards-container {
+    min-height: 350px;
+  }
+
+  .story-card-text {
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Adjust card padding on mobile */
+  .story-card-1>div,
+  .story-card-2>div,
+  .story-card-3>div {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-card-text {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  .story-card-1>div,
+  .story-card-2>div,
+  .story-card-3>div {
+    padding: 1.25rem !important;
+  }
+}/* 
+Performance Optimizations for Faster Animations */
+
+/* Contact Section Faster Animations */
+.contact-form-glass,
+.contact-info-glass,
+.map-container {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Testimonial Section Faster Animations */
+.testimonial-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Faster transition for interactive elements */
+.contact-input {
+  transition: all 0.2s ease !important;
+}
+
+.contact-input:focus {
+  transition: all 0.15s ease !important;
+}
+
+/* Optimized hover effects */
+.morphing-card {
+  transition: all 0.3s ease !important;
+}
+
+.morphing-card:hover {
+  transition: all 0.2s ease !important;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .section-animate,
+  .morphing-card,
+  .contact-form-glass,
+  .contact-info-glass {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .story-card-1,
+  .story-card-2,
+  .story-card-3 {
+    animation: none !important;
+    transform: none !important;
+  }
 }

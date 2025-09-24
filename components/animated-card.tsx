@@ -27,43 +27,42 @@ export function AnimatedCard({ children, title, description, icon, className, de
     gsap.fromTo(
       card,
       {
-        y: 50,
+        y: 30,
         opacity: 0,
-        scale: 0.9,
-        rotateX: 10,
+        scale: 0.95,
+        rotateX: 5,
       },
       {
         y: 0,
         opacity: 1,
         scale: 1,
         rotateX: 0,
-        duration: 0.8,
+        duration: 0.4,
         delay: delay,
-        ease: "power3.out",
+        ease: "power2.out",
         scrollTrigger: {
           trigger: card,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          start: "top 85%",
+          once: true,
         },
       },
     )
 
-    // Mouse move effect
+    // Mouse move effect - Faster and smoother
     const handleMouseMove = (e: MouseEvent) => {
       const rect = card.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
       const centerX = rect.width / 2
       const centerY = rect.height / 2
-      const rotateX = (y - centerY) / 10
-      const rotateY = (centerX - x) / 10
+      const rotateX = (y - centerY) / 15
+      const rotateY = (centerX - x) / 15
 
       gsap.to(card, {
         rotateX: rotateX,
         rotateY: rotateY,
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.2,
+        ease: "power1.out",
       })
     }
 
@@ -71,8 +70,8 @@ export function AnimatedCard({ children, title, description, icon, className, de
       gsap.to(card, {
         rotateX: 0,
         rotateY: 0,
-        duration: 0.5,
-        ease: "power2.out",
+        duration: 0.3,
+        ease: "power1.out",
       })
     }
 

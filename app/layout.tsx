@@ -1,11 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Montserrat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import "../styles/animations.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const montserrat = Montserrat({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "NEEM - Saving Limbs. Restoring Lives.",
@@ -30,7 +30,7 @@ export default function RootLayout({
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         <meta name="google-site-verification" content="uHZaR51Gbr8p9GOvIP5ZqIwM9Pqnbn5MdqzKwrlm0Ko" />
       </head>
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         {children}
         <Analytics />
       </body>
