@@ -60,11 +60,11 @@ export default function AppoModernLanding() {
   const [showPopup, setShowPopup] = useState(false)
   const [customerName, setCustomerName] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
-  
+
   // FAQ state
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
   const [showAllFAQs, setShowAllFAQs] = useState(false)
-  
+
   const heroRef = useRef<HTMLElement>(null)
   const navRef = useRef<HTMLElement>(null)
 
@@ -140,7 +140,7 @@ export default function AppoModernLanding() {
     }
 
     // Calculate total amount
-    const totalAmount = 30000 * quantity
+    const totalAmount = 35000 * quantity
 
     // Create MoMo dial string
     const momoDialString = `*182*1*1*0784131200*${totalAmount}#`
@@ -283,23 +283,7 @@ export default function AppoModernLanding() {
     })
 
     // Team section animations (simplified)
-    gsap.utils.toArray('.team-card-animate').forEach((card: any, i: number) => {
-      gsap.fromTo(card, {
-        opacity: 0,
-        y: 30
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        delay: i * 0.1,
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 90%',
-          once: true
-        }
-      })
-    })
+
 
     // Technology section animations with enhanced text effects
     gsap.utils.toArray('.tech-card-animate').forEach((card: any, i: number) => {
@@ -525,23 +509,23 @@ export default function AppoModernLanding() {
       <FloatingElements />
 
       {/* Modern Circular Navigation */}
-      <header ref={navRef} className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-4xl px-4">
-        <nav className="nav-circle px-8 py-4 shadow-2xl">
+      <header ref={navRef} className="fixed top-3 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4">
+        <nav className="nav-circle px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-2xl">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               <div className="nav-logo-container relative cursor-pointer">
                 <img
                   src="/logo neem.png"
                   alt="NEEM Logo"
-                  className="h-12 w-auto object-contain"
+                  className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                 />
               </div>
             </div>
 
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               <Link
                 href="#story"
-                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                className={`nav-link-glass px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
                   ? 'text-white hover:text-blue-300'
                   : 'text-gray-700 hover:text-blue-600'
                   }`}
@@ -550,7 +534,7 @@ export default function AppoModernLanding() {
               </Link>
               <Link
                 href="#technology"
-                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                className={`nav-link-glass px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
                   ? 'text-white hover:text-blue-300'
                   : 'text-gray-700 hover:text-blue-600'
                   }`}
@@ -559,7 +543,7 @@ export default function AppoModernLanding() {
               </Link>
               <Link
                 href="#team"
-                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                className={`nav-link-glass px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
                   ? 'text-white hover:text-blue-300'
                   : 'text-gray-700 hover:text-blue-600'
                   }`}
@@ -568,7 +552,7 @@ export default function AppoModernLanding() {
               </Link>
               <Link
                 href="#contact"
-                className={`nav-link-glass px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
+                className={`nav-link-glass px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
                   ? 'text-white hover:text-blue-300'
                   : 'text-gray-700 hover:text-blue-600'
                   }`}
@@ -577,8 +561,8 @@ export default function AppoModernLanding() {
               </Link>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="hidden md:block">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="hidden lg:block">
                 <a
                   href="https://eu.makeforms.co/bb4hlb3/"
                   target="_blank"
@@ -590,21 +574,21 @@ export default function AppoModernLanding() {
                 </a>
               </div>
               <button
-                className="md:hidden p-3 rounded-full liquid-glass-icon transition-all duration-300 relative group"
+                className="lg:hidden p-2 sm:p-3 rounded-full liquid-glass-icon transition-all duration-300 relative group"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
-                <div className="relative w-5 h-5">
+                <div className="relative w-4 h-4 sm:w-5 sm:h-5">
                   <span
-                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                    className={`absolute block h-0.5 w-4 sm:w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
                       } ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'}`}
                   />
                   <span
-                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                    className={`absolute block h-0.5 w-4 sm:w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
                       } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
                   />
                   <span
-                    className={`absolute block h-0.5 w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
+                    className={`absolute block h-0.5 w-4 sm:w-5 transform transition-all duration-300 ease-in-out ${navLinksWhite ? 'bg-white' : 'bg-gray-700'
                       } ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'}`}
                   />
                 </div>
@@ -616,86 +600,86 @@ export default function AppoModernLanding() {
         {/* Mobile Menu Backdrop */}
         {isMenuOpen && (
           <div
-            className="md:hidden fixed inset-0 bg-black/20 z-40 transition-opacity duration-300"
+            className="lg:hidden fixed inset-0 bg-black/20 z-40 transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden absolute top-full left-0 right-0 mt-4 transition-all duration-500 ease-in-out transform z-50 ${isMenuOpen
+          className={`lg:hidden absolute top-full left-0 right-0 mt-2 sm:mt-4 transition-all duration-500 ease-in-out transform z-50 ${isMenuOpen
             ? 'opacity-100 translate-y-0 pointer-events-auto scale-100'
             : 'opacity-0 -translate-y-4 pointer-events-none scale-95'
             }`}
         >
-          <div className="liquid-glass-menu rounded-2xl overflow-hidden">
-            <div className="px-6 py-6">
-              <div className="space-y-3">
+          <div className="liquid-glass-menu rounded-xl sm:rounded-2xl overflow-hidden mx-2 sm:mx-0">
+            <div className="px-4 sm:px-6 py-4 sm:py-6">
+              <div className="space-y-2 sm:space-y-3">
                 <Link
                   href="#story"
-                  className={`mobile-menu-item liquid-glass liquid-glass-blue liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-blue-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                  className={`mobile-menu-item liquid-glass liquid-glass-blue liquid-ripple liquid-float flex items-center px-3 sm:px-5 py-3 sm:py-4 text-gray-700 hover:text-blue-600 rounded-xl sm:rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
                     }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
-                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
-                    <Heart className="h-6 w-6 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="liquid-glass-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 transition-all duration-300">
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base text-gray-800 group-hover:text-blue-700 transition-colors">Our Story</span>
-                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-blue-600 transition-colors">Learn about our mission</p>
+                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-blue-700 transition-colors">Our Story</span>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-blue-600 transition-colors">Learn about our mission</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-blue-600" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-blue-600" />
                 </Link>
 
                 <Link
                   href="#technology"
-                  className={`mobile-menu-item liquid-glass liquid-glass-green liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-green-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                  className={`mobile-menu-item liquid-glass liquid-glass-green liquid-ripple liquid-float flex items-center px-3 sm:px-5 py-3 sm:py-4 text-gray-700 hover:text-green-600 rounded-xl sm:rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
                     }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
-                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
-                    <Smartphone className="h-6 w-6 text-green-600 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="liquid-glass-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 transition-all duration-300">
+                    <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base text-gray-800 group-hover:text-green-700 transition-colors">Services</span>
-                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-green-600 transition-colors">Smart insole technology</p>
+                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-green-700 transition-colors">Services</span>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-green-600 transition-colors">Smart insole technology</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-green-600" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-green-600" />
                 </Link>
 
                 <Link
                   href="#team"
-                  className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-purple-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                  className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-3 sm:px-5 py-3 sm:py-4 text-gray-700 hover:text-purple-600 rounded-xl sm:rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
                     }`}
                   onClick={() => setIsMenuOpen(false)}
 
                 >
-                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
-                    <Users className="h-6 w-6 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="liquid-glass-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 transition-all duration-300">
+                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base text-gray-800 group-hover:text-purple-700 transition-colors">Team</span>
-                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-purple-600 transition-colors">Meet our experts</p>
+                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-purple-700 transition-colors">Team</span>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-purple-600 transition-colors">Meet our experts</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
                 </Link>
 
                 <Link
                   href="#contact"
-                  className={`mobile-menu-item liquid-glass liquid-glass-orange liquid-ripple liquid-float flex items-center px-5 py-4 text-gray-700 hover:text-orange-600 rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
+                  className={`mobile-menu-item liquid-glass liquid-glass-orange liquid-ripple liquid-float flex items-center px-3 sm:px-5 py-3 sm:py-4 text-gray-700 hover:text-orange-600 rounded-xl sm:rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
                     }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <div className="liquid-glass-icon w-12 h-12 rounded-2xl flex items-center justify-center mr-4 transition-all duration-300">
-                    <Mail className="h-6 w-6 text-orange-600 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="liquid-glass-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 transition-all duration-300">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-base text-gray-800 group-hover:text-orange-700 transition-colors">Contact</span>
-                    <p className="text-sm text-gray-600 mt-0.5 group-hover:text-orange-600 transition-colors">Get in touch with us</p>
+                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-orange-700 transition-colors">Contact</span>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-orange-600 transition-colors">Get in touch with us</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-orange-600" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-orange-600" />
                 </Link>
               </div>
 
@@ -753,59 +737,58 @@ export default function AppoModernLanding() {
         </div>
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 relative z-10">
-          <div className="flex items-center justify-center min-h-[80vh]">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-32 relative z-10">
+          <div className="flex items-center justify-center min-h-[75vh] sm:min-h-[80vh]">
             {/* Centered Content */}
-            <div className="max-w-5xl mx-auto text-center space-y-8 lg:space-y-12">
-              <div className="space-y-6 lg:space-y-10">
+            <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-8 lg:space-y-12">
+              <div className="space-y-4 sm:space-y-6 lg:space-y-10">
 
                 {/* Main Heading */}
-                <h1 className="hero-title text-[42px] font-black text-white leading-[1.1] tracking-tight">
+                <h1 className="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.1] tracking-tight px-2">
                   Protecting Diabetic Patients from{" "}
                   <span className="relative inline-block">
                     <span className="text-gradient-animated">
                       Amputation
                     </span>
-                    <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 rounded-full shadow-lg hero-glow"></div>
+                    <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 rounded-full shadow-lg hero-glow"></div>
                   </span>
                 </h1>
 
                 {/* Subtitle */}
-                <p className="hero-subtitle text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed font-light max-w-4xl mx-auto">
+                <p className="hero-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed font-light max-w-4xl mx-auto px-4">
                   Our smart insole detects foot ulcers before they begin saving lives, preserving independence, and
                   restoring dignity.
                 </p>
 
                 {/* Key Stats */}
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-12 pt-6">
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 pt-4 sm:pt-6">
                   <div className="text-center">
-                    <div className="text-3xl sm:text-4xl font-bold text-blue-400">90%</div>
-                    <div className="text-sm sm:text-base text-gray-300">Prevention Rate</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400">90%</div>
+                    <div className="text-xs sm:text-sm md:text-base text-gray-300">Prevention Rate</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl sm:text-4xl font-bold text-cyan-400">24/7</div>
-                    <div className="text-sm sm:text-base text-gray-300">Monitoring</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400">24/7</div>
+                    <div className="text-xs sm:text-sm md:text-base text-gray-300">Monitoring</div>
                   </div>
-
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pt-4">
+              <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center pt-2 sm:pt-4 px-4">
                 <ModernButton
                   onClick={() => window.open("https://www.youtube.com/watch?v=07gVpwzimEA", "_blank")}
                   variant="primary"
                   size="lg"
-                  icon={<Play className="h-5 w-5" />}
-                  className="magnetic-button rounded-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl shadow-2xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 transform hover:scale-105 transition-all duration-300"
+                  icon={<Play className="h-4 w-4 sm:h-5 sm:w-5" />}
+                  className="magnetic-button rounded-full px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg lg:text-xl shadow-2xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 transform hover:scale-105 transition-all duration-300"
                 >
                   Patient Story
                 </ModernButton>
                 <ModernButton
                   variant="outline"
                   size="lg"
-                  icon={<ArrowRight className="h-5 w-5" />}
-                  className="magnetic-button rounded-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl shadow-lg learn-more-btn bg-transparent backdrop-blur-sm border-2 border-blue-500/70 text-white hover:bg-blue-500/10 hover:border-blue-400 transform hover:scale-105 transition-all duration-300"
+                  icon={<ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />}
+                  className="magnetic-button rounded-full px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg lg:text-xl shadow-lg learn-more-btn bg-transparent backdrop-blur-sm border-2 border-blue-500/70 text-white hover:bg-blue-500/10 hover:border-blue-400 transform hover:scale-105 transition-all duration-300"
                   onClick={() => setShowAbout(true)}
                 >
                   Learn More
@@ -816,11 +799,11 @@ export default function AppoModernLanding() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="flex flex-col items-center space-y-3 text-white animate-bounce">
-            <span className="text-sm font-medium tracking-wide">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/10">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+        <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="flex flex-col items-center space-y-2 sm:space-y-3 text-white animate-bounce">
+            <span className="text-xs sm:text-sm font-medium tracking-wide hidden sm:block">Scroll to explore</span>
+            <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/10">
+              <div className="w-0.5 sm:w-1 h-2 sm:h-3 bg-white rounded-full mt-1.5 sm:mt-2 animate-pulse"></div>
             </div>
           </div>
         </div>
@@ -855,12 +838,12 @@ export default function AppoModernLanding() {
       {/* Our Story Section - Sticky Cards Design */}
       <section id="story" className="relative bg-white">
         {/* Section Header */}
-        <div className="container px-4 py-16">
-          <div className="max-w-6xl mx-auto text-center space-y-6">
-            <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-6 py-3 rounded-full text-lg">
+        <div className="container px-3 sm:px-4 py-12 sm:py-16">
+          <div className="max-w-6xl mx-auto text-center space-y-4 sm:space-y-6">
+            <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg">
               📖 Our Story: Why We Exist
             </Badge>
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 leading-tight px-2">
               We couldn't accept that <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">1 in 6 diabetic patients</span> in Rwanda risks losing a limb
             </h2>
           </div>
@@ -904,7 +887,7 @@ export default function AppoModernLanding() {
                     <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 lg:p-12 shadow-xl h-full border border-blue-200">
                       <div className="flex items-center h-full">
                         <h3 className="story-card-text">
-                          "At NEEM, we couldn't accept that. That's why we built a smart, affordable, non-invasive insole that can detect ulcers before they develop—preventing up to <span className="text-blue-600">90% of amputations</span>."
+                          "At NEEM, we couldn't accept that. That's why we built a smart, affordable, non-invasive insole that can detect ulcers before they develop preventing up to <span className="text-blue-600">90% of amputations</span>."
                         </h3>
                       </div>
                     </div>
@@ -915,7 +898,7 @@ export default function AppoModernLanding() {
                     <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-2xl h-full border border-gray-200">
                       <div className="flex items-center h-full">
                         <h3 className="story-card-text">
-                          "When that happens, it's not just a foot that's lost—it's mobility, dignity, and income."
+                          "When that happens, it's not just a foot that's lost it's mobility, dignity, and income."
                         </h3>
                       </div>
                     </div>
@@ -991,7 +974,7 @@ export default function AppoModernLanding() {
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
                 {/* Background Image */}
                 <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: 'url(/insole%20implint.jpg)' }}>
+                  style={{ backgroundImage: 'url(/custom%20insole.webp)' }}>
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300"></div>
                 </div>
 
@@ -1226,7 +1209,7 @@ export default function AppoModernLanding() {
 
                     {/* Price */}
                     <div className="product-price">
-                      {(30000 * quantity).toLocaleString()} RWF
+                      {(35000 * quantity).toLocaleString()} RWF
                     </div>
 
                     {/* Quantity and Buy Button */}
@@ -1331,7 +1314,7 @@ export default function AppoModernLanding() {
                   <Star key={i} className="h-8 w-8 text-yellow-400 fill-current mx-1" />
                 ))}
               </div>
-              <blockquote className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-relaxed">
+              <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-gray-900 mb-8 leading-relaxed">
                 "I've already lost one leg. NEEM's insole is helping me protect the other. Every diabetic patient should
                 have one."
               </blockquote>

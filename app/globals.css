@@ -176,6 +176,119 @@
   overflow: hidden;
 }
 
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .nav-circle {
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+/* Global responsive improvements */
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ensure text doesn't overflow */
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Improve button spacing on mobile */
+  .hero-buttons {
+    padding: 0 1rem;
+  }
+  
+  /* Better mobile typography */
+  .hero-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Small screens */
+  .section-animate {
+    padding: 2rem 1rem;
+  }
+  
+  /* Improve mobile spacing */
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .space-y-12 > * + * {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Tablet and mobile improvements */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+  
+  /* Better mobile navigation */
+  .liquid-glass-menu {
+    margin: 0 0.5rem;
+    border-radius: 1rem;
+  }
+  
+  /* Improve mobile text readability */
+  .text-gradient-animated {
+    -webkit-text-fill-color: #3b82f6;
+    background: none;
+  }
+}
+
+/* Ensure proper touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .nav-link-glass {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile menu button improvements */
+  .liquid-glass-icon {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Improve mobile menu animations */
+@media (max-width: 1024px) {
+  .mobile-menu-item {
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideInLeft 0.3s ease-out forwards;
+  }
+  
+  .mobile-menu-item:nth-child(1) { animation-delay: 0.1s; }
+  .mobile-menu-item:nth-child(2) { animation-delay: 0.2s; }
+  .mobile-menu-item:nth-child(3) { animation-delay: 0.3s; }
+  .mobile-menu-item:nth-child(4) { animation-delay: 0.4s; }
+}
+
+@keyframes slideInLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .nav-circle::before {
   content: '';
   position: absolute;
