@@ -35,12 +35,10 @@ import {
   Plus,
 } from "lucide-react"
 import Link from "next/link"
-import styles from '@/styles/tech-section.module.css'
-
+import Image from 'next/image';
 import techStyles from '@/styles/tech-section.module.css';
 import teamStyles from '@/styles/team-section.module.css';
 import partnerStyles from '@/styles/partners.module.css';
-import Image from 'next/image';
 import FAQSection from '@/components/faq-section'
 
 import AboutNEEM from "@/components/about/about";
