@@ -799,9 +799,10 @@ export default function AppoModernLanding() {
             </div>
           </div>
         </div>
-        {/* Bottom rounded fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-white rounded-t-3xl z-5"></div>
       </section>
+
+      {/* Spacer between hero and story sections */}
+      <div className="h-16 sm:h-20 md:h-24 lg:h-32 bg-gradient-to-b from-gray-900 to-white"></div>
 
       {showAbout && (
         <div
@@ -830,7 +831,7 @@ export default function AppoModernLanding() {
       {/* Our Story Section - Sticky Cards Design */}
       <section id="story" className="relative bg-white">
         {/* Section Header */}
-        <div className="container px-3 sm:px-4 py-12 sm:py-16">
+        <div className="container px-3 sm:px-4 pt-8 sm:pt-12 pb-12 sm:pb-16">
           <div className="max-w-6xl mx-auto text-center space-y-4 sm:space-y-6">
             <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg">
               Our Story: Why We Exist
