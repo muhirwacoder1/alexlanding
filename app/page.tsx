@@ -515,7 +515,7 @@ export default function AppoModernLanding() {
                 <img
                   src="/logo neem.png"
                   alt="NEEM Logo"
-                  className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+                  className="h-10 sm:h-12 md:h-16 lg:h-18 w-auto object-contain"
                 />
               </div>
             </div>
@@ -540,13 +540,13 @@ export default function AppoModernLanding() {
                 Services
               </Link>
               <Link
-                href="#team"
+                href="#partners"
                 className={`nav-link-glass px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition-all duration-300 hover:scale-105 rounded-full relative overflow-hidden ${navLinksWhite
                   ? 'text-white hover:text-blue-300'
                   : 'text-gray-700 hover:text-blue-600'
                   }`}
               >
-                Team
+                Partners
               </Link>
               <Link
                 href="#contact"
@@ -561,15 +561,11 @@ export default function AppoModernLanding() {
 
             <div className="flex items-center space-x-2 sm:space-x-4">
               <div className="hidden lg:block">
-                <a
-                  href="https://eu.makeforms.co/bb4hlb3/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="#product">
                   <ModernButton variant="primary" size="sm">
-                    Partner With Us
+                    Shop
                   </ModernButton>
-                </a>
+                </Link>
               </div>
               <button
                 className="lg:hidden p-2 sm:p-3 rounded-full liquid-glass-icon transition-all duration-300 relative group"
@@ -648,7 +644,7 @@ export default function AppoModernLanding() {
                 </Link>
 
                 <Link
-                  href="#team"
+                  href="#partners"
                   className={`mobile-menu-item liquid-glass liquid-glass-purple liquid-ripple liquid-float flex items-center px-3 sm:px-5 py-3 sm:py-4 text-gray-700 hover:text-purple-600 rounded-xl sm:rounded-2xl transition-all duration-300 group ${isMenuOpen ? 'animate-in' : ''
                     }`}
                   onClick={() => setIsMenuOpen(false)}
@@ -658,8 +654,8 @@ export default function AppoModernLanding() {
                     <Users className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-purple-700 transition-colors">Team</span>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-purple-600 transition-colors">Meet our experts</p>
+                    <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-purple-700 transition-colors">Partners</span>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-0.5 group-hover:text-purple-600 transition-colors">Our trusted partners</p>
                   </div>
                   <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 text-purple-600" />
                 </Link>
@@ -681,13 +677,11 @@ export default function AppoModernLanding() {
                 </Link>
               </div>
 
-              {/* Partner With Us Button in Mobile Menu */}
+              {/* Shop Button in Mobile Menu */}
               <div className={`mt-8 pt-6 border-t border-white/20 mobile-menu-item ${isMenuOpen ? 'animate-in' : ''}`}>
                 <div className="liquid-glass liquid-ripple rounded-2xl p-1">
-                  <a
-                    href="https://eu.makeforms.co/bb4hlb3/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="#product"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <ModernButton
@@ -696,14 +690,14 @@ export default function AppoModernLanding() {
                       className="w-full justify-center group hover:scale-105 transition-all duration-300 relative overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                      <Users className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                      <span className="font-semibold relative z-10">Partner With Us</span>
+                      <Smartphone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                      <span className="font-semibold relative z-10">Shop</span>
                       <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-75 group-hover:animate-ping relative z-10"></div>
                     </ModernButton>
-                  </a>
+                  </Link>
                 </div>
                 <p className="text-center text-sm text-gray-400 mt-3 font-medium">
-                  Join us in saving lives through innovation ✨
+                  Get your NEEM smart insoles today 🛒
                 </p>
               </div>
 
@@ -839,7 +833,7 @@ export default function AppoModernLanding() {
         <div className="container px-3 sm:px-4 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto text-center space-y-4 sm:space-y-6">
             <Badge className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg">
-              📖 Our Story: Why We Exist
+              Our Story: Why We Exist
             </Badge>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 leading-tight px-2">
               We couldn't accept that <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">1 in 6 diabetic patients</span> in Rwanda risks losing a limb
@@ -953,7 +947,7 @@ export default function AppoModernLanding() {
         <div className="container px-4 relative z-10">
           <div className="text-center space-y-6 mb-20">
             <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border-blue-200 px-6 py-3 rounded-full text-lg">
-              🧪 What We Do
+              Our Services
             </Badge>
             <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
               Smart Technology That <span className="text-gradient">Saves Lives</span>
@@ -1247,7 +1241,7 @@ export default function AppoModernLanding() {
       </section>
 
       {/* Trusted Partners Section */}
-      <section className="section-animate py-32 section-bg">
+      <section id="partners" className="section-animate py-32 section-bg">
         <div className="container px-4">
           <div className="text-center space-y-6 mb-20">
             <Badge className="bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-6 py-3 rounded-full text-lg">
@@ -1446,15 +1440,11 @@ export default function AppoModernLanding() {
               amputations across Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="https://eu.makeforms.co/bb4hlb3/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link href="#product">
                 <ModernButton variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-gray-100 hover:scale-105 transition-all duration-300">
-                  📌 Partner With Us
+                  🛒 Shop
                 </ModernButton>
-              </a>
+              </Link>
               <a
                 href="https://eu.makeforms.co/tqvhwn7/"
                 target="_blank"
@@ -1755,10 +1745,10 @@ export default function AppoModernLanding() {
                       Services
                     </Link>
                     <Link
-                      href="#team"
+                      href="#partners"
                       className="footer-link-simple block text-gray-600 hover:text-blue-600 transition-colors py-1"
                     >
-                      Team
+                      Partners
                     </Link>
                     <Link
                       href="#contact"

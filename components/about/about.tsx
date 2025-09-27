@@ -227,12 +227,17 @@ export default function AboutNEEM({ onClose }: { onClose?: () => void }) {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a 
-                href="https://eu.makeforms.co/bb4hlb3/" 
-                target="_blank" 
-                rel="noopener noreferrer"
+                href="#product" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClose && onClose();
+                  setTimeout(() => {
+                    document.getElementById('product')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
                 className="bg-white text-blue-700 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-all duration-300 shadow-lg"
               >
-                Partner With Us
+                Shop
               </a>
               <a 
                 href="#contact" 
